@@ -3,23 +3,16 @@ import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeLayout extends StatelessWidget {
-
+class StoreAProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt,MobilState>
       (
-     listener: (context,state){},
-     builder: (context,state){
-       return  Scaffold(
-         appBar: AppBar(
-           title: Text('Home'),
-         ),
-         body: Center(
-           child: Text('Home'),
-         ),
-       );
-     },
+      listener: (context,state){},
+      builder: (context,state){
+        return Column();
+      },
+
     );
   }
 }

@@ -27,7 +27,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
       child: Center(
         child: ConnectionNotifierToggler(
           onConnectionStatusChanged: (bool? status) {
-            if (status=false) {
+            if (status=true) {
               _controller
                 ..duration =  Duration(milliseconds: 1500)
                 ..forward().then((value) =>Nevigator(bool: false, context: context,page: HomeLayout()));
@@ -51,7 +51,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
             controller: _controller,
             onLoaded: (composition) {
               _controller
-                ..duration =Duration(milliseconds:1500)
+                ..duration =composition.duration
                 ..forward().then((value) =>Nevigator(bool: false, context: context,page: HomeLayout())
                 );
 
