@@ -2,6 +2,7 @@ import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Componads/TextForm.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
+import 'package:casheir_mobill/sign/First.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +16,7 @@ class SignIn extends StatelessWidget {
           var cuibt = MobilCuibt.get(context);
           return Scaffold(
             body: Stack(fit: StackFit.expand, children: [
-              Wallpaper(Size),
+              sssWallpaper(Size),
               Positioned(
                 top: 80,
                 left: 20,
@@ -53,7 +54,7 @@ class SignIn extends StatelessWidget {
                   MyTextField(
                     Controlr: cuibt.EmailAdreessController,
                     hint: "Email123@gmail.com",
-                    label: "email address",
+                    label: "Email Address",
                     Prefix: const Icon(
                       Icons.email,
                       color: Colors.black,
@@ -127,10 +128,10 @@ class SignIn extends StatelessWidget {
                     color: Colors.grey[900],
                     fontWeight: FontWeight.bold,
                   ),),),
-                  TextButton(onPressed: (){}, child:Text("don't have Email?",style: TextStyle(
+                  TextButton(onPressed: (){Nevigator(page:SignUp(),context: context,bool: true );}, child:Text("don't have Email?",style: TextStyle(
                     fontSize: Size.height * 0.03,
                     color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                   ),),),
                 ],
               ),
