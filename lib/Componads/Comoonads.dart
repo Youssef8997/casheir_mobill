@@ -28,7 +28,7 @@ Container sssWallpaper(Size Size) {
           fit: BoxFit.fill,
           filterQuality: FilterQuality.high,
           image: AssetImage(
-            "lib/assest/WallpaperWithOut.psd",
+            "lib/assest/WallpaperWithOut.psd.jpg",
 
           ),
         )),

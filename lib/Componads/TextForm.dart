@@ -13,7 +13,7 @@ Widget MyTextField({required Controlr,required String hint,label,Prefix,suffix,k
       focusColor: Colors.white,
 
         enabledBorder:OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white,width: 2),
+             borderSide: BorderSide(color: Colors.white,width: 2),
             borderRadius: BorderRadius.circular(40),
             gapPadding: 10
         ),
@@ -22,9 +22,9 @@ Widget MyTextField({required Controlr,required String hint,label,Prefix,suffix,k
             borderRadius: BorderRadius.circular(40),
             gapPadding: 10
         ),
-        contentPadding: EdgeInsetsDirectional.fromSTEB(20, 0, 0,0),
-        hintText: hint,
-        hintStyle:TextStyle(color: Colors.white),
+         contentPadding:const  EdgeInsetsDirectional.fromSTEB(20, 0, 0,0),
+        hintText:  hint,
+        hintStyle:const TextStyle(color: Colors.white),
         label: label!=null?Text("$label"):null,
         labelStyle: TextStyle(color: Colors.white,fontSize: 20),
         prefixIcon: Prefix,

@@ -1,5 +1,6 @@
 import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/HomeLayout/HomeLayout.dart';
+import 'package:casheir_mobill/sign/signin.dart';
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -30,7 +31,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
             if (status=true) {
               _controller
                 ..duration =  Duration(milliseconds: 1500)
-                ..forward().then((value) =>Nevigator(bool: false, context: context,page: HomeLayout()));
+                ..forward().then((value) =>Nevigator(bool: false, context: context,page: SignIn()));
             }
           },
           disconnected: Lottie.asset(
@@ -54,7 +55,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
             onLoaded: (composition) {
               _controller
                 ..duration =composition.duration
-                ..forward().then((value) =>Nevigator(bool: false, context: context,page: HomeLayout())
+                ..forward().then((value) =>Nevigator(bool: false, context: context,page: SignIn())
                 );
 
             },

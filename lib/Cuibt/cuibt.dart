@@ -14,9 +14,18 @@ class MobilCuibt extends Cubit<MobilState> {
   MobilCuibt() : super(initState());
   static MobilCuibt get(context) => BlocProvider.of(context);
   //SignIN
-  var EmailAdreessController = TextEditingController();
-  var PasswordController = TextEditingController();
-  bool obsr=true;
+  var emailAdreessController = TextEditingController();
+  var passwordController = TextEditingController();
+  bool obscuring=true;
+  //SignUp
+  var nameController = TextEditingController();
+  var emailController = TextEditingController();
+  var signUpPassword = TextEditingController();
+  var signUpPassword2 = TextEditingController();
+  var phoneController = TextEditingController();
+  String? positionValue ;
+  bool signUpObscuring=true;
+
 // UI
   var value=0;
 List<Widget>Body=[
@@ -41,9 +50,16 @@ List<FlashyTabBarItem>barItem=[
   FlashyTabBarItem(title: const Text("Employees"), icon: const Icon(Icons.group_outlined,),inactiveColor: Colors.white,activeColor: Colors.blueGrey ),
 ];
   //Methods
-void ChangeObsr(){
-  obsr=!obsr;
-  print(obsr);
+void changeSignInObsr(){
+  obscuring=!obscuring;
   emit(changeObsr());
 }
+void changeSignUpObsr(){
+  signUpObscuring=!signUpObscuring;
+  emit(changeObsr());
+}
+ void changePostion(value){
+   positionValue=value;
+   emit(ChangePosition());
+ }
 }
