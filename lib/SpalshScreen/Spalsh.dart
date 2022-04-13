@@ -23,7 +23,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.lightBlue[800],
+      color: Colors.teal[600],
       child: Center(
         child: ConnectionNotifierToggler(
           onConnectionStatusChanged: (bool? status) {
@@ -34,7 +34,9 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
             }
           },
           disconnected: Lottie.asset(
+
             'lib/assest/Lottie.json',
+            repeat:true,
             controller: _controller,
             onLoaded: (composition) {
               _controller
@@ -46,9 +48,9 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
 
           ),
           connected: Lottie.asset(
-
             'lib/assest/Lottie.json',
             controller: _controller,
+            repeat:true,
             onLoaded: (composition) {
               _controller
                 ..duration =composition.duration

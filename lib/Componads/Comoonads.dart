@@ -11,10 +11,9 @@ Container Wallpaper(Size Size) {
         image: DecorationImage(
           fit: BoxFit.fill,
           filterQuality: FilterQuality.high,
-          colorFilter: ColorFilter.mode(
-              Colors.grey, BlendMode.modulate),
           image: AssetImage(
-            "Asset/waaass.jpg",
+            "lib/assest/FirstScreen.jpg",
+
           ),
         )),
   );

@@ -38,6 +38,7 @@ dependencies:
   hexcolor: ^2.0.6
   shimmer: ^2.0.0
   blurrycontainer: ^0.1.0
+  flashy_tab_bar2: ^0.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
