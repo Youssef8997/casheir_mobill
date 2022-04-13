@@ -1,6 +1,7 @@
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:casheir_mobill/SpalshScreen/Spalsh.dart';
-import 'package:casheir_mobill/sign/FistScreen.dart';
+import 'package:casheir_mobill/sign/First.dart';
+import 'package:casheir_mobill/sign/signin.dart';
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
   debugShowCheckedModeBanner: false,
-          home: FirstScreen(),
+          home: First(),
         ),
       ),
     );

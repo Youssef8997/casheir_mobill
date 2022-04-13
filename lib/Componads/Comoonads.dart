@@ -12,7 +12,7 @@ Container Wallpaper(Size Size) {
           fit: BoxFit.fill,
           filterQuality: FilterQuality.high,
           image: AssetImage(
-            "lib/assest/FirstScreen.png",
+            "lib/assest/Wallpaper.jpg",
 
           ),
         )),

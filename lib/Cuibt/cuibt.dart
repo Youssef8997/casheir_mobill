@@ -13,7 +13,12 @@ import '../Models/Users.dart';
 class MobilCuibt extends Cubit<MobilState> {
   MobilCuibt() : super(initState());
   static MobilCuibt get(context) => BlocProvider.of(context);
+  //SignIN
+  var EmailAdreessController = TextEditingController();
+  var PasswordController = TextEditingController();
+  bool obsr=true;
 // UI
+  var value=0;
 List<Widget>Body=[
   SellesABuying(),
   StoreAProducts(),
@@ -35,5 +40,10 @@ List<FlashyTabBarItem>barItem=[
   FlashyTabBarItem(title: const Text("activity"), icon: const Icon(Icons.supervisor_account_outlined,),inactiveColor:Colors.white,activeColor: Colors.blue[400]! ),
   FlashyTabBarItem(title: const Text("Employees"), icon: const Icon(Icons.group_outlined,),inactiveColor: Colors.white,activeColor: Colors.blueGrey ),
 ];
-  var value=0;
+  //Methods
+void ChangeObsr(){
+  obsr=!obsr;
+  print(obsr);
+  emit(changeObsr());
+}
 }
