@@ -22,10 +22,17 @@ class FirstScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-const CircleAvatar(
-  backgroundImage: AssetImage('lib/assest/cryptocurrency-2(3).png'),
-  radius: 80,
-),
+                  Container(
+                    height:Size.height*.5,
+                    width: Size.width*.5,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage('lib/assest/yo.png'),
+                      )
+                    ),
+               ),
                     Container(
                       alignment: Alignment.center,
                       height: 50,
