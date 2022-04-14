@@ -16,3 +16,7 @@ class SellesABuying extends StatelessWidget {
     );
   }
 }
+//Show what they baying and selling
+//show most sold and most bought
+//show the little sold and bought
+

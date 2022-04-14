@@ -24,7 +24,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.teal[600],
+      color: Colors.brown[800],
       child: Center(
         child: ConnectionNotifierToggler(
           onConnectionStatusChanged: (bool? status) {

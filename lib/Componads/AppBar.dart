@@ -4,8 +4,8 @@ import 'package:shimmer/shimmer.dart';
 PreferredSizeWidget appBar ({required text,required List <Widget> Action}){
   return AppBar(
     title: Shimmer.fromColors(
-        baseColor: Colors.black,
-        highlightColor:Colors.white,
+        highlightColor: Colors.black,
+        baseColor:Colors.white54,
         child: Text(text,style: TextStyle(fontWeight: FontWeight.w900),)),
     centerTitle: true,
     backgroundColor: Colors.transparent,

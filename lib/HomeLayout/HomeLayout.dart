@@ -1,3 +1,4 @@
+import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
@@ -16,17 +17,24 @@ class _HomeLayoutState extends State<HomeLayout> {
       (
      listener: (context,state){},
      builder: (context,state){
+       var size=MediaQuery.of(context).size;
        var cuibt=MobilCuibt.get(context);
        return  Scaffold(
+         extendBody: true,
          extendBodyBehindAppBar: true,
          appBar: cuibt.AppBar[cuibt.value],
-         body: cuibt.Body[cuibt.value],
+         body: Stack(children: [
+           mainWallpaper(size),
+           blurWallpaper(size),
+           cuibt.Body[cuibt.value]
+         ]),
          bottomNavigationBar: FlashyTabBar(
-           iconSize: 25,
-           showElevation: true,
+showElevation: false,
+             height: 70,
+           iconSize: 28,
            animationDuration: const Duration(milliseconds: 500),
            animationCurve: Curves.easeInOut,
-           backgroundColor: Colors.grey[500]!,
+           backgroundColor: Colors.transparent,
            selectedIndex: cuibt.value,
            items: cuibt.barItem,
            onItemSelected: (int value) {

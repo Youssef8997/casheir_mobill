@@ -1,7 +1,5 @@
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:casheir_mobill/SpalshScreen/Spalsh.dart';
-import 'package:casheir_mobill/sign/SignUp.dart';
-import 'package:casheir_mobill/sign/signin.dart';
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

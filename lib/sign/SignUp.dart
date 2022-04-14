@@ -19,8 +19,8 @@ class SignUp extends StatelessWidget {
               body: Scaffold(
             body: Stack(
               children: [
-                sssWallpaper(Size),
-                MainWallpaper(Size),
+                mainWallpaper(Size),
+                blurWallpaper(Size),
                 Positioned(
                   top: 50,
                   left: 10,

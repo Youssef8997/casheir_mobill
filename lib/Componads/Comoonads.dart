@@ -19,7 +19,7 @@ Container Wallpaper(Size Size) {
         )),
   );
 }
-Container sssWallpaper(Size Size) {
+Container mainWallpaper(Size Size) {
   return   Container(
     width: Size.width,
     height: Size.height,
@@ -34,7 +34,7 @@ Container sssWallpaper(Size Size) {
         )),
   );
 }
-BlurryContainer MainWallpaper(Size Size) {
+BlurryContainer blurWallpaper(Size Size) {
   return   BlurryContainer(
     blur: 6,
     width: Size.width,
