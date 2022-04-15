@@ -29,6 +29,11 @@ class MobilCuibt extends Cubit<MobilState> {
   bool searchVisibleBar=false;// UI
   var searchController = TextEditingController();
   var value=0;
+  //Filters
+  var bottomSheetController = TextEditingController();
+  var kayScaffold=GlobalKey<ScaffoldState>();
+  String typeSearch="Sells";
+  String typeOrder="descending";
   //UI
 List<Widget>Body=[
   SellesABuying(),
@@ -51,11 +56,7 @@ List<FlashyTabBarItem>barItem=[
   FlashyTabBarItem(title: const Text("activity"), icon: const Icon(Icons.supervisor_account_outlined,),inactiveColor:Colors.white,activeColor: Colors.blue[400]! ),
   FlashyTabBarItem(title: const Text("Employees"), icon: const Icon(Icons.group_outlined,),inactiveColor: Colors.white,activeColor: Colors.blueGrey ),
 ];
-//BottomSheet
-  var bottomSheetController = TextEditingController();
-  var kayScaffold=GlobalKey<ScaffoldState>();
-  bool activeColor=false;
-  bool activeColor2=true;
+
   //Methods
 void changeSignInObsr(){
   obscuring=!obscuring;
@@ -72,12 +73,5 @@ void changeSignUpObsr(){
  void changeSearchVisible(){
    searchVisibleBar=!searchVisibleBar;
    emit(ChangeVisibalBar());
- }
- void changeActivedColor(){
-  activeColor=!activeColor;
-  activeColor2=!activeColor2;
-  print("activeColor:$activeColor");
-  print("activeColor2:$activeColor2");
-  emit(Changed());
  }
 }

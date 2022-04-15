@@ -14,8 +14,14 @@ class HomeLayout extends StatefulWidget {
   State<HomeLayout> createState() => _HomeLayoutState();
 }
 
+
 class _HomeLayoutState extends State<HomeLayout> {
   @override
+  void initState() {
+    MobilCuibt.get(context).bottomSheetController.text =
+        DateFormat.yMMMd().format(DateTime.now());
+    super.initState();
+  }
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
@@ -77,8 +83,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                       ],
                     ),
                     onPressed: () {
-                      cuibt.kayScaffold.currentState
-                          ?.showBottomSheet((context) => MyButtomSheet(size,cuibt));
+                      cuibt.kayScaffold.currentState?.showBottomSheet(
+                          (context) => MyButtomSheet(size, cuibt));
                     },
                   )
                 : null,
@@ -108,9 +114,9 @@ class _HomeLayoutState extends State<HomeLayout> {
     );
   }
 
-  Widget MyButtomSheet(Size Sise,MobilCuibt cuibt) {
+  Widget MyButtomSheet(Size Sise, MobilCuibt cuibt) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10),
       clipBehavior: Clip.antiAlias,
       height: Sise.height * .5,
       width: Sise.width,
@@ -119,6 +125,7 @@ class _HomeLayoutState extends State<HomeLayout> {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
+
         children: [
           //Title
           Padding(
@@ -148,23 +155,69 @@ class _HomeLayoutState extends State<HomeLayout> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
-          //Divider
           myDivider(Sise),
           const SizedBox(
-            height: 10,
+            height: 25,
           ),
           Date(cuibt, Sise),
           const SizedBox(
-            height: 15,
+            height: 25,
           ),
           myDivider(Sise),
           const SizedBox(
-            height: 15,
+            height: 25,
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
+              children: [
+                activePressButton(cuibt,(){
+                  Navigator.pop(context);
+                 setState(() {
+                   cuibt.typeSearch="Sells";
+                 });
+                  },"Sells", cuibt.typeSearch),
+                const SizedBox(width:100),
+                activePressButton(cuibt,(){
+                  Navigator.pop(context);
+                  setState(() {
+                    cuibt.typeSearch="Buys";
+                  });
+                  },"Buys",cuibt.typeSearch),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          myDivider(Sise),
+          const SizedBox(
+            height: 25,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Row(
 
-
+              children: [
+                activePressButton(cuibt,(){
+                  Navigator.pop(context);
+                  setState(() {
+                    cuibt.typeOrder="descending";
+                  });
+                },"descending", cuibt.typeOrder),
+                const SizedBox(width:100),
+                activePressButton(cuibt,(){
+                  Navigator.pop(context);
+                  setState(() {
+                    cuibt.typeOrder="ascending";
+                  });
+                },"ascending", cuibt.typeOrder),
+              ],
+            ),
+          ),
+//descending and ascending
         ],
       ),
     );
@@ -172,92 +225,98 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   Padding Date(MobilCuibt cuibt, Size Sise) {
     return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Row(
-              children: [
-                PressButton(cuibt,(){
-                  showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(DateTime.now().year-1),
-                    lastDate: DateTime.now(),
-                  ).then((value) {
-                    setState(() {
-                      value ??= DateTime.now();
-                      cuibt.bottomSheetController.text =DateFormat.yMMMd().format(value!);
-
-                    });
-                  });
-                },"Date"),
-                const SizedBox(
-                  width: 10,
-                ),
-                  Container(
-                  padding: const EdgeInsets.only(left: 10),
-                  height: 40,
-                  width: Sise.width-120,
-decoration: BoxDecoration(
-border: Border.all(color: Colors.white60,width: 2),
-color: Colors.grey[600],
-borderRadius: BorderRadius.circular(25.0),
-),
-                  child: TextField(
-                    enabled: false,
-                    style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                    controller: cuibt.bottomSheetController,
-                    decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Date of Search",
-                      hintStyle: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                )
-              ],
+      padding: const EdgeInsets.all(8.0),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Row(
+          children: [
+            PressButton(cuibt, () {
+              showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(DateTime.now().year - 1),
+                lastDate: DateTime.now(),
+              ).then((value) {
+                setState(() {
+                  value ??= DateTime.now();
+                  cuibt.bottomSheetController.text =
+                      DateFormat.yMMMd().format(value!);
+                });
+              });
+            }, "Date"),
+            const SizedBox(
+              width: 10,
             ),
-          ),
-        );
+            Container(
+              padding: const EdgeInsets.only(left: 10),
+              height: 40,
+              width: Sise.width - 120,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.white60, width: 2),
+                color: Colors.grey[600],
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              child: TextField(
+                enabled: false,
+                style: const TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.bold),
+                controller: cuibt.bottomSheetController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Date of Search",
+                  hintStyle: TextStyle(color: Colors.white),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
-  InkWell PressButton(MobilCuibt cuibt,ontap,text, {color}) {
+  InkWell PressButton(MobilCuibt cuibt, ontap, text) {
     return InkWell(
-                onTap:ontap,
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 35,
-                  width: 90,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white60,width: 2),
-                    color: color??= Colors.grey[600],
-borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Text(text,style: TextStyle(fontSize: 18,color: Colors.white),),
-                ),
-              );
+      onTap: ontap,
+      child: Container(
+        alignment: Alignment.center,
+        height: 35,
+        width: 90,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white60, width: 2),
+          color: Colors.grey[600],
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 18, color: Colors.white),
+        ),
+      ),
+    );
   }
-  InkWell activePressButton(MobilCuibt cuibt,ontap,text) {
+  InkWell activePressButton(MobilCuibt cuibt, ontap, text,type) {
     return InkWell(
-                onTap:ontap,
-                child: Container(
-                  alignment: Alignment.center,
-                  height: 35,
-                  width: 90,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white60,width: 2),
-                    color:cuibt.activeColor?Colors.brown[600]:Colors.grey[600],
-borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Text(text,style: TextStyle(fontSize: 18,color: Colors.white),),
-                ),
-              );
+      onTap: ontap,
+      child: Container(
+        alignment: Alignment.center,
+        height: 35,
+        width: 90,
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.white60, width: 2),
+          color:type=="$text"?Colors.brown:Colors.grey[600],
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 18, color: Colors.white,overflow: TextOverflow.fade,),
+        ),
+      ),
+    );
   }
-
   Container myDivider(Size Sise) {
     return Container(
       height: 1,
       width: Sise.width,
-      color: Colors.grey[800],
+      color: Colors.grey[900],
     );
   }
 }
