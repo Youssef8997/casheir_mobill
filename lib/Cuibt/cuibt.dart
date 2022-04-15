@@ -25,9 +25,11 @@ class MobilCuibt extends Cubit<MobilState> {
   var phoneController = TextEditingController();
   String? positionValue ;
   bool signUpObscuring=true;
-
-// UI
+//Sells
+  bool searchVisibleBar=false;// UI
+  var searchController = TextEditingController();
   var value=0;
+  //UI
 List<Widget>Body=[
   SellesABuying(),
   StoreAProducts(),
@@ -35,12 +37,12 @@ List<Widget>Body=[
   Users(),
   Employees(),
   ];
-List <PreferredSizeWidget>AppBar=[
-  appBar(text: "Selles ", Action: []),
-  appBar(text: "Store ", Action: []),
-  appBar(text: "Suppliers ", Action: []),
-  appBar(text: "Users activity ", Action: []),
-  appBar(text: "Employees ", Action: []),
+List <String>AppBar=[
+  "Selles ",
+  "Store ",
+   "Suppliers ",
+ "Users activity ",
+  "Employees ",
 ];
 List<FlashyTabBarItem>barItem=[
   FlashyTabBarItem(title: const Text("Sells"), icon: const Icon(Icons.shopping_cart),inactiveColor: Colors.grey,activeColor: Colors.blue[900]!),
@@ -49,6 +51,11 @@ List<FlashyTabBarItem>barItem=[
   FlashyTabBarItem(title: const Text("activity"), icon: const Icon(Icons.supervisor_account_outlined,),inactiveColor:Colors.white,activeColor: Colors.blue[400]! ),
   FlashyTabBarItem(title: const Text("Employees"), icon: const Icon(Icons.group_outlined,),inactiveColor: Colors.white,activeColor: Colors.blueGrey ),
 ];
+//BottomSheet
+  var bottomSheetController = TextEditingController();
+  var kayScaffold=GlobalKey<ScaffoldState>();
+  bool activeColor=false;
+  bool activeColor2=true;
   //Methods
 void changeSignInObsr(){
   obscuring=!obscuring;
@@ -61,5 +68,15 @@ void changeSignUpObsr(){
  void changePostion(value){
    positionValue=value;
    emit(ChangePosition());
+ }
+ void changeSearchVisible(){
+   searchVisibleBar=!searchVisibleBar;
+   emit(ChangeVisibalBar());
+ }
+ void changeActivedColor(){
+  activeColor=!activeColor;
+  activeColor2=!activeColor2;
+  print(activeColor);
+  emit(ChangeVisibalBar());
  }
 }

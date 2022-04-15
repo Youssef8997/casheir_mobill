@@ -20,6 +20,11 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (BuildContext context) => MobilCuibt(),)
         ],
         child: MaterialApp(
+          theme: ThemeData(
+            primarySwatch: Colors.brown,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+
+          ),
   debugShowCheckedModeBanner: false,
           home: Spalsh(),
         ),
