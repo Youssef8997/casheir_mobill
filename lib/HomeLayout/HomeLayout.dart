@@ -163,37 +163,8 @@ class _HomeLayoutState extends State<HomeLayout> {
           const SizedBox(
             height: 15,
           ),
-//Second Row
-         Padding(
-         padding: const EdgeInsets.only(left: 10),
-         child: Row(
-           children: [
-         InkWell(
-           onTap: () {
-             cuibt.changeActivedColor();
-           },
-           child: Container(
-             color: !cuibt.activeColor?Colors.brown:Colors.grey,
-             height: 45,
-             width:120
-           ),
-         ),
-         SizedBox(width: 20),
-         InkWell(
-           onTap: () {
-             cuibt.changeActivedColor();
-           },
-           child: Container(
-             color: cuibt.activeColor2?Colors.brown:Colors.grey,
-             height: 45,
-             width:120
-           ),
-         ),
 
-    ],
 
-  ),
-)
         ],
       ),
     );

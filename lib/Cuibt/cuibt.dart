@@ -76,7 +76,8 @@ void changeSignUpObsr(){
  void changeActivedColor(){
   activeColor=!activeColor;
   activeColor2=!activeColor2;
-  print(activeColor);
-  emit(ChangeVisibalBar());
+  print("activeColor:$activeColor");
+  print("activeColor2:$activeColor2");
+  emit(Changed());
  }
 }
