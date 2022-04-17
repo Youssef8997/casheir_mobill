@@ -39,6 +39,7 @@ class _HomeLayoutState extends State<HomeLayout> {
             actions: [
               if (cuibt.value == 0)
                 IconButton(
+
                   icon: Icon(
                     cuibt.searchVisibleBar
                         ? Icons.clear_outlined
@@ -57,6 +58,27 @@ class _HomeLayoutState extends State<HomeLayout> {
                     cuibt.changeSearchVisible();
                   },
                 ),
+              if (cuibt.value ==1)
+                IconButton(
+
+                  icon: Icon(
+                    cuibt.searchVisibleStore
+                        ? Icons.clear_outlined
+                        : Icons.search,
+                    color: Colors.white,
+                    size: 28,
+                    shadows: const [
+                      Shadow(
+                        color: Colors.black,
+                        blurRadius: 20,
+                        offset: Offset(0, 10),
+                      ),
+                    ],
+                  ),
+                  onPressed: () {
+                    cuibt.changeSearchVisible();
+                  },
+                )
             ],
             title: Shimmer.fromColors(
                 baseColor: Colors.white60,
@@ -129,7 +151,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         children: [
           //Title
           Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Align(
               alignment: Alignment.topLeft,
               child: Row(

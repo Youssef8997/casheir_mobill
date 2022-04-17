@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return ConnectionNotifier(
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (BuildContext context) => MobilCuibt(),)
+          BlocProvider(create: (BuildContext context) => MobilCuibt())
         ],
         child: MaterialApp(
           theme: ThemeData(
@@ -32,6 +32,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
 
 
 

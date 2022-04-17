@@ -19,19 +19,207 @@ class SellesABuying extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               child: Column(
                 children: [
-                  visibilitySearch(cuibt),
-                  SizedBox(
-                    height: Size.height * 0.01,
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: const EdgeInsetsDirectional.all(20.0),
+                    height: Size.height * .2,
+                    width: Size.width * .8,
+                    decoration: BoxDecoration(
+                        color: Colors.white54,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.grey[800]!, width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey[900]!,
+                              blurRadius: 3,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 5)),
+                        ]),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //Row of title
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Balance",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 22.0),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.unfold_more_outlined,
+                                  color: Colors.white70,
+                                  size: 23,
+                                ),
+                                onPressed: () {},)
+                            ],
+                          ),
+                          //Row of Money
+                          Row(
+  children:  [
+    Text("\$",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.teal[700]!),),
+    const SizedBox(width: 3),
+    const Text("20,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800),),
+
+  ],
+),
+                          const SizedBox(height: 20,),
+                          //Row of analytics
+
+                          Row(
+                            children: [
+                              Container(
+                                color:Colors.white.withOpacity(.15)
+                                ,child: const Icon(
+                                  Icons.trending_up_outlined,
+                                color: Colors.white60,
+                                ),
+                              ),
+                              const SizedBox(width: 5,),
+                              const Text("15.0 %",style: TextStyle( fontWeight: FontWeight.bold,fontSize: 17),)
+                            ],
+                          )
+
+
+                        ]),
                   ),
-                  SizedBox(
-                    height: Size.height,
-                    width: Size.width,
-                    child: ListView.separated(
-                      physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context,index)=>showItems(Size),
-                        separatorBuilder: (context,index)=>const SizedBox(height:15,),
-                        itemCount: 50),
-                  )
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: const EdgeInsetsDirectional.all(20.0),
+                    height: Size.height * .2,
+                    width: Size.width * .8,
+                    decoration: BoxDecoration(
+                        color: Colors.white54,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.grey[800]!, width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey[900]!,
+                              blurRadius: 3,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 5)),
+                        ]),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //Row of title
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Information",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 22.0),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.unfold_more_outlined,
+                                  color: Colors.white70,
+                                  size: 23,
+                                ),
+                                onPressed: () {},)
+                            ],
+                          ),
+                          //Row of Money
+                          Row(
+  children:  [
+    Text("\$",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.teal[700]!),),
+    const SizedBox(width: 3),
+    const Text("20,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800),),
+
+  ],
+),
+                          const SizedBox(height: 20,),
+                          //Row of analytics
+
+                          Row(
+                            children: [
+                              Container(
+                                color:Colors.white.withOpacity(.15)
+                                ,child: const Icon(
+                                  Icons.trending_up_outlined,
+                                color: Colors.white60,
+                                ),
+                              ),
+                              const SizedBox(width: 5,),
+                              const Text("15.0 %",style: TextStyle( fontWeight: FontWeight.bold,fontSize: 17),)
+                            ],
+                          )
+
+
+                        ]),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    margin: const EdgeInsetsDirectional.all(20.0),
+                    height: Size.height * .2,
+                    width: Size.width * .8,
+                    decoration: BoxDecoration(
+                        color: Colors.white54,
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.grey[800]!, width: 2),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey[900]!,
+                              blurRadius: 3,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 5)),
+                        ]),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //Row of title
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Balance",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 22.0),
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.unfold_more_outlined,
+                                  color: Colors.white70,
+                                  size: 23,
+                                ),
+                                onPressed: () {},)
+                            ],
+                          ),
+                          //Row of Money
+                          Row(
+  children:  [
+    Text("\$",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.teal[700]!),),
+    const SizedBox(width: 3),
+    const Text("20,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800),),
+
+  ],
+),
+                          const SizedBox(height: 20,),
+                          //Row of analytics
+
+                          Row(
+                            children: [
+                              Container(
+                                color:Colors.white.withOpacity(.15)
+                                ,child: const Icon(
+                                  Icons.trending_up_outlined,
+                                color: Colors.white60,
+                                ),
+                              ),
+                              const SizedBox(width: 5,),
+                              const Text("15.0 %",style: TextStyle( fontWeight: FontWeight.bold,fontSize: 17),)
+                            ],
+                          )
+
+
+                        ]),
+                  ),
                 ],
               ),
             ),
@@ -43,7 +231,10 @@ class SellesABuying extends StatelessWidget {
 
   Visibility visibilitySearch(MobilCuibt cuibt) {
     return Visibility(
-      replacement: const SizedBox(height: 0,width: 0,),
+        replacement: const SizedBox(
+          height: 0,
+          width: 0,
+        ),
         maintainSize: true,
         maintainState: true,
         maintainAnimation: true,
@@ -57,44 +248,45 @@ class SellesABuying extends StatelessWidget {
         ));
   }
 
+/*SizedBox(
+                    height: Size.height,
+                    width: Size.width,
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context,index)=>showItems(Size),
+                        separatorBuilder: (context,index)=>const SizedBox(height:15,),
+                        itemCount: 50),
+                  )*/
   Container showItems(Size Size) {
     return Container(
-      padding: const EdgeInsets.only(right: 10),
+      padding: const EdgeInsets.only(right: 10, left: 30),
       height: 80,
       width: Size.width,
       decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(50.0),
-
           border: Border.all(color: Colors.grey[600]!, width: 4)),
       child: Row(
         children: [
-          const CircleAvatar(
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.transparent,
-            radius: 45,
-            backgroundImage:  NetworkImage(
-                "https://cdn.mosoah.com/wp-content/uploads/2019/10/24120124/pepsico.png"),
-          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 "Pepsi",
                 style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Text(
                 "100.00 LE",
-                style:  TextStyle(
+                style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white,
+                    color: Colors.grey[300]!,
                     fontWeight: FontWeight.bold),
               ),
             ],

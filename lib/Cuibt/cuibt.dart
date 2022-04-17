@@ -2,6 +2,7 @@ import 'package:casheir_mobill/Componads/AppBar.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Models/Selles%20and%20baying.dart';
 import 'package:casheir_mobill/Models/Store%20and%20products.dart';
+import 'package:casheir_mobill/main.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,14 +29,17 @@ class MobilCuibt extends Cubit<MobilState> {
 //Sells
   bool searchVisibleBar=false;// UI
   var searchController = TextEditingController();
-  var value=0;
+  //Store
+  bool searchVisibleStore=false;// UI
+  var searchControllerStore = TextEditingController();
   //Filters
   var bottomSheetController = TextEditingController();
   var kayScaffold=GlobalKey<ScaffoldState>();
   String typeSearch="Sells";
   String typeOrder="descending";
   //UI
-List<Widget>Body=[
+  var value=0;
+  List<Widget>Body=[
   SellesABuying(),
   StoreAProducts(),
   Suppliers(),
@@ -71,7 +75,13 @@ void changeSignUpObsr(){
    emit(ChangePosition());
  }
  void changeSearchVisible(){
-   searchVisibleBar=!searchVisibleBar;
-   emit(ChangeVisibalBar());
+  if(value==0) {
+      searchVisibleBar = !searchVisibleBar;
+  }
+  if(value==1) {
+      searchVisibleStore = !searchVisibleStore;
+  }
+    emit(ChangeVisibalBar());
  }
+
 }
