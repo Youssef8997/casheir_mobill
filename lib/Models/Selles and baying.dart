@@ -39,24 +39,14 @@ class SellesABuying extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           //Row of title
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Balance",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 22.0),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.unfold_more_outlined,
-                                  color: Colors.white70,
-                                  size: 23,
-                                ),
-                                onPressed: () {},)
-                            ],
+                          const Text(
+                            "total balance",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 22.0),
                           ),
+              const SizedBox(height: 20,),
+
                           //Row of Money
                           Row(
   children:  [
@@ -110,7 +100,7 @@ class SellesABuying extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                "Information",
+                                "profit",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 22.0),
@@ -129,7 +119,7 @@ class SellesABuying extends StatelessWidget {
   children:  [
     Text("\$",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.teal[700]!),),
     const SizedBox(width: 3),
-    const Text("20,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800),),
+    const Text("5,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800),),
 
   ],
 ),
@@ -146,7 +136,7 @@ class SellesABuying extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 5,),
-                              const Text("15.0 %",style: TextStyle( fontWeight: FontWeight.bold,fontSize: 17),)
+                              const Text("5.0 %",style: TextStyle( fontWeight: FontWeight.bold,fontSize: 17),)
                             ],
                           )
 
@@ -177,7 +167,7 @@ class SellesABuying extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               const Text(
-                                "Balance",
+                                "loss",
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 22.0),
@@ -196,7 +186,7 @@ class SellesABuying extends StatelessWidget {
   children:  [
     Text("\$",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800,color: Colors.teal[700]!),),
     const SizedBox(width: 3),
-    const Text("20,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w800),),
+     Text("1,000 LE",style: TextStyle(fontSize: 30,fontWeight: FontWeight.w600,color: Colors.grey[800]!),),
 
   ],
 ),
@@ -208,7 +198,7 @@ class SellesABuying extends StatelessWidget {
                               Container(
                                 color:Colors.white.withOpacity(.15)
                                 ,child: const Icon(
-                                  Icons.trending_up_outlined,
+                                  Icons.trending_down_outlined,
                                 color: Colors.white60,
                                 ),
                               ),
