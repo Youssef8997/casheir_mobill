@@ -27,8 +27,10 @@ class MobilCuibt extends Cubit<MobilState> {
   String? positionValue ;
   bool signUpObscuring=true;
 //Sells
-  bool searchVisibleBar=false;// UI
+  var hideSubtitle=null;// UI
   var searchController = TextEditingController();
+
+
   //Store
   bool searchVisibleStore=false;// UI
   var searchControllerStore = TextEditingController();
@@ -75,13 +77,20 @@ void changeSignUpObsr(){
    emit(ChangePosition());
  }
  void changeSearchVisible(){
-  if(value==0) {
-      searchVisibleBar = !searchVisibleBar;
-  }
+
   if(value==1) {
       searchVisibleStore = !searchVisibleStore;
   }
     emit(ChangeVisibalBar());
  }
+ void ChangeHideSubtitle(Expanded){
+if(Expanded) {
+  hideSubtitle=Text("");
+} else {
+  hideSubtitle=null;
+}
+emit(clopsed());
+ }
+
 
 }

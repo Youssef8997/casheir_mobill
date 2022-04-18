@@ -37,27 +37,6 @@ class _HomeLayoutState extends State<HomeLayout> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             actions: [
-              if (cuibt.value == 0)
-                IconButton(
-
-                  icon: Icon(
-                    cuibt.searchVisibleBar
-                        ? Icons.clear_outlined
-                        : Icons.search,
-                    color: Colors.white,
-                    size: 28,
-                    shadows: const [
-                      Shadow(
-                        color: Colors.black,
-                        blurRadius: 20,
-                        offset: Offset(0, 10),
-                      ),
-                    ],
-                  ),
-                  onPressed: () {
-                    cuibt.changeSearchVisible();
-                  },
-                ),
               if (cuibt.value ==1)
                 IconButton(
 
@@ -90,7 +69,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0),
                 )),
-            leading: cuibt.value == 0
+            leading: cuibt.value == 1
                 ? IconButton(
                     icon: const Icon(
                       Icons.filter_alt_outlined,
