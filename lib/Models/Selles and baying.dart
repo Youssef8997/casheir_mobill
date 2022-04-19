@@ -2,6 +2,7 @@ import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class SellesABuying extends StatelessWidget {
   @override
@@ -9,9 +10,7 @@ class SellesABuying extends StatelessWidget {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var Size = MediaQuery
-            .of(context)
-            .size;
+        var Size = MediaQuery.of(context).size;
         var cuibt = MobilCuibt.get(context);
         return SafeArea(
           child: Padding(
@@ -21,27 +20,60 @@ class SellesABuying extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Hi Youssef!",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white,fontStyle: FontStyle.italic),),
-                  const Text("Thanks for your trust in us to make your work more professional ",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500,color: Colors.white54,),),
-                  MyExpansionTile(Size: Size, Children: [balanceContents()], Title: "Account Balance",SubTitle: "All physical transactions are recorded in the account balance",cuibt: cuibt,),
-                  MyExpansionTile(Size: Size, Children: [sellsContents()], Title: "Sells",SubTitle: "The monetary gain you earned from selling your products",cuibt: cuibt,),
-                  MyExpansionTile(Size: Size,
-                      Children: [paymentContents()],
-                      Title: "Payments",
-                  SubTitle: "The money you paid to buy your products or raw materials",
-                  cuibt: cuibt,
+                  const Text(
+                    "Hi Youssef!",
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic),
                   ),
-                  MyExpansionTile(Size: Size, Children: [
-                    mostContents()
-                  ], Title: "Most in demand",
-                  SubTitle: "The most sold products",
-                  cuibt: cuibt,
+                  const Text(
+                    "Thanks for your trust in us to make your work more professional ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white54,
+                    ),
                   ),
-                  MyExpansionTile(Size: Size, Children: [
-                    leastContents()
-                  ], Title: "least in demand",
-                  SubTitle:"The least sold products",
-                  cuibt: cuibt,
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [balanceContents()],
+                    Title: "Account Balance",
+                    SubTitle:
+                        "All physical transactions are recorded in the account balance",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [sellsContents()],
+                    Title: "Sells",
+                    SubTitle:
+                        "The monetary gain you earned from selling your products",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [paymentContents()],
+                    Title: "Payments",
+                    SubTitle:
+                        "The money you paid to buy your products or raw materials",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+
+                    Size: Size,
+                    Children: [mostContents(context)],
+                    Title: "Most in demand",
+                    SubTitle: "The most sold products",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [leastContents(Size)],
+                    Title: "least in demand",
+                    SubTitle: "The least sold products",
+                    cuibt: cuibt,
                   ),
                 ],
               ),
@@ -52,13 +84,12 @@ class SellesABuying extends StatelessWidget {
     );
   }
 
-  Widget MyExpansionTile({
-    required Size Size,
-    required List<Widget> Children,
-    required String Title,
-     String ? SubTitle,
-    required MobilCuibt cuibt
-  }) {
+  Widget MyExpansionTile(
+      {required Size Size,
+      required List<Widget> Children,
+      required String Title,
+      String? SubTitle,
+      required MobilCuibt cuibt}) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       margin: const EdgeInsetsDirectional.all(20.0),
@@ -75,14 +106,16 @@ class SellesABuying extends StatelessWidget {
                 offset: const Offset(0, 5)),
           ]),
       //To hide Subtitle
-      child: ExpansionTile(onExpansionChanged: (bool)=>cuibt.ChangeHideSubtitle(bool),
-        subtitle: cuibt.hideSubtitle??Text(
-          SubTitle??"",
-          style: TextStyle(
-              color: Colors.grey[800]!,
-              fontSize: Size.width * .04,
-              fontWeight: FontWeight.bold),
-        ),
+      child: ExpansionTile(
+        onExpansionChanged: (bool) => cuibt.ChangeHideSubtitle(bool),
+        subtitle: cuibt.hideSubtitle ??
+            Text(
+              SubTitle ?? "",
+              style: TextStyle(
+                  color: Colors.grey[800]!,
+                  fontSize: Size.width * .04,
+                  fontWeight: FontWeight.bold),
+            ),
         controlAffinity: ListTileControlAffinity.leading,
         title: Text(
           Title,
@@ -96,7 +129,7 @@ class SellesABuying extends StatelessWidget {
 
   Column balanceContents() {
     return Column(
-      crossAxisAlignment:   CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         //Row of Money
         Row(
@@ -111,8 +144,7 @@ class SellesABuying extends StatelessWidget {
             const SizedBox(width: 3),
             const Text(
               "20,000 LE",
-              style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.w800),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -134,8 +166,7 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             )
           ],
         ),
@@ -167,157 +198,8 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
-
-          ],
-        ),
-       const Text("Second user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-
-          ],
-        ),
-        const Text("third user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-
-          ],
-        ),
-
-
-      ],
-    );
-  }
-
-  Column sellsContents() {
-    return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        //Row of Money
-        Row(
-          children: [
-            Text(
-              "\$",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.teal[700]!),
-            ),
-            const SizedBox(width: 3),
-            const Text(
-              "15,000 LE",
-              style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.w800),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        //Row of analytics
-        Row(
-          children: [
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Text("First user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-
           ],
         ),
         const Text("Second user",
@@ -345,10 +227,8 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
-
           ],
         ),
         const Text("third user",
@@ -376,10 +256,145 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
+          ],
+        ),
+      ],
+    );
+  }
 
+  Column sellsContents() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        //Row of Money
+        Row(
+          children: [
+            Text(
+              "\$",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w800,
+                  color: Colors.teal[700]!),
+            ),
+            const SizedBox(width: 3),
+            const Text(
+              "15,000 LE",
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        //Row of analytics
+        Row(
+          children: [
+            Container(
+              color: Colors.white.withOpacity(.15),
+              child: const Icon(
+                Icons.trending_up_outlined,
+                color: Colors.white60,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Text(
+              "15.0 %",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            )
+          ],
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        const Text("First user",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black)),
+        Row(
+          children: [
+            Text("5,000 LE",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800]!)),
+            const Spacer(),
+            Container(
+              color: Colors.white.withOpacity(.15),
+              child: const Icon(
+                Icons.trending_up_outlined,
+                color: Colors.white60,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Text(
+              "15.0 %",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
+          ],
+        ),
+        const Text("Second user",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black)),
+        Row(
+          children: [
+            Text("5,000 LE",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800]!)),
+            const Spacer(),
+            Container(
+              color: Colors.white.withOpacity(.15),
+              child: const Icon(
+                Icons.trending_up_outlined,
+                color: Colors.white60,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Text(
+              "15.0 %",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
+          ],
+        ),
+        const Text("third user",
+            style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black)),
+        Row(
+          children: [
+            Text("5,000 LE",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800]!)),
+            const Spacer(),
+            Container(
+              color: Colors.white.withOpacity(.15),
+              child: const Icon(
+                Icons.trending_up_outlined,
+                color: Colors.white60,
+              ),
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Text(
+              "15.0 %",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            ),
           ],
         ),
       ],
@@ -403,8 +418,7 @@ class SellesABuying extends StatelessWidget {
             const SizedBox(width: 3),
             const Text(
               "4,000 LE",
-              style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.w800),
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -426,8 +440,7 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             )
           ],
         ),
@@ -459,10 +472,8 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
-
           ],
         ),
         const Text("Second user",
@@ -490,10 +501,8 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
-
           ],
         ),
         const Text("third user",
@@ -521,115 +530,222 @@ class SellesABuying extends StatelessWidget {
             ),
             const Text(
               "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
-
           ],
         ),
       ],
     );
   }
 
-  Column mostContents() {
-    return Column(
+  Row mostContents(context) {
+    return Row(
       children: [
-        //Row of Money
-        Row(
+        Column(
           children: [
-            Text(
-              "\$",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.teal[700]!),
+             SizedBox(
+              width: 50,
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: LinearPercentIndicator(
+barRadius: const Radius.circular(10),
+                width: MediaQuery.of(context).size.height*.3,
+                animation: true,
+                lineHeight: 30.0,
+                animationDuration: 2500,
+                percent: 0.8,
+                progressColor: Colors.green,
+restartAnimation: true,
+                center:const RotatedBox(
+                  quarterTurns: 1,
+                  child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                  ),
+                ),
+                ),
             ),
-            const SizedBox(width: 3),
-            const Text(
-              "20,000 LE",
-              style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.w800),
             ),
+            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
           ],
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        //Row of analytics
-        Row(
+        const SizedBox(width: 5,),
+        Column(
           children: [
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
+             SizedBox(
+              width: 50,
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: Padding(
+    padding: const EdgeInsets.all(1.0),
+    child:  LinearPercentIndicator(
+barRadius: const Radius.circular(10),
+    width: MediaQuery.of(context).size.height*.3,
+    animation: true,
+    lineHeight: 30.0,
+    animationDuration: 2500,
+    percent: 0.8,
+    progressColor: Colors.green,
+restartAnimation: true,
+    center:const RotatedBox(
+      quarterTurns: 1,
+      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+      ),
+    ),
+    ),
               ),
             ),
-            const SizedBox(
-              width: 5,
             ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
-            )
+            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
           ],
         ),
-        const SizedBox(
-          height: 20,
+        const SizedBox(width: 5,),
+        Column(
+          children: [
+             SizedBox(
+              width: 50,
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: Padding(
+    padding: const EdgeInsets.all(1.0),
+    child:  LinearPercentIndicator(
+barRadius: const Radius.circular(10),
+    width: MediaQuery.of(context).size.height*.3,
+    animation: true,
+    lineHeight: 30.0,
+    animationDuration: 2500,
+    percent: 0.8,
+    progressColor: Colors.green,
+restartAnimation: true,
+    center:const RotatedBox(
+      quarterTurns: 1,
+      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+      ),
+    ),
+    ),
+              ),
+            ),
+            ),
+            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+          ],
+        ),
+        const SizedBox(width: 5,),
+        Column(
+          children: [
+             SizedBox(
+              width: 50,
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: Padding(
+    padding: const EdgeInsets.all(1.0),
+    child:  LinearPercentIndicator(
+barRadius: const Radius.circular(10),
+    width: MediaQuery.of(context).size.height*.3,
+    animation: true,
+    lineHeight: 30.0,
+    animationDuration: 2500,
+    percent: 0.8,
+    progressColor: Colors.green,
+restartAnimation: true,
+    center:const RotatedBox(
+      quarterTurns: 1,
+      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+      ),
+    ),
+    ),
+              ),
+            ),
+            ),
+            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+          ],
+        ),
+        const SizedBox(width: 5,),
+        Column(
+          children: [
+            SizedBox(
+              width: 50,
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(1.0),
+                  child:  LinearPercentIndicator(
+                    barRadius: const Radius.circular(10),
+                    width: MediaQuery.of(context).size.height*.3,
+                    animation: true,
+                    lineHeight: 30.0,
+                    animationDuration: 2500,
+                    percent: 0.8,
+                    progressColor: Colors.green,
+                    restartAnimation: true,
+                    center:const RotatedBox(
+                      quarterTurns: 1,
+                      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
+          ],
         ),
       ],
     );
   }
 
-  Column leastContents() {
+  Column leastContents(Size) {
     return Column(
       children: [
-        //Row of Money
-        Row(
-          children: [
-            Text(
-              "\$",
-              style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w800,
-                  color: Colors.teal[700]!),
-            ),
-            const SizedBox(width: 3),
-            const Text(
-              "20,000 LE",
-              style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.w800),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        //Row of analytics
-        Row(
-          children: [
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 17),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
+        showItems(Size,Colors.red[900]),
+        showItems(Size,Colors.red[500]),
+        showItems(Size,Colors.pink),
+    showItems(Size,Colors.teal),
+        showItems(Size,Colors.grey[800]),
+
       ],
+    );
+  }
+  Container showItems(Size Size,color) {
+    return Container(
+      margin: const EdgeInsetsDirectional.all(8.0),
+      padding: const EdgeInsets.only(right: 10, left: 30),
+      height: 80,
+      width: Size.width,
+      decoration: BoxDecoration(
+          color: color,
+          borderRadius: BorderRadius.circular(50.0),
+          border: Border.all(color: Colors.grey[600]!, width: 4)),
+      child: Row(
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Pepsi",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "100.00 LE",
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.grey[300]!,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const Spacer(),
+          const Text(
+            "50 Package",
+            style: TextStyle(
+                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 
