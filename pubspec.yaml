@@ -41,6 +41,8 @@ dependencies:
   flashy_tab_bar2: ^0.0.4
   dio: ^4.0.4
   percent_indicator: ^4.0.0
+  conditional_builder_null_safety: ^0.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

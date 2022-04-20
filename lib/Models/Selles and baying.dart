@@ -6,6 +6,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class SellesABuying extends StatelessWidget {
   @override
+
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
@@ -13,72 +14,69 @@ class SellesABuying extends StatelessWidget {
         var Size = MediaQuery.of(context).size;
         var cuibt = MobilCuibt.get(context);
         return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    "Hi Youssef!",
-                    style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
+          child:SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal:20,vertical: 20),
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Hi Youssef!",
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic),
+                ),
+                const Text(
+                  "Thanks for your trust in us to make your work more professional ",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white54,
                   ),
-                  const Text(
-                    "Thanks for your trust in us to make your work more professional ",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white54,
-                    ),
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [balanceContents()],
-                    Title: "Account Balance",
-                    SubTitle:
-                        "All physical transactions are recorded in the account balance",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [sellsContents()],
-                    Title: "Sells",
-                    SubTitle:
-                        "The monetary gain you earned from selling your products",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [paymentContents()],
-                    Title: "Payments",
-                    SubTitle:
-                        "The money you paid to buy your products or raw materials",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-
-                    Size: Size,
-                    Children: [mostContents(context)],
-                    Title: "Most in demand",
-                    SubTitle: "The most sold products",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [leastContents(Size)],
-                    Title: "least in demand",
-                    SubTitle: "The least sold products",
-                    cuibt: cuibt,
-                  ),
-                ],
-              ),
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [balanceContents()],
+                  Title: "Account Balance",
+                  SubTitle:
+                  "All physical transactions are recorded in the account balance",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [sellsContents()],
+                  Title: "Sells",
+                  SubTitle:
+                  "The monetary gain you earned from selling your products",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [paymentContents()],
+                  Title: "Payments",
+                  SubTitle:
+                  "The money you paid to buy your products or raw materials",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [mostContents(context)],
+                  Title: "Most in demand",
+                  SubTitle: "The most sold products",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [leastContents(Size)],
+                  Title: "least in demand",
+                  SubTitle: "The least sold products",
+                  cuibt: cuibt,
+                ),
+              ],
             ),
-          ),
+          )
         );
       },
     );
@@ -95,14 +93,14 @@ class SellesABuying extends StatelessWidget {
       margin: const EdgeInsetsDirectional.all(20.0),
       width: Size.width * .8,
       decoration: BoxDecoration(
-          color: Colors.white54,
+          color: Colors.white70,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.grey[800]!, width: 2),
           boxShadow: [
             BoxShadow(
                 color: Colors.grey[900]!,
                 blurRadius: 3,
-                spreadRadius: 1,
+                spreadRadius: 1.5,
                 offset: const Offset(0, 5)),
           ]),
       //To hide Subtitle
@@ -148,39 +146,29 @@ class SellesABuying extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          height: 20,
+        UserNMoney(Money: 10000, NU: "zyad", precent: (30.0).ceil()),
+        UserNMoney(Money: 5000, NU: "3rfat", precent: (30.0).ceil()),
+        UserNMoney(Money: 15000, NU: "magdy", precent: (30.0).ceil()),
+      ],
+    );
+  }
+
+  Column UserNMoney(
+      {required String NU, required double Money, required int precent}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextButton(
+          child: Text("${NU} user",
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black)),
+          onPressed: () {},
         ),
-        //Row of analytics
         Row(
           children: [
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Text("First user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
+            Text("$Money LE",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -196,72 +184,15 @@ class SellesABuying extends StatelessWidget {
             const SizedBox(
               width: 5,
             ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
-        const Text("Second user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
-        const Text("third user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
+            Text(
+              "$precent %",
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ],
         ),
       ],
     );
+
   }
 
   Column sellsContents() {
@@ -285,118 +216,9 @@ class SellesABuying extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(
-          height: 20,
-        ),
-        //Row of analytics
-        Row(
-          children: [
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Text("First user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
-        const Text("Second user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
-        const Text("third user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
+        UserNMoney(Money: 10000, NU: "zyad", precent: (30.0).ceil()),
+        UserNMoney(Money: 5000, NU: "3rfat", precent: (30.0).ceil()),
+        UserNMoney(Money: 15000, NU: "magdy", precent: (30.0).ceil()),
       ],
     );
   }
@@ -426,114 +248,9 @@ class SellesABuying extends StatelessWidget {
           height: 20,
         ),
         //Row of analytics
-        Row(
-          children: [
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 20,
-        ),
-        const Text("First user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
-        const Text("Second user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
-        const Text("third user",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black)),
-        Row(
-          children: [
-            Text("5,000 LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey[800]!)),
-            const Spacer(),
-            Container(
-              color: Colors.white.withOpacity(.15),
-              child: const Icon(
-                Icons.trending_up_outlined,
-                color: Colors.white60,
-              ),
-            ),
-            const SizedBox(
-              width: 5,
-            ),
-            const Text(
-              "15.0 %",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-            ),
-          ],
-        ),
+        UserNMoney(Money: 10000, NU: "zyad", precent: (30.0).ceil()),
+        UserNMoney(Money: 5000, NU: "3rfat", precent: (30.0).ceil()),
+        UserNMoney(Money: 15000, NU: "magdy", precent: (30.0).ceil()),
       ],
     );
   }
@@ -541,152 +258,28 @@ class SellesABuying extends StatelessWidget {
   Row mostContents(context) {
     return Row(
       children: [
-        Column(
-          children: [
-             SizedBox(
-              width: 50,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: LinearPercentIndicator(
-barRadius: const Radius.circular(10),
-                width: MediaQuery.of(context).size.height*.3,
-                animation: true,
-                lineHeight: 30.0,
-                animationDuration: 2500,
-                percent: 0.8,
-                progressColor: Colors.green,
-restartAnimation: true,
-                center:const RotatedBox(
-                  quarterTurns: 1,
-                  child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                  ),
-                ),
-                ),
-            ),
-            ),
-            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-          ],
+        progerssBar(context,
+            color: const Color(0xffd8f3dc), percentage: .9, text: "pepsi"),
+        const SizedBox(
+          width: 3,
         ),
-        const SizedBox(width: 5,),
-        Column(
-          children: [
-             SizedBox(
-              width: 50,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Padding(
-    padding: const EdgeInsets.all(1.0),
-    child:  LinearPercentIndicator(
-barRadius: const Radius.circular(10),
-    width: MediaQuery.of(context).size.height*.3,
-    animation: true,
-    lineHeight: 30.0,
-    animationDuration: 2500,
-    percent: 0.8,
-    progressColor: Colors.green,
-restartAnimation: true,
-    center:const RotatedBox(
-      quarterTurns: 1,
-      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-      ),
-    ),
-    ),
-              ),
-            ),
-            ),
-            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-          ],
+        progerssBar(context,
+            color: const Color(0xffb7e4c7), percentage: .7, text: "cola"),
+        const SizedBox(
+          width: 3,
         ),
-        const SizedBox(width: 5,),
-        Column(
-          children: [
-             SizedBox(
-              width: 50,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Padding(
-    padding: const EdgeInsets.all(1.0),
-    child:  LinearPercentIndicator(
-barRadius: const Radius.circular(10),
-    width: MediaQuery.of(context).size.height*.3,
-    animation: true,
-    lineHeight: 30.0,
-    animationDuration: 2500,
-    percent: 0.8,
-    progressColor: Colors.green,
-restartAnimation: true,
-    center:const RotatedBox(
-      quarterTurns: 1,
-      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-      ),
-    ),
-    ),
-              ),
-            ),
-            ),
-            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-          ],
+        progerssBar(context,
+            color: const Color(0xff74c69d), percentage: .5, text: "twinkes"),
+        const SizedBox(
+          width: 3,
         ),
-        const SizedBox(width: 5,),
-        Column(
-          children: [
-             SizedBox(
-              width: 50,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Padding(
-    padding: const EdgeInsets.all(1.0),
-    child:  LinearPercentIndicator(
-barRadius: const Radius.circular(10),
-    width: MediaQuery.of(context).size.height*.3,
-    animation: true,
-    lineHeight: 30.0,
-    animationDuration: 2500,
-    percent: 0.8,
-    progressColor: Colors.green,
-restartAnimation: true,
-    center:const RotatedBox(
-      quarterTurns: 1,
-      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-      ),
-    ),
-    ),
-              ),
-            ),
-            ),
-            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-          ],
+        progerssBar(context,
+            color: const Color(0xff40916c), percentage: .4, text: "hogo"),
+        const SizedBox(
+          width: 3,
         ),
-        const SizedBox(width: 5,),
-        Column(
-          children: [
-            SizedBox(
-              width: 50,
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(1.0),
-                  child:  LinearPercentIndicator(
-                    barRadius: const Radius.circular(10),
-                    width: MediaQuery.of(context).size.height*.3,
-                    animation: true,
-                    lineHeight: 30.0,
-                    animationDuration: 2500,
-                    percent: 0.8,
-                    progressColor: Colors.green,
-                    restartAnimation: true,
-                    center:const RotatedBox(
-                      quarterTurns: 1,
-                      child:  Text("%80",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            const Text("pepsi",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold)),
-          ],
-        ),
+        progerssBar(context,
+            color: const Color(0xff1b4332), percentage: .3, text: "pepsi"),
       ],
     );
   }
@@ -694,16 +287,20 @@ restartAnimation: true,
   Column leastContents(Size) {
     return Column(
       children: [
-        showItems(Size,Colors.red[900]),
-        showItems(Size,Colors.red[500]),
-        showItems(Size,Colors.pink),
-    showItems(Size,Colors.teal),
-        showItems(Size,Colors.grey[800]),
-
+        showItems(Size, const Color(0xFFe63946),
+            NOF: "prile", HMany: 10, HM: 60),
+        showItems(Size, const Color(0xFFE97171), NOF: "Axe", HM: 50, HMany: 20),
+        showItems(Size, const Color(0xFFFFCB8E),
+            NOF: "Biscuit", HM: 40, HMany: 10),
+        showItems(Size, Colors.grey[500], NOF: "Chips", HM: 30, HMany: 5),
+        showItems(Size, const Color(0xFFF5EFEF),
+            NOF: "Coffee", HM: 20, HMany: 3),
       ],
     );
   }
-  Container showItems(Size Size,color) {
+
+  Container showItems(Size Size, color,
+      {required String NOF, required double HM, required int HMany}) {
     return Container(
       margin: const EdgeInsetsDirectional.all(8.0),
       padding: const EdgeInsets.only(right: 10, left: 30),
@@ -719,36 +316,72 @@ restartAnimation: true,
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                "Pepsi",
-                style: TextStyle(
+              //Name of product
+              Text(
+                NOF,
+                style: const TextStyle(
                     fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
+                    color: Colors.black,
+                    fontWeight: FontWeight.w900),
               ),
               const SizedBox(
                 height: 10,
               ),
               Text(
-                "100.00 LE",
+                "${HM} LE",
                 style: TextStyle(
                     fontSize: 18,
-                    color: Colors.grey[300]!,
+                    color: Colors.grey[800]!,
                     fontWeight: FontWeight.bold),
               ),
             ],
           ),
           const Spacer(),
-          const Text(
-            "50 Package",
-            style: TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+          //how many packages sell
+          Text(
+            "${HMany} Package",
+            style: const TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ],
       ),
     );
   }
 
+  Column progerssBar(context,
+      {required text, required double percentage, required Color color}) {
+    return Column(
+      children: [
+        Container(
+          width: 50,
+          child: RotatedBox(
+            quarterTurns: 3,
+            child: LinearPercentIndicator(
+              barRadius: const Radius.circular(10),
+              width: MediaQuery.of(context).size.height * .3,
+              animation: true,
+              lineHeight: 30.0,
+              animationDuration: 2500,
+              percent: percentage,
+              progressColor: color,
+              restartAnimation: true,
+              center: RotatedBox(
+                quarterTurns: 1,
+                child: Text(
+                  "${(percentage * 100).ceil()}%",
+                  style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Text(text,
+            style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+      ],
+    );
+
+  }
 //Show what they baying and selling
 //show most sold and most bought
 //show the little sold and bought
