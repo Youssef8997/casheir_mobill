@@ -101,27 +101,27 @@ class _HomeLayoutState extends State<HomeLayout> {
               Stack(children: [
                 mainWallpaper(size),
                 blurWallpaper(size),
-                cuibt.Body[0]
+                cuibt.body[0]
               ]),
               Stack(children: [
                 mainWallpaper(size),
                 blurWallpaper(size),
-                cuibt.Body[1]
+                cuibt.body[1]
               ]),
               Stack(children: [
                 mainWallpaper(size),
                 blurWallpaper(size),
-                cuibt.Body[2]
+                cuibt.body[2]
               ]),
               Stack(children: [
                 mainWallpaper(size),
                 blurWallpaper(size),
-                cuibt.Body[3]
+                cuibt.body[3]
               ]),
               Stack(children: [
                 mainWallpaper(size),
                 blurWallpaper(size),
-                cuibt.Body[4]
+                cuibt.body[4]
               ]),
 
             ],
@@ -298,7 +298,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         ),
         child: Text(
           text,
-          style: TextStyle(fontSize: 18, color: Colors.white),
+          style: const TextStyle(fontSize: 18, color: Colors.white),
         ),
       ),
     );

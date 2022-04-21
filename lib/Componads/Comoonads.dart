@@ -1,10 +1,11 @@
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
-Future Nevigator({ page, context, bool=false}){
+// ignore: avoid_types_as_parameter_names
+Future nevigator({ page, context, bool=false}){
   return Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context)=> page),(Route route)=>bool);
 }
-Container Wallpaper(Size Size) {
+Container wallpaper(Size Size) {
   return   Container(
     width: Size.width,
     height: Size.height,

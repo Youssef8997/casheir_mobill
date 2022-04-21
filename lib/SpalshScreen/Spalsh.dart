@@ -29,8 +29,8 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
           onConnectionStatusChanged: (bool? status) {
             if (status=true) {
               _controller
-                ..duration =  Duration(milliseconds: 1500)
-                ..forward().then((value) =>Nevigator(bool: false, context: context,page: SignIn()));
+                ..duration =  const Duration(milliseconds: 1500)
+                ..forward().then((value) =>nevigator(bool: false, context: context,page: SignIn()));
             }
           },
           disconnected: Lottie.asset(
@@ -54,7 +54,7 @@ class _SpalshState extends State<Spalsh>with TickerProviderStateMixin {
             onLoaded: (composition) {
               _controller
                 ..duration =composition.duration
-                ..forward().then((value) =>Nevigator(bool: false, context: context,page: SignIn())
+                ..forward().then((value) =>nevigator(bool: false, context: context,page: SignIn())
                 );
 
             },

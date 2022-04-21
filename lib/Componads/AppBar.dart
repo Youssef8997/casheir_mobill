@@ -6,7 +6,7 @@ PreferredSizeWidget appBar ({required text,required List <Widget> Action}){
     title: Shimmer.fromColors(
         highlightColor: Colors.black,
         baseColor:Colors.white54,
-        child: Text(text,style: TextStyle(fontWeight: FontWeight.w900),)),
+        child: Text(text,style: const TextStyle(fontWeight: FontWeight.w900),)),
     centerTitle: true,
     backgroundColor: Colors.transparent,
     elevation: 0,

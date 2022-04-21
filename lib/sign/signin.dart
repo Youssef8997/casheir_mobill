@@ -18,7 +18,7 @@ class SignIn extends StatelessWidget {
           var cuibt = MobilCuibt.get(context);
           return Scaffold(
             body: Stack(fit: StackFit.expand, children: [
-              Wallpaper(Size),
+              wallpaper(Size),
               Positioned(
                 top: 80,
                 left: 20,
@@ -108,14 +108,14 @@ class SignIn extends StatelessWidget {
                       fontSize: Size.height * 0.027,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                    ),),onPressed: ()=>Nevigator(bool: false,page: HomeLayout(),context: context)),
+                    ),),onPressed: ()=>nevigator(bool: false,page: HomeLayout(),context: context)),
                     const SizedBox(height: 10,),
                     TextButton(onPressed: (){}, child:Text("Forgot Password?",style: TextStyle(
                       fontSize: Size.height * 0.027,
                       color: Colors.grey[900],
                       fontWeight: FontWeight.bold,
                     ),),),
-                    TextButton(onPressed: (){Nevigator(page:SignUp(),context: context,bool: true );}, child:Text("don't have Email?",style: TextStyle(
+                    TextButton(onPressed: (){nevigator(page:SignUp(),context: context,bool: true );}, child:Text("don't have Email?",style: TextStyle(
                       fontSize: Size.height * 0.03,
                       color: Colors.black,
                       fontWeight: FontWeight.w900,
