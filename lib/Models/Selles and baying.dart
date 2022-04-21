@@ -1,6 +1,6 @@
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -38,7 +38,7 @@ class SellesABuying extends StatelessWidget {
                 ),
                 MyExpansionTile(
                   Size: Size,
-                  Children: [balanceContents()],
+                  Children: [_balanceContents()],
                   Title: "Account Balance",
                   SubTitle:
                   "All physical transactions are recorded in the account balance",
@@ -46,7 +46,7 @@ class SellesABuying extends StatelessWidget {
                 ),
                 MyExpansionTile(
                   Size: Size,
-                  Children: [sellsContents()],
+                  Children: [_sellsContents()],
                   Title: "Sells",
                   SubTitle:
                   "The monetary gain you earned from selling your products",
@@ -54,7 +54,7 @@ class SellesABuying extends StatelessWidget {
                 ),
                 MyExpansionTile(
                   Size: Size,
-                  Children: [paymentContents()],
+                  Children: [_paymentContents()],
                   Title: "Payments",
                   SubTitle:
                   "The money you paid to buy your products or raw materials",
@@ -62,14 +62,14 @@ class SellesABuying extends StatelessWidget {
                 ),
                 MyExpansionTile(
                   Size: Size,
-                  Children: [mostContents(context)],
+                  Children: [_mostContents(context)],
                   Title: "Most in demand",
                   SubTitle: "The most sold products",
                   cuibt: cuibt,
                 ),
                 MyExpansionTile(
                   Size: Size,
-                  Children: [leastContents(Size)],
+                  Children: [_leastContents(Size)],
                   Title: "least in demand",
                   SubTitle: "The least sold products",
                   cuibt: cuibt,
@@ -125,7 +125,7 @@ class SellesABuying extends StatelessWidget {
     );
   }
 
-  Column balanceContents() {
+  Column _balanceContents() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -195,7 +195,7 @@ class SellesABuying extends StatelessWidget {
 
   }
 
-  Column sellsContents() {
+  Column _sellsContents() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -223,7 +223,7 @@ class SellesABuying extends StatelessWidget {
     );
   }
 
-  Column paymentContents() {
+  Column _paymentContents() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -255,7 +255,7 @@ class SellesABuying extends StatelessWidget {
     );
   }
 
-  Row mostContents(context) {
+  Row _mostContents(context) {
     return Row(
       children: [
         progerssBar(context,
@@ -284,22 +284,22 @@ class SellesABuying extends StatelessWidget {
     );
   }
 
-  Column leastContents(Size) {
+  Column _leastContents(Size) {
     return Column(
       children: [
-        showItems(Size, const Color(0xFFe63946),
+        _showItems(Size, const Color(0xFFe63946),
             NOF: "prile", HMany: 10, HM: 60),
-        showItems(Size, const Color(0xFFE97171), NOF: "Axe", HM: 50, HMany: 20),
-        showItems(Size, const Color(0xFFFFCB8E),
+        _showItems(Size, const Color(0xFFE97171), NOF: "Axe", HM: 50, HMany: 20),
+        _showItems(Size, const Color(0xFFFFCB8E),
             NOF: "Biscuit", HM: 40, HMany: 10),
-        showItems(Size, Colors.grey[500], NOF: "Chips", HM: 30, HMany: 5),
-        showItems(Size, const Color(0xFFF5EFEF),
+        _showItems(Size, Colors.grey[500], NOF: "Chips", HM: 30, HMany: 5),
+        _showItems(Size, const Color(0xFFF5EFEF),
             NOF: "Coffee", HM: 20, HMany: 3),
       ],
     );
   }
 
-  Container showItems(Size Size, color,
+  Container _showItems(Size Size, color,
       {required String NOF, required double HM, required int HMany}) {
     return Container(
       margin: const EdgeInsetsDirectional.all(8.0),
@@ -382,7 +382,4 @@ class SellesABuying extends StatelessWidget {
     );
 
   }
-//Show what they baying and selling
-//show most sold and most bought
-//show the little sold and bought
 }

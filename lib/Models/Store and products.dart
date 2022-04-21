@@ -148,25 +148,23 @@ class StoreAProducts extends StatelessWidget {
         onTap: () => settingDialog(context, cuibt),
         child: showItems(Size: Size, NOF: NOF, HM: HM, HMany: HMany));
   }
-}
-
-settingDialog(context, MobilCuibt cuibt) {
-  return showDialog(
-    barrierDismissible: false,
-      useRootNavigator: true,
-      routeSettings: const RouteSettings(name: "setting",arguments:"Dialog"),
-      context: context,
-      builder: (context) {
-        return BlurryContainer(
-          borderRadius: BorderRadius.circular(35),
-          height: double.maxFinite,
-          width: double.maxFinite,
-          blur: 6,
-          child: AlertDialog(
+  settingDialog(context, MobilCuibt cuibt) {
+    return showDialog(
+        barrierDismissible: false,
+        useRootNavigator: true,
+        routeSettings: const RouteSettings(name: "setting",arguments:"Dialog"),
+        context: context,
+        builder: (context) {
+          return BlurryContainer(
+            borderRadius: BorderRadius.circular(35),
+            height: double.maxFinite,
+            width: double.maxFinite,
+            blur: 6,
+            child: AlertDialog(
 
               clipBehavior: Clip.antiAliasWithSaveLayer,
               contentPadding:
-                  const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+              const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(35)),
               title: const Text("Edit Item"),
@@ -187,7 +185,7 @@ settingDialog(context, MobilCuibt cuibt) {
                   const SizedBox(height: 15),
                   MyTextField(
 
-                    label: "Price",
+                      label: "Price",
                       keybordtype: TextInputType.number,
                       Controlr: cuibt.costItemController, hint: "30 LE"),
                   const SizedBox(height: 15),
@@ -198,45 +196,48 @@ settingDialog(context, MobilCuibt cuibt) {
                       label: "Number of packages"),
                   const SizedBox(height: 15),
                   MyTextField(
-                    keybordtype: TextInputType.none,
-                    OnTap: () => showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      initialDatePickerMode: DatePickerMode.year,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2030),
-                    ),
+                      keybordtype: TextInputType.none,
+                      OnTap: () => showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        initialDatePickerMode: DatePickerMode.year,
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2030),
+                      ),
                       label: "Expire Date",
                       Controlr: cuibt.dateItemController, hint: "2023/8/5"),
                 ],
               ),
-          actionsAlignment: MainAxisAlignment.center,
-          scrollable:true,
+              actionsAlignment: MainAxisAlignment.center,
+              scrollable:true,
 
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: MyButton(widget: const Text("Save"), onPressed: () {
-                    Navigator.pop(context);
-                  }),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: MyButton(widget: const Text("cancel"), onPressed: () {
-                    Navigator.pop(context);
-                  }),
+              actions: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: MyButton(widget: const Text("Save"), onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: MyButton(widget: const Text("cancel"), onPressed: () {
+                        Navigator.pop(context);
+                      }),
+                    ),
+                  ],
                 ),
               ],
+
             ),
-          ],
 
-          ),
+          );
+        });
+  }
 
-        );
-      });
 }
+
 
 /* 1-Show the item which almost finish
 * 2-Show the item which finish
