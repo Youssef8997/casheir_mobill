@@ -1,5 +1,4 @@
 import 'package:casheir_mobill/Componads/Comoonads.dart';
-import 'package:casheir_mobill/Componads/TextForm.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
@@ -69,7 +68,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       fontWeight: FontWeight.bold,
                       fontSize: 25.0),
                 )),
-            leading: cuibt.value == 1
+            leading: cuibt.value == 0||cuibt.value == 1
                 ? IconButton(
                     icon: const Icon(
                       Icons.filter_alt_outlined,
@@ -90,11 +89,44 @@ class _HomeLayoutState extends State<HomeLayout> {
                   )
                 : null,
           ),
-          body: Stack(children: [
-            mainWallpaper(size),
-            blurWallpaper(size),
-            cuibt.Body[cuibt.value]
-          ]),
+          body: PageView(
+            controller: cuibt.scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
+            allowImplicitScrolling: true,
+            onPageChanged: (index){setState(() {
+              cuibt.value = index;
+            });},
+            scrollBehavior: const ScrollBehavior(),
+            children: [
+              Stack(children: [
+                mainWallpaper(size),
+                blurWallpaper(size),
+                cuibt.Body[0]
+              ]),
+              Stack(children: [
+                mainWallpaper(size),
+                blurWallpaper(size),
+                cuibt.Body[1]
+              ]),
+              Stack(children: [
+                mainWallpaper(size),
+                blurWallpaper(size),
+                cuibt.Body[2]
+              ]),
+              Stack(children: [
+                mainWallpaper(size),
+                blurWallpaper(size),
+                cuibt.Body[3]
+              ]),
+              Stack(children: [
+                mainWallpaper(size),
+                blurWallpaper(size),
+                cuibt.Body[4]
+              ]),
+
+            ],
+
+          ),
           bottomNavigationBar: FlashyTabBar(
             showElevation: true,
             height: 65,
@@ -107,6 +139,7 @@ class _HomeLayoutState extends State<HomeLayout> {
             onItemSelected: (int value) {
               setState(() {
                 cuibt.value = value;
+                cuibt.scrollController.animateToPage(cuibt.value, duration: const Duration(seconds: 1), curve: Curves.easeOutCubic);
               });
             },
           ),
@@ -170,30 +203,6 @@ class _HomeLayoutState extends State<HomeLayout> {
           const SizedBox(
             height: 25,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Row(
-              children: [
-                activePressButton(cuibt,(){
-                  Navigator.pop(context);
-                 setState(() {
-                   cuibt.typeSearch="Sells";
-                 });
-                  },"Sells", cuibt.typeSearch),
-                const SizedBox(width:100),
-                activePressButton(cuibt,(){
-                  Navigator.pop(context);
-                  setState(() {
-                    cuibt.typeSearch="Buys";
-                  });
-                  },"Buys",cuibt.typeSearch),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 25,
-          ),
-          myDivider(Sise),
           const SizedBox(
             height: 25,
           ),
