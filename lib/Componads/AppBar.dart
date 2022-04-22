@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-PreferredSizeWidget appBar ({required text,required List <Widget> Action}){
+PreferredSizeWidget myAppBar ({required text,required List <Widget> Action}){
   return AppBar(
     title: Shimmer.fromColors(
         highlightColor: Colors.black,

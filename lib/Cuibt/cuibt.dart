@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../Models/Empo.dart';
-import '../Models/Suppliers.dart';
+import '../Models/suppliers/Suppliers.dart';
 import '../Models/Users.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
