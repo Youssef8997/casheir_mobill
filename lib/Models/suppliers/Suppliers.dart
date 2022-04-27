@@ -54,7 +54,22 @@ class Suppliers extends StatelessWidget {
     required BuildContext context
   }) {
     return InkWell(
-      onTap: ()=>nevigator(bool: true,page: AllFess(),context: context),
+      onTap: ()=>nevigator(bool: true,page: AllFess(
+        suppliersName: "Pepsi",
+        lastFess: 500.0,
+        userName: "yoyo",
+        totalMoney: 3000.0,
+        Fess: [
+          {
+            "date": "20/10/2022",
+            "fess": 500.0,
+          },
+          {
+            "date": "21/10/2022",
+            "fess": 500.0,
+          },
+        ],
+      ),context: context),
       child: Container(
         margin: const EdgeInsetsDirectional.all(15),
         padding: const EdgeInsetsDirectional.all(15),

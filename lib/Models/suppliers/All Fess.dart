@@ -1,17 +1,23 @@
 import 'package:casheir_mobill/Componads/AppBar.dart';
-import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class AllFess extends StatefulWidget {
-  @override
-  State<AllFess> createState() => _AllFessState();
-}
+class AllFess extends StatelessWidget {
+  final String userName;
+  final String suppliersName;
+  final double totalMoney;
+  final double lastFess;
+  final List Fess;
 
-class _AllFessState extends State<AllFess> {
+  const AllFess(
+      {required this.userName,
+      required this.suppliersName,
+      required this.totalMoney,
+      required this.lastFess,
+      required this.Fess});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt, MobilState>(
@@ -22,7 +28,7 @@ class _AllFessState extends State<AllFess> {
             extendBodyBehindAppBar: true,
             appBar: myAppBar(text: "All Fess", Action: []),
             body: Container(
-              padding: EdgeInsets.only(top: 25, left: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               height: Size.height,
               width: Size.width,
               decoration: const BoxDecoration(
@@ -31,10 +37,21 @@ class _AllFessState extends State<AllFess> {
                   fit: BoxFit.fill,
                 ),
               ),
-              child: Column(children: [
-                precentge_circular(precent: 1, size: Size),
-                showFess()
-              ]),
+              child: SafeArea(
+                child: ListView (
+                    children: [
+                  Expanded(child: precentge_circular(precent: 1, size: Size)),
+                      Expanded(
+                        child: ListView.separated(
+                          padding:EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context,i)=>showFess(context,user: userName,date:"20/10/2022",fess:500.0,moneyBefore:3000.0,moneyAfter: 2500.0 ),
+                        separatorBuilder: (context,_)=>const SizedBox(height: 15),
+                        itemCount:20),
+                      ),
+                ]),
+              ),
             ));
       },
     );
@@ -44,11 +61,12 @@ class _AllFessState extends State<AllFess> {
     required Size size,
     required double precent,
   }) {
-    return SizedBox(
+    return Container(
       height: size.height * .5,
       width: size.width,
+
       child: CircularPercentIndicator(
-        radius: 150,
+        radius: size.width * .4,
         lineWidth: 10,
         linearGradient: const LinearGradient(colors: [
           Colors.tealAccent,
@@ -59,14 +77,11 @@ class _AllFessState extends State<AllFess> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Pepsi",
+              suppliersName,
               style: const TextStyle(
                   fontSize: 21,
                   color: Colors.white,
                   fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 10,
             ),
             Text("${(precent * 100).ceil()}%",
                 style: const TextStyle(
@@ -74,7 +89,7 @@ class _AllFessState extends State<AllFess> {
                     fontWeight: FontWeight.bold,
                     fontSize: 20)),
             Text(
-              "Total Money : 3000 LE",
+              "Total Money : $totalMoney LE",
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -82,7 +97,7 @@ class _AllFessState extends State<AllFess> {
               ),
             ),
             Text(
-              "Total Money : 3000 LE",
+              "Last fess : $lastFess LE",
               style: TextStyle(
                 color: Colors.grey[600]!,
                 fontWeight: FontWeight.bold,
@@ -98,19 +113,25 @@ class _AllFessState extends State<AllFess> {
         animateFromLastPercent: false,
         curve: Curves.easeInCubic,
         arcType: ArcType.FULL,
+
       ),
     );
   }
 
-  Widget showFess() {
+  Widget showFess(context,
+      {required String date,
+      required String user,
+      required double fess,
+      required double moneyBefore,
+      required double moneyAfter}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         RotatedBox(
             quarterTurns: 3,
             child: Text(
-              "20/4/2022",
-              style: TextStyle(
+              date,
+              style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
@@ -127,8 +148,8 @@ class _AllFessState extends State<AllFess> {
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey[900]!,
-                  blurRadius: 10,
-                  spreadRadius: 5,
+                  blurRadius: 5,
+                  spreadRadius: 4,
                   offset: const Offset(2, 5),
                 )
               ],
@@ -140,32 +161,29 @@ class _AllFessState extends State<AllFess> {
                   children: [
                     Expanded(
                         child: Text(
-                      "youssef ahmed",
-                      style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-
-
-
+                      user,
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
                       ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     )),
-                  const   SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
                     Expanded(
                         child: Text(
-                      "Fees: 300 LE",
-                      style: TextStyle(
+                      "Fees: $fess LE",
+                      style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontStyle: FontStyle.italic),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     )),
                   ],
                 ),
@@ -174,30 +192,30 @@ class _AllFessState extends State<AllFess> {
                   children: [
                     Expanded(
                         child: Text(
-                      "3300 LE",
-                      style: TextStyle(
-                          fontSize: 21,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          fontStyle: FontStyle.italic,
-                      decoration: TextDecoration.lineThrough,
+                      "$moneyBefore LE",
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        decoration: TextDecoration.lineThrough,
                       ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     )),
-                    SizedBox(
+                    const SizedBox(
                       width: 30,
                     ),
                     Expanded(
                         child: Text(
-                      "3000 LE",
-                      style: TextStyle(
+                      "$moneyAfter LE",
+                      style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontStyle: FontStyle.italic),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     )),
                   ],
                 ),
