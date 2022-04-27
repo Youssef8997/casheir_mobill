@@ -99,28 +99,23 @@ class _HomeLayoutState extends State<HomeLayout> {
             scrollBehavior: const ScrollBehavior(),
             children: [
               Stack(children: [
-                mainWallpaper(size),
-                blurWallpaper(size),
+                gfWallpaper(size),
                 cuibt.body[0]
               ]),
               Stack(children: [
-                mainWallpaper(size),
-                blurWallpaper(size),
+                gfWallpaper(size),
                 cuibt.body[1]
               ]),
               Stack(children: [
-                mainWallpaper(size),
-                blurWallpaper(size),
+                gfWallpaper(size),
                 cuibt.body[2]
               ]),
               Stack(children: [
-                mainWallpaper(size),
-                blurWallpaper(size),
+                gfWallpaper(size),
                 cuibt.body[3]
               ]),
               Stack(children: [
-                mainWallpaper(size),
-                blurWallpaper(size),
+                gfWallpaper(size),
                 cuibt.body[4]
               ]),
 

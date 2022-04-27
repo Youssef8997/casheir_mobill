@@ -35,12 +35,19 @@ Container mainWallpaper(Size Size) {
         )),
   );
 }
-BlurryContainer blurWallpaper(Size Size) {
-  return BlurryContainer(
-    blur: 6,
+Container gfWallpaper(Size Size) {
+  return Container(
     width: Size.width,
     height: Size.height,
-    child: const Text(""),
+    decoration:const BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          filterQuality: FilterQuality.high,
+          image: AssetImage(
+            "lib/assest/Wallpaperbluer.jpg",
+
+          ),
+        )),
   );
 }
 Color activeColor=Colors.brown[700]!;

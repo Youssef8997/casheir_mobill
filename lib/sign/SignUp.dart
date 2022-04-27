@@ -21,8 +21,7 @@ class SignUp extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  mainWallpaper(Size),
-                  blurWallpaper(Size),
+               gfWallpaper(Size),
                   Positioned(
                     top: 50,
                     left: 10,
