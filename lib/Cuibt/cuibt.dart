@@ -4,8 +4,7 @@ import 'package:casheir_mobill/Models/Store%20and%20products.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../Models/Empo.dart';
+import '../Models/empo/Empo.dart';
 import '../Models/suppliers/Suppliers.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
@@ -36,6 +35,8 @@ class MobilCuibt extends Cubit<MobilState> {
   bool searchVisibleEmployee = false;
   var searchControllerEmployee = TextEditingController();
   int selectedTile=1;
+  var employeeScaffold = GlobalKey<ScaffoldState>();
+
   //Filters
   var bottomSheetController = TextEditingController();
   var kayScaffold = GlobalKey<ScaffoldState>();
