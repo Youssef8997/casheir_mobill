@@ -2,6 +2,7 @@ import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_simple_rating_bar/flutter_simple_rating_bar.dart';
 
 class Employees extends StatelessWidget {
 
@@ -16,7 +17,12 @@ class Employees extends StatelessWidget {
           child: Column(
 children: [
   listTileWidget(cuibt),
-
+  if(cuibt.selectedTile==1)
+  timeColumn(),
+  if(cuibt.selectedTile==2)
+    ratingColumn(),
+  if(cuibt.selectedTile==3)
+    moneyColumn(),
   ],
           ),
         );
@@ -53,10 +59,39 @@ children: [
             onTap: ()=>cuibt.changeSelectedTile(3),
             selected: cuibt.selectedTile==3,
             leading: const Icon(Icons.monetization_on,color: Colors.greenAccent,),
-            title: const Text('Time',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            subtitle: const Text('Attendance, Leave, Overtime',style: TextStyle(fontSize: 17,),),
+            title: const Text('money',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+            subtitle: const Text('Salary of employees ',style: TextStyle(fontSize: 17,),),
             trailing: cuibt.selectedTile==3?const Icon(Icons.arrow_downward_outlined):null,
           ),
+
+        ],
+      ),
+    );
+  }
+  Widget timeColumn(){
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+
+        ],
+      ),
+    );
+  }
+  Widget ratingColumn(){
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+        ],
+      ),
+    );
+  }
+  Widget moneyColumn(){
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
 
         ],
       ),

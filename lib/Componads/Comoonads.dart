@@ -1,4 +1,3 @@
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 
 // ignore: avoid_types_as_parameter_names

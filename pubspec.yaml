@@ -39,10 +39,9 @@ dependencies:
   shimmer: ^2.0.0
   blurrycontainer: ^0.1.0
   flashy_tab_bar2: ^0.0.4
-  dio: ^4.0.4
   percent_indicator: ^4.0.0
   conditional_builder_null_safety: ^0.0.6
-  timeline_tile: ^2.0.0
+  flutter_rating_bar: ^4.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
