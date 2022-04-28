@@ -1,4 +1,3 @@
-import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
@@ -89,38 +88,30 @@ class _HomeLayoutState extends State<HomeLayout> {
                   )
                 : null,
           ),
-          body: PageView(
-            controller: cuibt.scrollController,
-            physics: const AlwaysScrollableScrollPhysics(),
-            allowImplicitScrolling: true,
-            onPageChanged: (index){setState(() {
-              cuibt.value = index;
-            });},
-            scrollBehavior: const ScrollBehavior(),
-            children: [
-              Stack(children: [
-                gfWallpaper(size),
-                cuibt.body[0]
-              ]),
-              Stack(children: [
-                gfWallpaper(size),
-                cuibt.body[1]
-              ]),
-              Stack(children: [
-                gfWallpaper(size),
-                cuibt.body[2]
-              ]),
-              Stack(children: [
-                gfWallpaper(size),
-                cuibt.body[3]
-              ]),
-              Stack(children: [
-                gfWallpaper(size),
-                cuibt.body[4]
-              ]),
+          body: Container(
+            height: size.height,
+            width: size.width,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('lib/assest/Wallpaperbluer.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: PageView(
+              controller: cuibt.scrollController,
+              physics: const AlwaysScrollableScrollPhysics(),
+              allowImplicitScrolling: true,
+              onPageChanged: (index){setState(() {
+                cuibt.value = index;
+              });},
+              children: [
+                cuibt.body[0],
+                cuibt.body[1],
+                cuibt.body[2],
+                cuibt.body[3],
+              ],
 
-            ],
-
+            ),
           ),
           bottomNavigationBar: FlashyTabBar(
             showElevation: true,

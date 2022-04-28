@@ -90,7 +90,7 @@ class AllFess extends StatelessWidget {
                     fontSize: 20)),
             Text(
               "Total Money : $totalMoney LE",
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 fontSize: 21,

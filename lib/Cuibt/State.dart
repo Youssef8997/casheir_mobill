@@ -4,5 +4,5 @@ class changeObsr extends MobilState{}
 class ChangePosition extends MobilState{}
 class ChangeVisibalBar extends MobilState{}
 class ChangeActived extends MobilState{}
-class Changed extends MobilState{}
 class clopsed extends MobilState{}
+class ChangeSelectedTile extends MobilState{}
