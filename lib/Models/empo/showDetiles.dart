@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
-class Empo extends StatefulWidget {
 
+class Empo extends StatefulWidget {
   @override
   State<Empo> createState() => _EmpoState();
 }
@@ -14,34 +14,37 @@ class Empo extends StatefulWidget {
 class _EmpoState extends State<Empo> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<MobilCuibt,MobilState>
-      (
-      listener: (context,state){},
-      builder: (context,state){
-        var cuibt =MobilCuibt.get(context);
-        var size= MediaQuery.of(context).size;
+    return BlocConsumer<MobilCuibt, MobilState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        var cuibt = MobilCuibt.get(context);
+        var size = MediaQuery.of(context).size;
         return Scaffold(
           key: cuibt.employeeScaffold,
           extendBodyBehindAppBar: true,
-          appBar: myAppBar(text: "Details",Action: [],leading:IconButton(
-            icon: const Icon(
-              Icons.filter_alt_outlined,
-              color: Colors.white,
-              size: 28,
-              shadows: [
-                Shadow(
-                  color: Colors.black,
-                  blurRadius: 20,
-                  offset: Offset(0, 10),
-                ),
-              ],
-            ),
-            onPressed: () {
-              cuibt.employeeScaffold.currentState?.showBottomSheet(
-                      (context) => MyButtomSheet(size, cuibt));
-            },
-          ) ),
+          appBar: myAppBar(text: "Details", Action: [
+            IconButton(
+              icon: const Icon(
+                Icons.filter_alt_outlined,
+                color: Colors.white,
+                size: 28,
+                shadows: [
+                  Shadow(
+                    color: Colors.black,
+                    blurRadius: 20,
+                    offset: Offset(0, 10),
+                  ),
+                ],
+              ),
+              onPressed: () {
+                cuibt.employeeScaffold.currentState
+                    ?.showBottomSheet((context) => MyButtomSheet(size, cuibt));
+              },
+            )
+          ]),
           body: Container(
+            height: size.height,
+            width: size.width,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage("lib/assest/Wallpaperbluer.jpg"),
@@ -49,23 +52,20 @@ class _EmpoState extends State<Empo> {
               ),
             ),
             child: SafeArea(
-              child: Column(
-children: [
-
-  listTileWidget(cuibt),
-  if(cuibt.selectedTile==1)
-  timeColumn(),
-  if(cuibt.selectedTile==2)
-    ratingColumn(),
-  if(cuibt.selectedTile==3)
-    moneyColumn(),
-  ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    listTileWidget(cuibt),
+                    if (cuibt.selectedTile == 1) timeColumn(),
+                    if (cuibt.selectedTile == 2) ratingColumn(),
+                    if (cuibt.selectedTile == 3) moneyColumn(),
+                  ],
+                ),
               ),
             ),
           ),
         );
       },
-
     );
   }
 
@@ -77,30 +77,66 @@ children: [
       selectedTileColor: Colors.teal,
       selectedColor: Colors.blue[200],
       child: Column(
-        children:  [
+        children: [
           ListTile(
-            onTap: ()=>cuibt.changeSelectedTile(1),
-            selected: cuibt.selectedTile==1,
+            onTap: () => cuibt.changeSelectedTile(1),
+            selected: cuibt.selectedTile == 1,
             leading: const Icon(Icons.access_time_outlined),
-            title: const Text('Time',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            subtitle: const Text('Attendance, Leave, Overtime',style: TextStyle(fontSize: 17,),),
-            trailing: cuibt.selectedTile==1?const Icon(Icons.arrow_downward_outlined):null,
+            title: const Text(
+              'Time',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            subtitle: const Text(
+              'Attendance, Leave, Overtime',
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+            trailing: cuibt.selectedTile == 1
+                ? const Icon(Icons.arrow_downward_outlined)
+                : null,
           ),
           ListTile(
-            onTap: ()=>cuibt.changeSelectedTile(2),
-            selected: cuibt.selectedTile==2,
-            leading: const Icon(Icons.star,color: Colors.yellow,),
-            title: const Text('Rating',style:  TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            subtitle: const Text('Rate employee ',style: TextStyle(fontSize: 17,),),
-            trailing: cuibt.selectedTile==2?const Icon(Icons.arrow_downward_outlined):null,
+            onTap: () => cuibt.changeSelectedTile(3),
+            selected: cuibt.selectedTile == 3,
+            leading: const Icon(
+              Icons.monetization_on,
+              color: Colors.greenAccent,
+            ),
+            title: const Text(
+              'money',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            subtitle: const Text(
+              'Salary of employees ',
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+            trailing: cuibt.selectedTile == 3
+                ? const Icon(Icons.arrow_downward_outlined)
+                : null,
           ),
           ListTile(
-            onTap: ()=>cuibt.changeSelectedTile(3),
-            selected: cuibt.selectedTile==3,
-            leading: const Icon(Icons.monetization_on,color: Colors.greenAccent,),
-            title: const Text('money',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-            subtitle: const Text('Salary of employees ',style: TextStyle(fontSize: 17,),),
-            trailing: cuibt.selectedTile==3?const Icon(Icons.arrow_downward_outlined):null,
+            onTap: () => cuibt.changeSelectedTile(2),
+            selected: cuibt.selectedTile == 2,
+            leading: const Icon(
+              Icons.star,
+              color: Colors.yellow,
+            ),
+            title: const Text(
+              'Rating',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            subtitle: const Text(
+              'Rate employee ',
+              style: TextStyle(
+                fontSize: 17,
+              ),
+            ),
+            trailing: cuibt.selectedTile == 2
+                ? const Icon(Icons.arrow_downward_outlined)
+                : null,
           ),
 
         ],
@@ -108,24 +144,43 @@ children: [
     );
   }
 
-  Widget timeColumn(){
+  Widget timeColumn() {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Column(
-        children: [
-
-        ],
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.8,
+        width: MediaQuery.of(context).size.width,
+        child: ListView.separated(
+          itemBuilder: (context, i) => showTime(
+            context,
+            date: "20/10/2022",
+            attendance: "7:00 pm",
+            leave: "2:30 am",
+            lateTime: "0",
+            overTime: "0",
+          ),
+          separatorBuilder: (context, _) => SizedBox(
+            height: 0,
+          ),
+          itemCount: 20,
+        ),
       ),
     );
   }
 
-  Widget ratingColumn(){
+  Widget ratingColumn() {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-         const  Text("Give rating to employee",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
-          const SizedBox(height: 15,),
+          const Text(
+            "Give rating to employee",
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
           RatingBar.builder(
             initialRating: 3,
             itemCount: 5,
@@ -161,71 +216,77 @@ children: [
                   return const SizedBox.shrink();
               }
             },
-            onRatingUpdate: (rating) {
-
-            },
+            onRatingUpdate: (rating) {},
             itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
           ),
-          const SizedBox(height: 50,),
-          const  Text("Manger`s rating of employee",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: Colors.white),),
-          const SizedBox(height: 15,),
+          const SizedBox(
+            height: 50,
+          ),
+          const Text(
+            "Manger`s rating of employee",
+            style: TextStyle(
+                fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(
+            height: 15,
+          ),
           RatingBar.builder(
             ignoreGestures: true,
-          initialRating: 3,
-          itemCount: 5,
-          allowHalfRating: true,
-          itemBuilder: (context, index) {
-            switch (index) {
-              case 0:
-                return const Icon(
-                  Icons.sentiment_very_dissatisfied,
-                  color: Colors.red,
-                );
-              case 1:
-                return const Icon(
-                  Icons.sentiment_dissatisfied,
-                  color: Colors.redAccent,
-                );
-              case 2:
-                return const Icon(
-                  Icons.sentiment_neutral,
-                  color: Colors.amber,
-                );
-              case 3:
-                return const Icon(
-                  Icons.sentiment_satisfied,
-                  color: Colors.lightGreen,
-                );
-              case 4:
-                return const Icon(
-                  Icons.sentiment_very_satisfied,
-                  color: Colors.green,
-                );
-              default:
-                return const SizedBox.shrink();
-            }
-          },
-          onRatingUpdate: (rating) {
-
-          },
-itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
+            initialRating: 3,
+            itemCount: 5,
+            allowHalfRating: true,
+            itemBuilder: (context, index) {
+              switch (index) {
+                case 0:
+                  return const Icon(
+                    Icons.sentiment_very_dissatisfied,
+                    color: Colors.red,
+                  );
+                case 1:
+                  return const Icon(
+                    Icons.sentiment_dissatisfied,
+                    color: Colors.redAccent,
+                  );
+                case 2:
+                  return const Icon(
+                    Icons.sentiment_neutral,
+                    color: Colors.amber,
+                  );
+                case 3:
+                  return const Icon(
+                    Icons.sentiment_satisfied,
+                    color: Colors.lightGreen,
+                  );
+                case 4:
+                  return const Icon(
+                    Icons.sentiment_very_satisfied,
+                    color: Colors.green,
+                  );
+                default:
+                  return const SizedBox.shrink();
+              }
+            },
+            onRatingUpdate: (rating) {},
+            itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
           )
-
         ],
       ),
     );
   }
 
-  Widget moneyColumn(){
+  Widget moneyColumn() {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: Column(
-        children: [
-
-        ],
-      ),
+      child: SizedBox(
+          height: MediaQuery.of(context).size.height * .8,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.separated(
+              itemBuilder: (context,i)=>showMoney(context,user: "Ebrahim",date: "20/10/2020",money: 100,moneyBefore:3000,moneyAfter: 2900 ),
+              separatorBuilder: (context,_)=>const SizedBox(height: 10,),
+              itemCount: 20)),
     );
   }
+
   Widget MyButtomSheet(Size Sise, MobilCuibt cuibt) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -237,7 +298,6 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
-
         children: [
           //Title
           Padding(
@@ -287,21 +347,20 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Row(
-
               children: [
-                activePressButton(cuibt,(){
+                activePressButton(cuibt, () {
                   Navigator.pop(context);
                   setState(() {
-                    cuibt.typeOrder="descending";
+                    cuibt.typeOrder = "descending";
                   });
-                },"descending", cuibt.typeOrder),
-                const SizedBox(width:100),
-                activePressButton(cuibt,(){
+                }, "descending", cuibt.typeOrder),
+                const SizedBox(width: 100),
+                activePressButton(cuibt, () {
                   Navigator.pop(context);
                   setState(() {
-                    cuibt.typeOrder="ascending";
+                    cuibt.typeOrder = "ascending";
                   });
-                },"ascending", cuibt.typeOrder),
+                }, "ascending", cuibt.typeOrder),
               ],
             ),
           ),
@@ -310,7 +369,8 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
       ),
     );
   }
-  InkWell activePressButton(MobilCuibt cuibt, ontap, text,type) {
+
+  InkWell activePressButton(MobilCuibt cuibt, ontap, text, type) {
     return InkWell(
       onTap: ontap,
       child: Container(
@@ -319,16 +379,21 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
         width: 90,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white60, width: 2),
-          color:type=="$text"?Colors.brown:Colors.grey[600],
+          color: type == "$text" ? Colors.brown : Colors.grey[600],
           borderRadius: BorderRadius.circular(15),
         ),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 18, color: Colors.white,overflow: TextOverflow.fade,),
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            overflow: TextOverflow.fade,
+          ),
         ),
       ),
     );
   }
+
   Container myDivider(Size Sise) {
     return Container(
       height: 1,
@@ -336,6 +401,7 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
       color: Colors.grey[900],
     );
   }
+
   Padding Date(MobilCuibt cuibt, Size Sise) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -382,14 +448,16 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
                 ),
               ),
             ),
-           const  SizedBox(width: 10,),
-            activePressButton(cuibt,(){},"All",false)
-
+            const SizedBox(
+              width: 10,
+            ),
+            activePressButton(cuibt, () {}, "All", false)
           ],
         ),
       ),
     );
   }
+
   InkWell PressButton(MobilCuibt cuibt, ontap, text) {
     return InkWell(
       onTap: ontap,
@@ -410,4 +478,221 @@ itemPadding: const EdgeInsets.symmetric(horizontal: 5.0),
     );
   }
 
+  Widget showTime(context,
+      {required String date,
+      required String attendance,
+      required String leave,
+      required String overTime,
+      required String lateTime}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        RotatedBox(
+            quarterTurns: 3,
+            child: Text(
+              date,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )),
+        Expanded(
+          child: Container(
+            height: 85,
+            width: MediaQuery.of(context).size.width * .8,
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(.8),
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 5,
+                  spreadRadius: 6,
+                  offset: const Offset(0, 5),
+                )
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        child: Text(
+                      attendance,
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Expanded(
+                        child: Text(
+                      leave,
+                      style: const TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        child: Text(
+                      "$lateTime Minutes Late",
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontStyle: FontStyle.italic,
+                        decoration: TextDecoration.underline,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "$overTime Hours",
+                      style: const TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget showMoney(context,
+      {required String date,
+      required String user,
+      required double money,
+      required double moneyBefore,
+      required double moneyAfter}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        RotatedBox(
+            quarterTurns: 3,
+            child: Text(
+              date,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
+            )),
+        Expanded(
+          child: Container(
+            height: 85,
+            width: MediaQuery.of(context).size.width * .8,
+            margin: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+              color: Colors.blueGrey[700]!,
+              borderRadius: BorderRadius.circular(40),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey[900]!,
+                  blurRadius: 5,
+                  spreadRadius: 4,
+                  offset: const Offset(2, 5),
+                )
+              ],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        child: Text(
+                      user,
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "Fees: $money LE",
+                      style: const TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        child: Text(
+                      "$moneyBefore LE",
+                      style: const TextStyle(
+                        fontSize: 21,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "$moneyAfter LE",
+                      style: const TextStyle(
+                          fontSize: 21,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontStyle: FontStyle.italic),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        )
+      ],
+    );
+  }
 }
