@@ -20,9 +20,9 @@ class SellesABuying extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Hi Youssef!",
-                  style: TextStyle(
+                 Text(
+                  "Hi ${cuibt.user!.name}!",
+                  style:const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

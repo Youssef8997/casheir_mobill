@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "576141552926",
+    "project_id": "dashboard-cashier",
+    "storage_bucket": "dashboard-cashier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:576141552926:android:0d8ebb6fc402e468576d0f",
+        "android_client_info": {
+          "package_name": "com.casheir.dashaboard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "576141552926-5eh0jk08i9n1attqlf3m2tqfe2b3pdff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAn9j5zMiHEHd1sYhf5ABrJXgeIA1vIu5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "576141552926-5eh0jk08i9n1attqlf3m2tqfe2b3pdff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

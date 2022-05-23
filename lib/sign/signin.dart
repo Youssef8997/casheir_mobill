@@ -3,7 +3,6 @@ import 'package:casheir_mobill/Componads/TextForm.dart';
 import 'package:casheir_mobill/Componads/mybutton.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
-import 'package:casheir_mobill/HomeLayout/HomeLayout.dart';
 import 'package:casheir_mobill/sign/SignUp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,7 +107,7 @@ class SignIn extends StatelessWidget {
                       fontSize: Size.height * 0.027,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                    ),),onPressed: ()=>nevigator(bool: false,page: HomeLayout(),context: context)),
+                    ),),onPressed: ()=>cuibt.signIn(context),),
                     const SizedBox(height: 10,),
                     TextButton(onPressed: (){}, child:Text("Forgot Password?",style: TextStyle(
                       fontSize: Size.height * 0.027,

@@ -42,6 +42,11 @@ dependencies:
   percent_indicator: ^4.0.0
   conditional_builder_null_safety: ^0.0.6
   flutter_rating_bar: ^4.0.0
+  firebase_core: ^1.15.0
+  firebase_auth: ^3.3.16
+  cloud_firestore: ^3.1.13
+  shared_preferences: ^2.0.11
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

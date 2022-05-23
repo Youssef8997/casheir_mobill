@@ -645,7 +645,7 @@ class _EmpoState extends State<Empo> {
                     ),
                     Expanded(
                         child: Text(
-                      "Fees: $money LE",
+                      "$money LE",
                       style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
