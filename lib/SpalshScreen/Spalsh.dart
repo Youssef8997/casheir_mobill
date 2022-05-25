@@ -65,7 +65,7 @@ class _SpalshState extends State<Spalsh> with TickerProviderStateMixin {
               _controller
                 ..duration = composition.duration
                 ..forward().then((value) =>
-                    nevigator(bool: false, context: context, page: SignIn()));
+                    nevigator(bool: false, context: context, page: widget));
             },
           ),
         ),

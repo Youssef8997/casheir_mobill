@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:casheir_mobill/SpalshScreen/Spalsh.dart';
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
 
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (BuildContext context) => MobilCuibt()..getUserDate())
+          BlocProvider(create: (BuildContext context) => MobilCuibt()..getUserDate()..getMoneyDate())
         ],
         child: MaterialApp(
           theme: ThemeData(

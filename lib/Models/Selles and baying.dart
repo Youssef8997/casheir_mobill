@@ -1,5 +1,6 @@
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
  import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -17,64 +18,68 @@ class SellesABuying extends StatelessWidget {
           child:SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal:20,vertical: 20),
             physics: const BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                 Text(
-                  "Hi ${cuibt.user!.name}!",
-                  style:const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontStyle: FontStyle.italic),
-                ),
-                const Text(
-                  "Thanks for your trust in us to make your work more professional ",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white54,
+            child: ConditionalBuilder(
+              builder: (context)=> Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Hi ${cuibt.user!.name}!",
+                    style:const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontStyle: FontStyle.italic),
                   ),
-                ),
-                MyExpansionTile(
-                  Size: Size,
-                  Children: [_balanceContents()],
-                  Title: "Account Balance",
-                  SubTitle:
-                  "All physical transactions are recorded in the account balance",
-                  cuibt: cuibt,
-                ),
-                MyExpansionTile(
-                  Size: Size,
-                  Children: [_sellsContents()],
-                  Title: "Sells",
-                  SubTitle:
-                  "The monetary gain you earned from selling your products",
-                  cuibt: cuibt,
-                ),
-                MyExpansionTile(
-                  Size: Size,
-                  Children: [_paymentContents()],
-                  Title: "Payments",
-                  SubTitle:
-                  "The money you paid to buy your products or raw materials",
-                  cuibt: cuibt,
-                ),
-                MyExpansionTile(
-                  Size: Size,
-                  Children: [_mostContents(context)],
-                  Title: "Most in demand",
-                  SubTitle: "The most sold products",
-                  cuibt: cuibt,
-                ),
-                MyExpansionTile(
-                  Size: Size,
-                  Children: [_leastContents(Size)],
-                  Title: "least in demand",
-                  SubTitle: "The least sold products",
-                  cuibt: cuibt,
-                ),
-              ],
+                  const Text(
+                    "Thanks for your trust in us to make your work more professional ",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white54,
+                    ),
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [_balanceContents(cuibt)],
+                    Title: "Account Balance",
+                    SubTitle:
+                    "All physical transactions are recorded in the account balance",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [_sellsContents(cuibt)],
+                    Title: "Sells",
+                    SubTitle:
+                    "The monetary gain you earned from selling your products",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [_paymentContents(cuibt)],
+                    Title: "Payments",
+                    SubTitle:
+                    "The money you paid to buy your products or raw materials",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [_mostContents(context)],
+                    Title: "Most in demand",
+                    SubTitle: "The most sold products",
+                    cuibt: cuibt,
+                  ),
+                  MyExpansionTile(
+                    Size: Size,
+                    Children: [_leastContents(Size)],
+                    Title: "least in demand",
+                    SubTitle: "The least sold products",
+                    cuibt: cuibt,
+                  ),
+                ],
+              ),
+             fallback: (context)=>const Center(child: CircularProgressIndicator(),),
+              condition: cuibt.user != null,
             ),
           )
         );
@@ -125,7 +130,7 @@ class SellesABuying extends StatelessWidget {
     );
   }
 
-  Column _balanceContents() {
+  Column _balanceContents(MobilCuibt cuibt) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -146,9 +151,8 @@ class SellesABuying extends StatelessWidget {
             ),
           ],
         ),
-        UserNMoney(Money: 10000, NU: "zyad", precent: (30.0).ceil()),
-        UserNMoney(Money: 5000, NU: "3rfat", precent: (30.0).ceil()),
-        UserNMoney(Money: 15000, NU: "magdy", precent: (30.0).ceil()),
+        UserNMoney(Money: cuibt.money!.moneyInBox!, NU: "LORD", precent: (30.0).ceil()),
+
       ],
     );
   }
@@ -195,7 +199,7 @@ class SellesABuying extends StatelessWidget {
 
   }
 
-  Column _sellsContents() {
+  Column _sellsContents(MobilCuibt cuibt) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -210,20 +214,19 @@ class SellesABuying extends StatelessWidget {
                   color: Colors.teal[700]!),
             ),
             const SizedBox(width: 3),
-            const Text(
-              "15,000 LE",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
+             Text(
+              "${cuibt.money!.allMoneyGeted!}",
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
-        UserNMoney(Money: 10000, NU: "zyad", precent: (30.0).ceil()),
-        UserNMoney(Money: 5000, NU: "3rfat", precent: (30.0).ceil()),
-        UserNMoney(Money: 15000, NU: "magdy", precent: (30.0).ceil()),
+        UserNMoney(Money: cuibt.money!.allMoneyGeted!, NU: "LORD", precent: (30.0).ceil()),
+
       ],
     );
   }
 
-  Column _paymentContents() {
+  Column _paymentContents(MobilCuibt cuibt) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -238,9 +241,9 @@ class SellesABuying extends StatelessWidget {
                   color: Colors.teal[700]!),
             ),
             const SizedBox(width: 3),
-            const Text(
-              "4,000 LE",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
+             Text(
+              "${cuibt.money!.moneyPaid}",
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
@@ -248,9 +251,8 @@ class SellesABuying extends StatelessWidget {
           height: 20,
         ),
         //Row of analytics
-        UserNMoney(Money: 10000, NU: "zyad", precent: (30.0).ceil()),
-        UserNMoney(Money: 5000, NU: "3rfat", precent: (30.0).ceil()),
-        UserNMoney(Money: 15000, NU: "magdy", precent: (30.0).ceil()),
+        UserNMoney(Money: cuibt.money!.moneyPaid!, NU: "LORD", precent: (30.0).ceil()),
+
       ],
     );
   }

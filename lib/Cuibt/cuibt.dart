@@ -6,11 +6,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import '../Componads/Comoonads.dart';
 import '../HomeLayout/HomeLayout.dart';
 import '../Models/empo/Empo.dart';
 import '../Models/suppliers/Suppliers.dart';
 import '../SheredPrefrence/shered.dart';
+import '../moudle/Money Moudle.dart';
 import '../moudle/UserMoudule.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
@@ -18,6 +20,7 @@ class MobilCuibt extends Cubit<MobilState> {
   static MobilCuibt get(context) => BlocProvider.of(context);
   //firebase var
   UserModule? user;
+MoneyMoudel? money;
   //SignIN
   var emailAdreessController = TextEditingController();
   var passwordController = TextEditingController();
@@ -49,8 +52,7 @@ class MobilCuibt extends Cubit<MobilState> {
   var bottomSheetController = TextEditingController();
   var kayScaffold = GlobalKey<ScaffoldState>();
   String typeSearch = "Sells";
-  String typeOrder = "descending";
-  //hive boxs
+  String typeOrder = "descending"; //hive boxs
   //UI
   var scrollController = PageController();
   var value = 0;
@@ -138,23 +140,44 @@ class MobilCuibt extends Cubit<MobilState> {
             email: emailAdreessController.text,
             password: passwordController.text)
         .then((value) {
-      sherdprefrence.setdate(key:'Token', value: value.user!.uid);
-print(value.user!.uid);
-      nevigator(bool: false,page: HomeLayout(),context: context);
+      sherdprefrence.setdate(key: 'Token', value: value.user!.uid);
+      getUserDate();
+      print(value.user!.uid);
+      nevigator(bool: false, page: HomeLayout(), context: context);
       emit(SignInTr());
     }).catchError((onError) {
       emit(SignInFa()); //error
       print(onError);
     });
   }
+
   //Get user data from firebase
-void getUserDate(){
-  FirebaseFirestore.instance.collection("Users").doc(sherdprefrence.getdate(key: 'Token')).get().then((value){
-    user= UserModule.fromJson(value.data()!);
-    emit(GetUserDateTr());
-  }).catchError((onError){
-    emit(GetUserDateFa());
-    print(onError);
-  });
-}
+  void getUserDate() {
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc(sherdprefrence.getdate(key: 'Token'))
+        .get()
+        .then((value) {
+      user = UserModule.fromJson(value.data()!);
+      print(user!.uid);
+      emit(GetUserDateTr());
+    }).catchError((onError) {
+      emit(GetUserDateFa());
+      print(onError);
+    });
+  }
+
+  void getMoneyDate() {
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Money")
+        .doc("${DateFormat.yMMMd().format(DateTime.now())}")
+        .get()
+        .then((value) {
+      money=MoneyMoudel.fromJson(value.data()!);
+    });
+  }
 }
