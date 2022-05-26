@@ -1,88 +1,90 @@
+import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class SellesABuying extends StatelessWidget {
   @override
-
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
+        print(state);
         var Size = MediaQuery.of(context).size;
         var cuibt = MobilCuibt.get(context);
         return SafeArea(
-          child:SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal:20,vertical: 20),
-            physics: const BouncingScrollPhysics(),
-            child: ConditionalBuilder(
-              builder: (context)=> Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Hi ${cuibt.user!.name}!",
-                    style:const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontStyle: FontStyle.italic),
+            child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          physics: const BouncingScrollPhysics(),
+          child: ConditionalBuilder(
+            condition: cuibt.user != null && cuibt.money != null,
+            builder: (context) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Hi ${cuibt.user!.name}!",
+                  style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic),
+                ),
+                const Text(
+                  "Thanks for your trust in us to make your work more professional ",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white54,
                   ),
-                  const Text(
-                    "Thanks for your trust in us to make your work more professional ",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white54,
-                    ),
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [_balanceContents(cuibt)],
-                    Title: "Account Balance",
-                    SubTitle:
-                    "All physical transactions are recorded in the account balance",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [_sellsContents(cuibt)],
-                    Title: "Sells",
-                    SubTitle:
-                    "The monetary gain you earned from selling your products",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [_paymentContents(cuibt)],
-                    Title: "Payments",
-                    SubTitle:
-                    "The money you paid to buy your products or raw materials",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [_mostContents(context)],
-                    Title: "Most in demand",
-                    SubTitle: "The most sold products",
-                    cuibt: cuibt,
-                  ),
-                  MyExpansionTile(
-                    Size: Size,
-                    Children: [_leastContents(Size)],
-                    Title: "least in demand",
-                    SubTitle: "The least sold products",
-                    cuibt: cuibt,
-                  ),
-                ],
-              ),
-             fallback: (context)=>const Center(child: CircularProgressIndicator(),),
-              condition: cuibt.user != null,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [_balanceContents(cuibt)],
+                  Title: "Account Balance",
+                  SubTitle:
+                      "All physical transactions are recorded in the account balance",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [_sellsContents(cuibt)],
+                  Title: "Sells",
+                  SubTitle:
+                      "The monetary gain you earned from selling your products",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [_paymentContents(cuibt)],
+                  Title: "Payments",
+                  SubTitle:
+                      "The money you paid to buy your products or raw materials",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [_mostContents(context, cuibt)],
+                  Title: "Most in demand",
+                  SubTitle: "The most sold products",
+                  cuibt: cuibt,
+                ),
+                MyExpansionTile(
+                  Size: Size,
+                  Children: [_leastContents(Size,cuibt)],
+                  Title: "least in demand",
+                  SubTitle: "The least sold products",
+                  cuibt: cuibt,
+                ),
+              ],
             ),
-          )
-        );
+            fallback: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        ));
       },
     );
   }
@@ -110,15 +112,14 @@ class SellesABuying extends StatelessWidget {
           ]),
       //To hide Subtitle
       child: ExpansionTile(
-        onExpansionChanged: (bool) => cuibt.ChangeHideSubtitle(bool),
-        subtitle: cuibt.hideSubtitle ??
-            Text(
-              SubTitle ?? "",
-              style: TextStyle(
-                  color: Colors.grey[800]!,
-                  fontSize: Size.width * .04,
-                  fontWeight: FontWeight.bold),
-            ),
+        childrenPadding: const EdgeInsets.symmetric(vertical: 10),
+        subtitle: Text(
+          SubTitle!,
+          style: TextStyle(
+              color: Colors.grey[800]!,
+              fontSize: Size.width * .04,
+              fontWeight: FontWeight.bold),
+        ),
         controlAffinity: ListTileControlAffinity.leading,
         title: Text(
           Title,
@@ -145,14 +146,16 @@ class SellesABuying extends StatelessWidget {
                   color: Colors.teal[700]!),
             ),
             const SizedBox(width: 3),
-            const Text(
-              "20,000 LE",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
+            Text(
+              "${cuibt.money!.moneyInBox} LE",
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
-        UserNMoney(Money: cuibt.money!.moneyInBox!, NU: "LORD", precent: (30.0).ceil()),
-
+        UserNMoney(
+            Money: cuibt.money!.moneyInBox!,
+            NU: "LORD",
+            precent: (30.0).ceil()),
       ],
     );
   }
@@ -163,7 +166,7 @@ class SellesABuying extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextButton(
-          child: Text("${NU} user",
+          child: Text("${NU} branch",
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -196,7 +199,6 @@ class SellesABuying extends StatelessWidget {
         ),
       ],
     );
-
   }
 
   Column _sellsContents(MobilCuibt cuibt) {
@@ -214,14 +216,16 @@ class SellesABuying extends StatelessWidget {
                   color: Colors.teal[700]!),
             ),
             const SizedBox(width: 3),
-             Text(
-              "${cuibt.money!.allMoneyGeted!}",
+            Text(
+              "${cuibt.money!.allMoneyGeted!} LE",
               style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
-        UserNMoney(Money: cuibt.money!.allMoneyGeted!, NU: "LORD", precent: (30.0).ceil()),
-
+        UserNMoney(
+            Money: cuibt.money!.allMoneyGeted!,
+            NU: "LORD",
+            precent: (30.0).ceil()),
       ],
     );
   }
@@ -241,8 +245,8 @@ class SellesABuying extends StatelessWidget {
                   color: Colors.teal[700]!),
             ),
             const SizedBox(width: 3),
-             Text(
-              "${cuibt.money!.moneyPaid}",
+            Text(
+              "${cuibt.money!.moneyPaid} LE",
               style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
@@ -251,61 +255,49 @@ class SellesABuying extends StatelessWidget {
           height: 20,
         ),
         //Row of analytics
-        UserNMoney(Money: cuibt.money!.moneyPaid!, NU: "LORD", precent: (30.0).ceil()),
-
+        UserNMoney(
+            Money: cuibt.money!.moneyPaid!, NU: "LORD", precent: (30.0).ceil()),
       ],
     );
   }
 
-  Row _mostContents(context) {
-    return Row(
-      children: [
-        progerssBar(context,
-            color: const Color(0xffd8f3dc), percentage: .9, text: "pepsi"),
-        const SizedBox(
-          width: 3,
-        ),
-        progerssBar(context,
-            color: const Color(0xffb7e4c7), percentage: .7, text: "cola"),
-        const SizedBox(
-          width: 3,
-        ),
-        progerssBar(context,
-            color: const Color(0xff74c69d), percentage: .5, text: "twinkes"),
-        const SizedBox(
-          width: 3,
-        ),
-        progerssBar(context,
-            color: const Color(0xff40916c), percentage: .4, text: "hogo"),
-        const SizedBox(
-          width: 3,
-        ),
-        progerssBar(context,
-            color: const Color(0xff1b4332), percentage: .3, text: "pepsi"),
-      ],
+  Widget _mostContents(context, MobilCuibt cuibt) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * .8,
+      height: MediaQuery.of(context).size.height * .38,
+      child: ListView.separated(
+          physics: const NeverScrollableScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, i) => progerssBar(context,
+              text: cuibt.itemsQuntity[i].Name,
+              percentage: cuibt.itemsQuntity[i].quantity!,
+              color: mostColors[i]),
+          separatorBuilder: (context, _) => const SizedBox(
+                width: 5,
+              ),
+          itemCount: cuibt.itemsQuntity.length.clamp(0, 5)),
     );
   }
 
-  Column _leastContents(Size) {
-    return Column(
-      children: [
-        _showItems(Size, const Color(0xFFe63946),
-            NOF: "prile", HMany: 10, HM: 60),
-        _showItems(Size, const Color(0xFFE97171), NOF: "Axe", HM: 50, HMany: 20),
-        _showItems(Size, const Color(0xFFFFCB8E),
-            NOF: "Biscuit", HM: 40, HMany: 10),
-        _showItems(Size, Colors.grey[500], NOF: "Chips", HM: 30, HMany: 5),
-        _showItems(Size, const Color(0xFFF5EFEF),
-            NOF: "Coffee", HM: 20, HMany: 3),
-      ],
+  SizedBox _leastContents(Size size, MobilCuibt cuibt) {
+    return SizedBox(
+      width: size.width * .8,
+      height: size.height * .38,
+      child: ListView.separated(
+          itemBuilder: (context, i) =>
+              _showItems(size, lessColors[i], NOF:cuibt.itemsQuntityLess[i].Name!, HM: 60, HMany: cuibt.itemsQuntityLess[i].quantity!),
+          separatorBuilder: (context, _) => const SizedBox(
+                height: 10,
+              ),
+          itemCount:5),
     );
   }
 
   Container _showItems(Size Size, color,
-      {required String NOF, required double HM, required int HMany}) {
+      {required String NOF, required double HM, required double HMany}) {
     return Container(
       margin: const EdgeInsetsDirectional.all(8.0),
-      padding: const EdgeInsets.only(right: 10, left: 30),
+      padding: const EdgeInsets.only(right:10, left:15),
       height: 80,
       width: Size.width,
       decoration: BoxDecoration(
@@ -319,12 +311,16 @@ class SellesABuying extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Name of product
-              Text(
-                NOF,
-                style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w900),
+              SizedBox(
+                width: Size.width * .35,
+                child: Text(
+                  NOF,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w900),
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -335,15 +331,21 @@ class SellesABuying extends StatelessWidget {
                     fontSize: 18,
                     color: Colors.grey[800]!,
                     fontWeight: FontWeight.bold),
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
           const Spacer(),
           //how many packages sell
-          Text(
-            "${HMany} Package",
-            style: const TextStyle(
-                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+          SizedBox(
+            width: Size.width * .2,
+            child: Text(
+              "${HMany.ceil()} Pack",
+              style: const TextStyle(
+                  fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
+              overflow: TextOverflow.ellipsis,
+
+            ),
           ),
         ],
       ),
@@ -352,6 +354,9 @@ class SellesABuying extends StatelessWidget {
 
   Column progerssBar(context,
       {required text, required double percentage, required Color color}) {
+    var precint =
+        (((percentage / MobilCuibt.get(context).allquantity) * 100).floor()) /
+            100;
     return Column(
       children: [
         Container(
@@ -364,16 +369,13 @@ class SellesABuying extends StatelessWidget {
               animation: true,
               lineHeight: 30.0,
               animationDuration: 2500,
-              percent: percentage,
+              percent: precint,
               progressColor: color,
               restartAnimation: true,
-              center: RotatedBox(
-                quarterTurns: 1,
-                child: Text(
-                  "${(percentage * 100).ceil()}%",
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold),
-                ),
+              center: Text(
+                "${(((percentage / MobilCuibt.get(context).allquantity) * 100)).floor()}%",
+                style: const TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -382,6 +384,5 @@ class SellesABuying extends StatelessWidget {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
       ],
     );
-
   }
 }

@@ -4,7 +4,7 @@ class MoneyMoudel {
   double? moneyPaid;
   double? allMoneyGeted;
   double? moneyInBox;
-  Timestamp? dateTime;
+  String? dateTime;
 
 
   MoneyMoudel(

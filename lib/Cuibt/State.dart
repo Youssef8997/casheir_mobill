@@ -10,3 +10,7 @@ class SignInTr extends MobilState{}
 class SignInFa extends MobilState{}
 class GetUserDateTr extends MobilState{}
 class GetUserDateFa extends MobilState{}
+class GetMoneyDateFa extends MobilState{}
+class GetMoneyDateTr extends MobilState{}
+class GetOrderItemDateFa extends MobilState{}
+class GetOrderItemDateTr extends MobilState{}

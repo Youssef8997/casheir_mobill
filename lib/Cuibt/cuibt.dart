@@ -14,6 +14,7 @@ import '../Models/suppliers/Suppliers.dart';
 import '../SheredPrefrence/shered.dart';
 import '../moudle/Money Moudle.dart';
 import '../moudle/UserMoudule.dart';
+import '../moudle/orders Moudle.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
   MobilCuibt() : super(initState());
@@ -21,6 +22,9 @@ class MobilCuibt extends Cubit<MobilState> {
   //firebase var
   UserModule? user;
 MoneyMoudel? money;
+List<OrdersMoudel>itemsQuntity=[];
+List<OrdersMoudel>itemsQuntityLess=[];
+var allquantity=0.0;
   //SignIN
   var emailAdreessController = TextEditingController();
   var passwordController = TextEditingController();
@@ -125,7 +129,6 @@ MoneyMoudel? money;
     } else {
       hideSubtitle = null;
     }
-    emit(clopsed());
   }
 
   void changeSelectedTile(int value) {
@@ -166,7 +169,7 @@ MoneyMoudel? money;
       print(onError);
     });
   }
-
+  //Get Money data from firebase
   void getMoneyDate() {
     FirebaseFirestore.instance
         .collection("Users")
@@ -177,7 +180,44 @@ MoneyMoudel? money;
         .doc("${DateFormat.yMMMd().format(DateTime.now())}")
         .get()
         .then((value) {
-      money=MoneyMoudel.fromJson(value.data()!);
+          print(value.data());
+         if(value.data()!=null){
+            money = MoneyMoudel.fromJson(value.data()!);
+           }
+          else{
+            money=MoneyMoudel(moneyInBox: 0.0,moneyPaid: 0.0,allMoneyGeted: 0.0,dateTime:DateFormat.yMMMd().format(DateTime.now()));
+          print(money!.moneyPaid);}
+          emit(GetMoneyDateTr());
+    }).catchError((onError){
+      emit(GetMoneyDateFa());
+      print(onError);
     });
   }
+//Get buying item
+void GetOrdersItem(){
+  itemsQuntity.clear();
+   FirebaseFirestore.instance
+      .collection("Users")
+      .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+      .collection("Shops")
+      .doc("lord")
+      .collection("Orders")
+       .orderBy("quantity",descending: true)
+      .get()
+      .then((value) {
+    for (var element in value.docs) {
+      itemsQuntity.add(OrdersMoudel.fromJson(element.data()));
+      allquantity=allquantity+element.data()["quantity"];
+    }
+    itemsQuntityLess=List.from(itemsQuntity.reversed);
+    emit(GetOrderItemDateTr());
+  }).catchError((onError){
+    emit(GetOrderItemDateFa());
+    print(onError);
+  });
+}
+//get the most and less Item buying
+
+
+
 }
