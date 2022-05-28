@@ -269,13 +269,13 @@ class SellesABuying extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, i) => progerssBar(context,
-              text: cuibt.itemsQuntity[i].Name,
-              percentage: cuibt.itemsQuntity[i].quantity!,
+              text: cuibt.itemsQuantity[i].Name,
+              percentage: cuibt.itemsQuantity[i].quantity!,
               color: mostColors[i]),
           separatorBuilder: (context, _) => const SizedBox(
                 width: 5,
               ),
-          itemCount: cuibt.itemsQuntity.length.clamp(0, 5)),
+          itemCount: cuibt.itemsQuantity.length.clamp(0, 5)),
     );
   }
 
@@ -285,7 +285,7 @@ class SellesABuying extends StatelessWidget {
       height: size.height * .38,
       child: ListView.separated(
           itemBuilder: (context, i) =>
-              _showItems(size, lessColors[i], NOF:cuibt.itemsQuntityLess[i].Name!, HM: 60, HMany: cuibt.itemsQuntityLess[i].quantity!),
+              _showItems(size, lessColors[i], NOF:cuibt.itemsQuantityLess[i].Name!, HM: 60, HMany: cuibt.itemsQuantityLess[i].quantity!),
           separatorBuilder: (context, _) => const SizedBox(
                 height: 10,
               ),
@@ -355,7 +355,7 @@ class SellesABuying extends StatelessWidget {
   Column progerssBar(context,
       {required text, required double percentage, required Color color}) {
     var precint =
-        (((percentage / MobilCuibt.get(context).allquantity) * 100).floor()) /
+        (((percentage / MobilCuibt.get(context).allQuantity) * 100).floor()) /
             100;
     return Column(
       children: [
@@ -373,7 +373,7 @@ class SellesABuying extends StatelessWidget {
               progressColor: color,
               restartAnimation: true,
               center: Text(
-                "${(((percentage / MobilCuibt.get(context).allquantity) * 100)).floor()}%",
+                "${(((percentage / MobilCuibt.get(context).allQuantity) * 100)).floor()}%",
                 style: const TextStyle(
                     color: Colors.black, fontWeight: FontWeight.bold),
               ),

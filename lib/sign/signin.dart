@@ -55,7 +55,7 @@ class SignIn extends StatelessWidget {
                       height: Size.height * 0.2,
                     ),
                     MyTextField(
-                      Controlr: cuibt.emailAdreessController,
+                      Controlr: cuibt.emailAddressController,
                       hint: "Email123@gmail.com",
                       label: "Email Address",
                       Prefix: const Icon(

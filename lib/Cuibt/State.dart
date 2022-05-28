@@ -14,3 +14,7 @@ class GetMoneyDateFa extends MobilState{}
 class GetMoneyDateTr extends MobilState{}
 class GetOrderItemDateFa extends MobilState{}
 class GetOrderItemDateTr extends MobilState{}
+class GetProductDateTr extends MobilState{}
+class GetProductDateFa extends MobilState{}
+class UpdateProductDateTr extends MobilState{}
+class UpdateProductDateFa extends MobilState{}

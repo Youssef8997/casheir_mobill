@@ -13,22 +13,28 @@ import '../Models/empo/Empo.dart';
 import '../Models/suppliers/Suppliers.dart';
 import '../SheredPrefrence/shered.dart';
 import '../moudle/Money Moudle.dart';
+import '../moudle/ProductMoudle.dart';
 import '../moudle/UserMoudule.dart';
 import '../moudle/orders Moudle.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
   MobilCuibt() : super(initState());
+
   static MobilCuibt get(context) => BlocProvider.of(context);
+
   //firebase var
   UserModule? user;
-MoneyMoudel? money;
-List<OrdersMoudel>itemsQuntity=[];
-List<OrdersMoudel>itemsQuntityLess=[];
-var allquantity=0.0;
+  MoneyMoudel? money;
+  List<OrdersMoudel>itemsQuantity = [];
+  List<OrdersMoudel>itemsQuantityLess = [];
+  List<ProductsModule>productData = [];
+  var allQuantity = 0.0;
+
   //SignIN
-  var emailAdreessController = TextEditingController();
+  var emailAddressController = TextEditingController();
   var passwordController = TextEditingController();
   bool obscuring = true;
+
   //SignUp
   var nameController = TextEditingController();
   var emailController = TextEditingController();
@@ -37,15 +43,16 @@ var allquantity=0.0;
   var phoneController = TextEditingController();
   String? positionValue;
   bool signUpObscuring = true;
+
 //Sells
-  var hideSubtitle; // UI
   //Store
   bool searchVisibleStore = false; // UI
   var searchControllerStore = TextEditingController();
   var nameItemController = TextEditingController();
-  var costItemController = TextEditingController();
-  var dateItemController = TextEditingController();
-  var numberItemController = TextEditingController();
+  var priceItemController = TextEditingController();
+  var expireDateItemController = TextEditingController();
+  var quantityItemController = TextEditingController();
+
   //employee
   bool searchVisibleEmployee = false;
   var searchControllerEmployee = TextEditingController();
@@ -123,14 +130,6 @@ var allquantity=0.0;
     emit(ChangeVisibalBar());
   }
 
-  void ChangeHideSubtitle(expanded) {
-    if (expanded) {
-      hideSubtitle = Text("");
-    } else {
-      hideSubtitle = null;
-    }
-  }
-
   void changeSelectedTile(int value) {
     selectedTile = value;
     emit(ChangeSelectedTile());
@@ -140,8 +139,8 @@ var allquantity=0.0;
   void signIn(context) {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(
-            email: emailAdreessController.text,
-            password: passwordController.text)
+        email: emailAddressController.text,
+        password: passwordController.text)
         .then((value) {
       sherdprefrence.setdate(key: 'Token', value: value.user!.uid);
       getUserDate();
@@ -169,6 +168,7 @@ var allquantity=0.0;
       print(onError);
     });
   }
+
   //Get Money data from firebase
   void getMoneyDate() {
     FirebaseFirestore.instance
@@ -180,44 +180,113 @@ var allquantity=0.0;
         .doc("${DateFormat.yMMMd().format(DateTime.now())}")
         .get()
         .then((value) {
-          print(value.data());
-         if(value.data()!=null){
-            money = MoneyMoudel.fromJson(value.data()!);
-           }
-          else{
-            money=MoneyMoudel(moneyInBox: 0.0,moneyPaid: 0.0,allMoneyGeted: 0.0,dateTime:DateFormat.yMMMd().format(DateTime.now()));
-          print(money!.moneyPaid);}
-          emit(GetMoneyDateTr());
-    }).catchError((onError){
+      print(value.data());
+      if (value.data() != null) {
+        money = MoneyMoudel.fromJson(value.data()!);
+      }
+      else {
+        money = MoneyMoudel(moneyInBox: 0.0,
+            moneyPaid: 0.0,
+            allMoneyGeted: 0.0,
+            dateTime: DateFormat.yMMMd().format(DateTime.now()));
+        print(money!.moneyPaid);
+      }
+      emit(GetMoneyDateTr());
+    }).catchError((onError) {
       emit(GetMoneyDateFa());
       print(onError);
     });
   }
+
 //Get buying item
-void GetOrdersItem(){
-  itemsQuntity.clear();
-   FirebaseFirestore.instance
-      .collection("Users")
-      .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
-      .collection("Shops")
-      .doc("lord")
-      .collection("Orders")
-       .orderBy("quantity",descending: true)
-      .get()
-      .then((value) {
-    for (var element in value.docs) {
-      itemsQuntity.add(OrdersMoudel.fromJson(element.data()));
-      allquantity=allquantity+element.data()["quantity"];
-    }
-    itemsQuntityLess=List.from(itemsQuntity.reversed);
-    emit(GetOrderItemDateTr());
-  }).catchError((onError){
-    emit(GetOrderItemDateFa());
-    print(onError);
-  });
+  void getOrdersItem() {
+    itemsQuantity.clear();
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Orders")
+        .orderBy("quantity", descending: true)
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        itemsQuantity.add(OrdersMoudel.fromJson(element.data()));
+        allQuantity = allQuantity + element.data()["quantity"];
+      }
+      itemsQuantityLess = List.from(itemsQuantity.reversed);
+      emit(GetOrderItemDateTr());
+    }).catchError((onError) {
+      emit(GetOrderItemDateFa());
+      print(onError);
+    });
+  }
+
+//get Product Data
+  void getProductData() {
+    productData.clear();
+    print("getProductData");
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("products")
+        .orderBy("quantityInShop", descending: false)
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        productData.add(ProductsModule.fromJson(element.data()));
+      }
+      emit(GetProductDateTr());
+    }).catchError((onError) {
+      emit(GetProductDateFa());
+      print(onError);
+    });
+  }
+
+//UpdateProduct
+  void updateProduct({
+  required name,
+  required price,
+  required quantity,
+  required expireDate,
+  required quantityInShop,
+  required code,
+  required startDate,
+  required quantityInStore,
+
+}) {
+    ProductsModule product = ProductsModule(
+        name: name,
+        price: double.parse(price),
+        quantityInShop: int.parse(quantity),
+        quantityInStore: quantityInStore,
+        code: code,
+      endDate: expireDate,
+      startDate: startDate,
+    );
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("products")
+        .doc(product.code)
+        .update(product.toJson())
+        .then((value) {
+      print("update");
+      emit(UpdateProductDateTr());
+    }).catchError((onError) {
+      emit(UpdateProductDateFa());
+      print(onError);
+    });
+  }
+  //Insert information to controller
+void fullController({name,price,quantity,expireDate}){
+  nameItemController.text =name;
+  priceItemController.text =price.toString();
+  quantityItemController.text =quantity.toString();
+  expireDateItemController.text =expireDate;
 }
-//get the most and less Item buying
-
-
-
 }
