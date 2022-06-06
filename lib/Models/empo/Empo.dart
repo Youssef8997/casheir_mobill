@@ -12,6 +12,8 @@ class Employees extends StatelessWidget {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cuibt=MobilCuibt.get(context);
+        var empo=cuibt.employee;
         var Size = MediaQuery.of(context).size;
         return SingleChildScrollView(
           child: Column(
@@ -26,15 +28,18 @@ class Employees extends StatelessWidget {
                   crossAxisCount: 2,
                   childAspectRatio: .98,
                   children: List.generate(
-                      20,
-                          (index) => _showEmployee(
+                      empo.length,
+                          (i) => _showEmployee(
                           Size: Size,
-                          name: "Youssef ahmed",
-                          startWork: "07:00 pm",
-                          endWork: "03:00 am",
-                              salary: 3000,
+                          name: empo[i].name!,
+                          startWork: empo[i].AttendanceDate!,
+                          endWork: empo[i].LeavingDate!,
+                              salary: empo[i].Salary!,
                           jobTitle: "Cashier",
-                          context: context
+                          context: context,
+                            cuibt: cuibt,
+                            id: empo[i].id!,
+                            index: i
                       )),
                 ),
               )
@@ -52,10 +57,18 @@ class Employees extends StatelessWidget {
     required double salary,
     required String startWork,
     required String endWork,
-    required BuildContext context
+    required BuildContext context,
+    required MobilCuibt cuibt,
+    required int id,
+    required index
+
   }) {
     return InkWell(
-      onTap: ()=>nevigator(bool: true,page: Empo(),context: context),
+      onTap: () {
+        cuibt.getAttendance(id:id );
+        cuibt.getRate(id:id );
+        nevigator(bool: true, page: Empo(index:index), context: context);
+      },
       child: Container(
         margin: const EdgeInsetsDirectional.all(15),
         padding: const EdgeInsetsDirectional.all(15),

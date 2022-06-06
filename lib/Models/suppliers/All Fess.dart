@@ -6,23 +6,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class AllFess extends StatelessWidget {
-  final String userName;
-  final String suppliersName;
-  final double totalMoney;
-  final double lastFess;
-  final List Fess;
-
-  const AllFess(
-      {required this.userName,
-      required this.suppliersName,
-      required this.totalMoney,
-      required this.lastFess,
-      required this.Fess});
+  var index;
+  AllFess({this.index});
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cuibt = MobilCuibt.get(context);
+        var listFess = MobilCuibt.get(context).fess;
         var Size = MediaQuery.of(context).size;
         return Scaffold(
             extendBodyBehindAppBar: true,
@@ -38,18 +30,26 @@ class AllFess extends StatelessWidget {
                 ),
               ),
               child: SafeArea(
-                child: ListView (
-                    children: [
-                  Expanded(child: precentge_circular(precent: 1, size: Size)),
-                      Expanded(
-                        child: ListView.separated(
-                          padding:EdgeInsets.zero,
-                    physics: const NeverScrollableScrollPhysics(),
+                child: ListView(children: [
+                  Expanded(
+                      child: precentge_circular(
+                          precent: (cuibt.suppliers[index].TotalSuppliers!/cuibt.suppliers[index].AllMoney!)
+                          , size: Size, cuibt: cuibt)),
+                  Expanded(
+                    child: ListView.separated(
+                        padding: EdgeInsets.zero,
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: (context,i)=>showFess(context,user: userName,date:"20/10/2022",fess:500.0,moneyBefore:3000.0,moneyAfter: 2500.0 ),
-                        separatorBuilder: (context,_)=>const SizedBox(height: 15),
-                        itemCount:20),
-                      ),
+                        itemBuilder: (context, i) => showFess(context,
+                            user: listFess[i].name!,
+                            date: listFess[i].feesDate!,
+                            fess: listFess[i].Paid!,
+                            moneyBefore: listFess[i].TotalSuppliers!+listFess[i].Paid!,
+                            moneyAfter: listFess[i].TotalSuppliers!),
+                        separatorBuilder: (context, _) =>
+                            const SizedBox(height: 15),
+                        itemCount: listFess.length),
+                  ),
                 ]),
               ),
             ));
@@ -57,14 +57,13 @@ class AllFess extends StatelessWidget {
     );
   }
 
-  Widget precentge_circular({
-    required Size size,
-    required double precent,
-  }) {
+  Widget precentge_circular(
+      {required Size size,
+      required double precent,
+      required MobilCuibt cuibt}) {
     return Container(
       height: size.height * .5,
       width: size.width,
-
       child: CircularPercentIndicator(
         radius: size.width * .4,
         lineWidth: 10,
@@ -77,7 +76,7 @@ class AllFess extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              suppliersName,
+              cuibt.suppliers[index].name!,
               style: const TextStyle(
                   fontSize: 21,
                   color: Colors.white,
@@ -89,7 +88,7 @@ class AllFess extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 20)),
             Text(
-              "Total Money : $totalMoney LE",
+              "Total Money : ${cuibt.suppliers[index].TotalSuppliers!} LE",
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -97,7 +96,7 @@ class AllFess extends StatelessWidget {
               ),
             ),
             Text(
-              "Last fess : $lastFess LE",
+              "Last fess : ${cuibt.suppliers[index].LastPaid!} LE",
               style: TextStyle(
                 color: Colors.grey[600]!,
                 fontWeight: FontWeight.bold,
@@ -113,7 +112,6 @@ class AllFess extends StatelessWidget {
         animateFromLastPercent: false,
         curve: Curves.easeInCubic,
         arcType: ArcType.FULL,
-
       ),
     );
   }

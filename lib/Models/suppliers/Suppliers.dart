@@ -11,6 +11,7 @@ class Suppliers extends StatelessWidget {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cuibt=MobilCuibt.get(context);
         var Size = MediaQuery.of(context).size;
         return SingleChildScrollView(
           child: Column(
@@ -25,15 +26,17 @@ class Suppliers extends StatelessWidget {
                   crossAxisCount: 2,
                   childAspectRatio: .98,
                   children: List.generate(
-                      20,
-                      (index) => _showSuppliers(
+                      cuibt.suppliers.length,
+                      (i) => _showSuppliers(
                           Size: Size,
-                          name: "Pepsi",
-                          firstDate: "20/10/20",
-                          dateFess: "20/4/22",
-                          fees: 500,
-                          totalMoney: 3000,
-                      context: context
+                          name: cuibt.suppliers[i].name!,
+                          firstDate:"",
+                          dateFess: cuibt.suppliers[i].feesDate!,
+                          fees: cuibt.suppliers[i].LastPaid!,
+                          totalMoney: cuibt.suppliers[i].TotalSuppliers!,
+                      context: context,
+                        cuibt: cuibt,
+                        i: i
                       )),
                 ),
               )
@@ -51,25 +54,16 @@ class Suppliers extends StatelessWidget {
     required double fees,
     required String firstDate,
     required String dateFess,
-    required BuildContext context
+    required int i,
+    required BuildContext context,
+    required MobilCuibt cuibt
   }) {
     return InkWell(
-      onTap: ()=>nevigator(bool: true,page: AllFess(
-        suppliersName: "Pepsi",
-        lastFess: 500.0,
-        userName: "yoyo",
-        totalMoney: 3000.0,
-        Fess: [
-          {
-            "date": "20/10/2022",
-            "fess": 500.0,
-          },
-          {
-            "date": "21/10/2022",
-            "fess": 500.0,
-          },
-        ],
-      ),context: context),
+      onTap: () {
+        cuibt.getFessData(name: name);
+        nevigator(bool: true, page: AllFess(index:i,), context: context);
+
+      },
       child: Container(
         margin: const EdgeInsetsDirectional.all(15),
         padding: const EdgeInsetsDirectional.all(15),

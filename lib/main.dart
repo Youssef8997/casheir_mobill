@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
 
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (BuildContext context) => MobilCuibt()..getUserDate()..getMoneyDate()..getOrdersItem()..getProductData())
+          BlocProvider(create: (BuildContext context) => MobilCuibt()..getUserDate()..getMoneyDate()..getOrdersItem()..getProductData()..getSuppliers()..getEmployeeData())
         ],
         child: MaterialApp(
           theme: ThemeData(

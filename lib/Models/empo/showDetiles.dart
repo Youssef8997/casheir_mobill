@@ -6,18 +6,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
+import '../../moudle/Date Empoloyee.dart';
+
 class Empo extends StatefulWidget {
+  int? index;
+  Empo({this.index});
   @override
-  State<Empo> createState() => _EmpoState();
+  State<Empo> createState() => _EmpoState(index);
 }
 
 class _EmpoState extends State<Empo> {
+  int? index;
+  _EmpoState(this.index);
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
         var cuibt = MobilCuibt.get(context);
+        var TimeList =cuibt.employeeDate;
+
+        var rate= cuibt.rate!.rate??0;
         var size = MediaQuery.of(context).size;
         return Scaffold(
           key: cuibt.employeeScaffold,
@@ -56,8 +65,8 @@ class _EmpoState extends State<Empo> {
                 child: Column(
                   children: [
                     listTileWidget(cuibt),
-                    if (cuibt.selectedTile == 1) timeColumn(),
-                    if (cuibt.selectedTile == 2) ratingColumn(),
+                    if (cuibt.selectedTile == 1) timeColumn(TimeList,cuibt),
+                    if (cuibt.selectedTile == 2) ratingColumn(cuibt),
                     if (cuibt.selectedTile == 3) moneyColumn(),
                   ],
                 ),
@@ -144,31 +153,39 @@ class _EmpoState extends State<Empo> {
     );
   }
 
-  Widget timeColumn() {
+  Widget timeColumn( List<EmployeeDateModule> TimeList,MobilCuibt cuibt) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width,
         child: ListView.separated(
-          itemBuilder: (context, i) => showTime(
-            context,
-            date: "20/10/2022",
-            attendance: "7:00 pm",
-            leave: "2:30 am",
-            lateTime: "0",
-            overTime: "0",
-          ),
+          itemBuilder: (context, i) {
+            int lateMin=(int.parse(TimeList[i].AttendanceDate!.substring(2,5))-int.parse(cuibt.employee[widget.index!].AttendanceDate!.substring(2,5))).isNegative?6:(int.parse(TimeList[i].AttendanceDate!.substring(2,5))-int.parse(cuibt.employee[widget.index!].AttendanceDate!.substring(2,5))).abs();
+            int overMin=int.parse(TimeList[i].LeavingDate!.substring(2,5))-int.parse(cuibt.employee[widget.index!].LeavingDate!.substring(2,5));
+            int Overhour=int.parse(TimeList[i].LeavingDate![0])-int.parse(cuibt.employee[widget.index!].LeavingDate![0]);
+           int totalhour=(overMin+Overhour)-lateMin;
+
+            return showTime(
+              context,
+              date: TimeList[i].DataTimeDay!,
+              attendance: TimeList[i].AttendanceDate!,
+              leave: TimeList[i].LeavingDate!,
+              lateTime:lateMin.toString(),
+              overTime:totalhour.toString(),
+            );
+
+          },
           separatorBuilder: (context, _) => SizedBox(
-            height: 0,
+            height: 25,
           ),
-          itemCount: 20,
+          itemCount: TimeList.length,
         ),
       ),
     );
   }
 
-  Widget ratingColumn() {
+  Widget ratingColumn(MobilCuibt cuibt) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: Column(
@@ -232,7 +249,7 @@ class _EmpoState extends State<Empo> {
           ),
           RatingBar.builder(
             ignoreGestures: true,
-            initialRating: 3,
+            initialRating:double.parse(cuibt.rate!.rate!),
             itemCount: 5,
             allowHalfRating: true,
             itemBuilder: (context, index) {
@@ -552,7 +569,7 @@ class _EmpoState extends State<Empo> {
                   children: [
                     Expanded(
                         child: Text(
-                      "$lateTime Minutes Late",
+                      "$lateTime Min Late",
                       style: const TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
@@ -568,7 +585,7 @@ class _EmpoState extends State<Empo> {
                     ),
                     Expanded(
                         child: Text(
-                      "$overTime Hours",
+                      "$overTime Min Over",
                       style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,

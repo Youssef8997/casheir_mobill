@@ -1,8 +1,10 @@
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Models/Selles%20and%20baying.dart';
 import 'package:casheir_mobill/Models/Store%20and%20products.dart';
+import 'package:casheir_mobill/moudle/Suppliers%20Moudle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +14,12 @@ import '../HomeLayout/HomeLayout.dart';
 import '../Models/empo/Empo.dart';
 import '../Models/suppliers/Suppliers.dart';
 import '../SheredPrefrence/shered.dart';
+import '../moudle/Date Empoloyee.dart';
+import '../moudle/Empoloyee.dart';
+import '../moudle/Fess moudle.dart';
 import '../moudle/Money Moudle.dart';
 import '../moudle/ProductMoudle.dart';
+import '../moudle/Rate.dart';
 import '../moudle/UserMoudule.dart';
 import '../moudle/orders Moudle.dart';
 
@@ -28,6 +34,11 @@ class MobilCuibt extends Cubit<MobilState> {
   List<OrdersMoudel>itemsQuantity = [];
   List<OrdersMoudel>itemsQuantityLess = [];
   List<ProductsModule>productData = [];
+  List<SuppliersModule>suppliers = [];
+  List<FeesModule>fess = [];
+  List<EmployeeModule>employee = [];
+  List<EmployeeDateModule>employeeDate = [];
+  Rate? rate;
   var allQuantity = 0.0;
 
   //SignIN
@@ -247,22 +258,22 @@ class MobilCuibt extends Cubit<MobilState> {
 
 //UpdateProduct
   void updateProduct({
-  required name,
-  required price,
-  required quantity,
-  required expireDate,
-  required quantityInShop,
-  required code,
-  required startDate,
-  required quantityInStore,
+    required name,
+    required price,
+    required quantity,
+    required expireDate,
+    required quantityInShop,
+    required code,
+    required startDate,
+    required quantityInStore,
 
-}) {
+  }) {
     ProductsModule product = ProductsModule(
-        name: name,
-        price: double.parse(price),
-        quantityInShop: int.parse(quantity),
-        quantityInStore: quantityInStore,
-        code: code,
+      name: name,
+      price: double.parse(price),
+      quantityInShop: int.parse(quantity),
+      quantityInStore: quantityInStore,
+      code: code,
       endDate: expireDate,
       startDate: startDate,
     );
@@ -282,11 +293,123 @@ class MobilCuibt extends Cubit<MobilState> {
       print(onError);
     });
   }
+
   //Insert information to controller
-void fullController({name,price,quantity,expireDate}){
-  nameItemController.text =name;
-  priceItemController.text =price.toString();
-  quantityItemController.text =quantity.toString();
-  expireDateItemController.text =expireDate;
-}
+  void fullController({name, price, quantity, expireDate}) {
+    nameItemController.text = name;
+    priceItemController.text = price.toString();
+    quantityItemController.text = quantity.toString();
+    expireDateItemController.text = expireDate;
+  }
+
+//Get Suppliers Data
+  void getSuppliers() {
+    suppliers.clear();
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Suppliers")
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        suppliers.add(SuppliersModule.fromJson(element.data()));
+      }
+      print(suppliers);
+      emit(GetSuppliersDateTr());
+    }).catchError((onError) {
+      emit(GetSuppliersDateFa());
+      print(onError);
+    });
+  }
+
+  //Fess
+  void getFessData({name}) {
+    fess.clear();
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Suppliers")
+        .doc(name)
+        .collection("Fees")
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        fess.add(FeesModule.fromJson(element.data()));
+      }
+      print("fess is ${fess.length}");
+      emit(GetFessDateTr());
+    }).catchError((onError) {
+      emit(GetFessDateFa());
+      print(onError);
+    });
+  }
+
+//employee
+  void getEmployeeData() {
+    employee.clear();
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Employee")
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        employee.add(EmployeeModule.fromJson(element.data()));
+      }
+      print("employee is ${employee.length}");
+      emit(GetEmployeeDateTr());
+    }).catchError((onError) {
+      emit(GetEmployeeDateFa());
+      print(onError);
+    });
+  }
+  //Get Employee Data
+  void getAttendance({id}){
+    employeeDate.clear();
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Employee")
+        .doc("$id")
+        .collection("Attendance,Leaving Date")
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        employeeDate.add(EmployeeDateModule.fromJson(element.data()));
+      }
+      print("employeeDate is ${employeeDate.length}");
+      emit(GetAttendanceDateTr());
+    }).catchError((onError) {
+      emit(GetAttendanceDateFa());
+      print(onError);
+    });
+  }
+  void getRate({id}){
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Employee")
+        .doc("$id")
+        .collection("Rate")
+    .doc(DateFormat.yMMMd().format(DateTime.now()))
+        .get()
+        .then((value) {
+     rate=Rate.fromJson(value.data()!);
+      print("rate is ${rate}");
+      emit(GetRateDateTr());
+    }).catchError((onError) {
+      emit(GetRateDateFa());
+      print(onError);
+    });
+  }
 }

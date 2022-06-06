@@ -18,3 +18,13 @@ class GetProductDateTr extends MobilState{}
 class GetProductDateFa extends MobilState{}
 class UpdateProductDateTr extends MobilState{}
 class UpdateProductDateFa extends MobilState{}
+class GetSuppliersDateTr extends MobilState{}
+class GetSuppliersDateFa extends MobilState{}
+class GetFessDateTr extends MobilState{}
+class GetFessDateFa extends MobilState{}
+class GetEmployeeDateTr extends MobilState{}
+class GetEmployeeDateFa extends MobilState{}
+class GetAttendanceDateTr extends MobilState{}
+class GetAttendanceDateFa extends MobilState{}
+class GetRateDateTr extends MobilState{}
+class GetRateDateFa extends MobilState{}
