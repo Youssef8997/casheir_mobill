@@ -21,7 +21,6 @@ class StoreAProducts extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               children: [
-                if (cuibt.searchVisibleStore) visibilitySearch(cuibt),
                 const SizedBox(
                   height: 10,
                 ),
@@ -58,20 +57,6 @@ class StoreAProducts extends StatelessWidget {
     );
   }
 
-  Widget visibilitySearch(MobilCuibt cuibt) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: MyTextField(
-        Prefix: const Icon(
-          Icons.search,
-          size: 25,
-          color: Colors.white,
-        ),
-        Controlr: cuibt.searchControllerStore,
-        hint: "pepsi",
-      ),
-    );
-  }
 
   Container showItems(
       {required Size Size,

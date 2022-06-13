@@ -4,7 +4,6 @@ import 'package:casheir_mobill/Models/Store%20and%20products.dart';
 import 'package:casheir_mobill/moudle/Suppliers%20Moudle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -186,7 +185,7 @@ class MobilCuibt extends Cubit<MobilState> {
   void getMoneyDate() {
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
         .doc("lord")
         .collection("Money")
@@ -216,7 +215,7 @@ class MobilCuibt extends Cubit<MobilState> {
     itemsQuantity.clear();
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
         .doc("lord")
         .collection("Orders")
@@ -241,7 +240,7 @@ class MobilCuibt extends Cubit<MobilState> {
     print("getProductData");
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
         .doc("lord")
         .collection("products")
@@ -309,7 +308,7 @@ class MobilCuibt extends Cubit<MobilState> {
     suppliers.clear();
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
         .doc("lord")
         .collection("Suppliers")
@@ -355,7 +354,7 @@ class MobilCuibt extends Cubit<MobilState> {
     employee.clear();
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
         .doc("lord")
         .collection("Employee")
