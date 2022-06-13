@@ -1,6 +1,7 @@
 import 'package:casheir_mobill/Componads/AppBar.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -24,9 +25,7 @@ class _EmpoState extends State<Empo> {
       listener: (context, state) {},
       builder: (context, state) {
         var cuibt = MobilCuibt.get(context);
-        var TimeList =cuibt.employeeDate;
-
-        var rate= cuibt.rate!.rate??0;
+        var TimeList = cuibt.employeeDate;
         var size = MediaQuery.of(context).size;
         return Scaffold(
           key: cuibt.employeeScaffold,
@@ -60,17 +59,21 @@ class _EmpoState extends State<Empo> {
                 fit: BoxFit.fill,
               ),
             ),
-            child: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    listTileWidget(cuibt),
-                    if (cuibt.selectedTile == 1) timeColumn(TimeList,cuibt),
-                    if (cuibt.selectedTile == 2) ratingColumn(cuibt),
-                    if (cuibt.selectedTile == 3) moneyColumn(),
-                  ],
+            child: ConditionalBuilder(
+              builder: (context) => SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      listTileWidget(cuibt),
+                      if (cuibt.selectedTile == 1) timeColumn(TimeList, cuibt),
+                      if (cuibt.selectedTile == 2) ratingColumn(cuibt),
+                      if (cuibt.selectedTile == 3) moneyColumn(cuibt),
+                    ],
+                  ),
                 ),
               ),
+              fallback: (context) => Center(child: CircularProgressIndicator()),
+              condition: TimeList.isNotEmpty,
             ),
           ),
         );
@@ -147,13 +150,12 @@ class _EmpoState extends State<Empo> {
                 ? const Icon(Icons.arrow_downward_outlined)
                 : null,
           ),
-
         ],
       ),
     );
   }
 
-  Widget timeColumn( List<EmployeeDateModule> TimeList,MobilCuibt cuibt) {
+  Widget timeColumn(List<EmployeeDateModule> TimeList, MobilCuibt cuibt) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: SizedBox(
@@ -161,20 +163,33 @@ class _EmpoState extends State<Empo> {
         width: MediaQuery.of(context).size.width,
         child: ListView.separated(
           itemBuilder: (context, i) {
-            int lateMin=(int.parse(TimeList[i].AttendanceDate!.substring(2,5))-int.parse(cuibt.employee[widget.index!].AttendanceDate!.substring(2,5))).isNegative?6:(int.parse(TimeList[i].AttendanceDate!.substring(2,5))-int.parse(cuibt.employee[widget.index!].AttendanceDate!.substring(2,5))).abs();
-            int overMin=int.parse(TimeList[i].LeavingDate!.substring(2,5))-int.parse(cuibt.employee[widget.index!].LeavingDate!.substring(2,5));
-            int Overhour=int.parse(TimeList[i].LeavingDate![0])-int.parse(cuibt.employee[widget.index!].LeavingDate![0]);
-           int totalhour=(overMin+Overhour)-lateMin;
+            int lateMin =
+                (int.parse(TimeList[i].AttendanceDate!.substring(2, 5)) -
+                            int.parse(cuibt
+                                .employee[widget.index!].AttendanceDate!
+                                .substring(2, 5)))
+                        .isNegative
+                    ? 6
+                    : (int.parse(TimeList[i].AttendanceDate!.substring(2, 5)) -
+                            int.parse(cuibt
+                                .employee[widget.index!].AttendanceDate!
+                                .substring(2, 5)))
+                        .abs();
+            int overMin = int.parse(TimeList[i].LeavingDate!.substring(2, 5)) -
+                int.parse(
+                    cuibt.employee[widget.index!].LeavingDate!.substring(2, 5));
+            int Overhour = int.parse(TimeList[i].LeavingDate![0]) -
+                int.parse(cuibt.employee[widget.index!].LeavingDate![0]);
+            int totalhour = (overMin + Overhour) - lateMin;
 
             return showTime(
               context,
               date: TimeList[i].DataTimeDay!,
               attendance: TimeList[i].AttendanceDate!,
               leave: TimeList[i].LeavingDate!,
-              lateTime:lateMin.toString(),
-              overTime:totalhour.toString(),
+              lateTime: lateMin.toString(),
+              overTime: totalhour.toString(),
             );
-
           },
           separatorBuilder: (context, _) => SizedBox(
             height: 25,
@@ -249,7 +264,7 @@ class _EmpoState extends State<Empo> {
           ),
           RatingBar.builder(
             ignoreGestures: true,
-            initialRating:double.parse(cuibt.rate!.rate!),
+            initialRating: double.parse(cuibt.rate!.rate!),
             itemCount: 5,
             allowHalfRating: true,
             itemBuilder: (context, index) {
@@ -291,16 +306,23 @@ class _EmpoState extends State<Empo> {
     );
   }
 
-  Widget moneyColumn() {
+  Widget moneyColumn(MobilCuibt cuibt) {
     return Padding(
       padding: const EdgeInsets.all(15),
       child: SizedBox(
           height: MediaQuery.of(context).size.height * .8,
           width: MediaQuery.of(context).size.width,
           child: ListView.separated(
-              itemBuilder: (context,i)=>showMoney(context,user: "Ebrahim",date: "20/10/2020",money: 100,moneyBefore:3000,moneyAfter: 2900 ),
-              separatorBuilder: (context,_)=>const SizedBox(height: 10,),
-              itemCount: 20)),
+              itemBuilder: (context, i) => showMoney(context,
+                  user:cuibt.employeeMoney[i].Name!,
+                  date: cuibt.employeeMoney[i].date!,
+                  money: cuibt.employeeMoney[i].paidMoney!,
+                  moneyBefore:cuibt.employeeMoney[i].MoneyBefore! ,
+                  moneyAfter: cuibt.employeeMoney[i].restSalary!),
+              separatorBuilder: (context, _) => const SizedBox(
+                    height: 10,
+                  ),
+              itemCount: cuibt.employeeMoney.length)),
     );
   }
 
@@ -607,9 +629,9 @@ class _EmpoState extends State<Empo> {
   Widget showMoney(context,
       {required String date,
       required String user,
-      required double money,
+      required String money,
       required double moneyBefore,
-      required double moneyAfter}) {
+      required String moneyAfter}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [

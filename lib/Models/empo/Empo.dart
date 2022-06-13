@@ -65,9 +65,10 @@ class Employees extends StatelessWidget {
   }) {
     return InkWell(
       onTap: () {
+        nevigator(bool: true, page: Empo(index:index), context: context);
         cuibt.getAttendance(id:id );
         cuibt.getRate(id:id );
-        nevigator(bool: true, page: Empo(index:index), context: context);
+        cuibt.getMoneyData(id:id );
       },
       child: Container(
         margin: const EdgeInsetsDirectional.all(15),

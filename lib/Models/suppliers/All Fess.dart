@@ -1,6 +1,7 @@
 import 'package:casheir_mobill/Componads/AppBar.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -29,29 +30,37 @@ class AllFess extends StatelessWidget {
                   fit: BoxFit.fill,
                 ),
               ),
-              child: SafeArea(
-                child: ListView(children: [
-                  Expanded(
-                      child: precentge_circular(
-                          precent: (cuibt.suppliers[index].TotalSuppliers!/cuibt.suppliers[index].AllMoney!)
-                          , size: Size, cuibt: cuibt)),
-                  Expanded(
-                    child: ListView.separated(
-                        padding: EdgeInsets.zero,
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, i) => showFess(context,
-                            user: listFess[i].name!,
-                            date: listFess[i].feesDate!,
-                            fess: listFess[i].Paid!,
-                            moneyBefore: listFess[i].TotalSuppliers!+listFess[i].Paid!,
-                            moneyAfter: listFess[i].TotalSuppliers!),
-                        separatorBuilder: (context, _) =>
-                            const SizedBox(height: 15),
-                        itemCount: listFess.length),
-                  ),
-                ]),
+              child: ConditionalBuilder(
+                builder:(context)=> SafeArea(
+                  child: Column(children: [
+                    Expanded(
+                        child: precentge_circular(
+                            precent: (cuibt.suppliers[index].TotalSuppliers!/cuibt.suppliers[index].AllMoney!)
+                            , size: Size, cuibt: cuibt)),
+                    Expanded(
+                      child: ListView.separated(
+                          padding: EdgeInsets.zero,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) => showFess(context,
+                              user: listFess[i].name!,
+                              date: listFess[i].feesDate!,
+                              fess: listFess[i].Paid!,
+                              moneyBefore: listFess[i].TotalSuppliers!+listFess[i].Paid!,
+                              moneyAfter: listFess[i].TotalSuppliers!),
+                          separatorBuilder: (context, _) =>
+                          const SizedBox(height: 15),
+                          itemCount: listFess.length),
+                    ),
+                  ]),
+                ),
+                fallback: (context)=>Center(child:CircularProgressIndicator()),
+                condition: listFess.isNotEmpty,
               ),
+
+
+
+
             ));
       },
     );

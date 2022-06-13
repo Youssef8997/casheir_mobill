@@ -92,42 +92,30 @@ class StoreAProducts extends StatelessWidget {
                   : Colors.red[300],
           borderRadius: BorderRadius.circular(50.0),
           border: Border.all(color: Colors.grey[600]!, width: 4)),
-      child: Row(
+      child: Column(
         children: [
-          Column(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               //Name of product
-              SizedBox(
-                width: Size.width * 0.5,
-                height: 40,
-                child: Text(
-                  NOF,
-                  style: const TextStyle(
-                      fontSize: 21,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w900),
+              Expanded(
+                child: SizedBox(
+                  width: Size.width * 0.5,
+                  height: 40,
+                  child: Text(
+                    NOF,
+                    style: const TextStyle(
+                        fontSize: 21,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900),
+                  ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "$HM LE",
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey[800]!,
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const Spacer(),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+              const Spacer(),
               Expanded(
                 child: Text(
+                  maxLines: 1,
                   "$HMany Pack",
                   style: const TextStyle(
                       fontSize: 20,
@@ -136,14 +124,31 @@ class StoreAProducts extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(height: 10),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Expanded(
                 child: Text(
+                  "$HM LE",
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey[800]!,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              const Spacer(),
+              Expanded(
+                child: Text(
+                  maxLines: 1,
                   endDate,
                   style: const TextStyle(
-                      fontSize: 20,
+                      fontSize: 19,
                       color: Colors.black,
-                      fontWeight: FontWeight.w400),
+                      fontWeight: FontWeight.bold
+
+                  ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),

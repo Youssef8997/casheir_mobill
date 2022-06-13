@@ -21,6 +21,7 @@ import '../moudle/Money Moudle.dart';
 import '../moudle/ProductMoudle.dart';
 import '../moudle/Rate.dart';
 import '../moudle/UserMoudule.dart';
+import '../moudle/money.dart';
 import '../moudle/orders Moudle.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
@@ -31,6 +32,7 @@ class MobilCuibt extends Cubit<MobilState> {
   //firebase var
   UserModule? user;
   MoneyMoudel? money;
+  List<MoneyEmpo> employeeMoney=[];
   List<OrdersMoudel>itemsQuantity = [];
   List<OrdersMoudel>itemsQuantityLess = [];
   List<ProductsModule>productData = [];
@@ -409,7 +411,28 @@ class MobilCuibt extends Cubit<MobilState> {
       emit(GetRateDateTr());
     }).catchError((onError) {
       emit(GetRateDateFa());
+      rate=Rate.fromJson({
+        "Rate":"0"
+      });
       print(onError);
+    });
+  }
+  void getMoneyData({id}){
+    FirebaseFirestore.instance
+        .collection("Users")
+        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .collection("Shops")
+        .doc("lord")
+        .collection("Employee")
+        .doc("$id")
+        .collection("Money")
+        .get()
+        .then((value) {
+      for (var element in value.docs) {
+        employeeMoney.add(MoneyEmpo.fromJson(element.data()));
+      }
+      print("money is ${employeeMoney.length}");
+      emit(GetMoneyDateTr());
     });
   }
 }
