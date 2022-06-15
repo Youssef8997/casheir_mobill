@@ -28,3 +28,4 @@ class GetAttendanceDateTr extends MobilState{}
 class GetAttendanceDateFa extends MobilState{}
 class GetRateDateTr extends MobilState{}
 class GetRateDateFa extends MobilState{}
+class ChangeBranch extends MobilState{}

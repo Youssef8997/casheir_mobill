@@ -14,7 +14,7 @@ class HomeLayout extends StatefulWidget {
 class _HomeLayoutState extends State<HomeLayout> {
   @override
   void initState() {
-    print("work");
+    MobilCuibt.get(context).getBranchName();
     MobilCuibt.get(context).getUserDate();
     MobilCuibt.get(context).getMoneyDate();
     MobilCuibt.get(context).getOrdersItem();
@@ -71,6 +71,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                 cuibt.body[1],
                 cuibt.body[2],
                 cuibt.body[3],
+                cuibt.body[4],
               ],
 
             ),

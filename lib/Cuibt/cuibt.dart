@@ -11,6 +11,7 @@ import 'package:intl/intl.dart';
 import '../Componads/Comoonads.dart';
 import '../HomeLayout/HomeLayout.dart';
 import '../Models/empo/Empo.dart';
+import '../Models/settings.dart';
 import '../Models/suppliers/Suppliers.dart';
 import '../SheredPrefrence/shered.dart';
 import '../moudle/Date Empoloyee.dart';
@@ -22,6 +23,7 @@ import '../moudle/Rate.dart';
 import '../moudle/UserMoudule.dart';
 import '../moudle/money.dart';
 import '../moudle/orders Moudle.dart';
+import '../sign/signin.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
   MobilCuibt() : super(initState());
@@ -31,14 +33,14 @@ class MobilCuibt extends Cubit<MobilState> {
   //firebase var
   UserModule? user;
   MoneyMoudel? money;
-  List<MoneyEmpo> employeeMoney=[];
-  List<OrdersMoudel>itemsQuantity = [];
-  List<OrdersMoudel>itemsQuantityLess = [];
-  List<ProductsModule>productData = [];
-  List<SuppliersModule>suppliers = [];
-  List<FeesModule>fess = [];
-  List<EmployeeModule>employee = [];
-  List<EmployeeDateModule>employeeDate = [];
+  List<MoneyEmpo> employeeMoney = [];
+  List<OrdersMoudel> itemsQuantity = [];
+  List<OrdersMoudel> itemsQuantityLess = [];
+  List<ProductsModule> productData = [];
+  List<SuppliersModule> suppliers = [];
+  List<FeesModule> fess = [];
+  List<EmployeeModule> employee = [];
+  List<EmployeeDateModule> employeeDate = [];
   Rate? rate;
   var allQuantity = 0.0;
 
@@ -84,12 +86,14 @@ class MobilCuibt extends Cubit<MobilState> {
     StoreAProducts(),
     Suppliers(),
     Employees(),
+    Setting()
   ];
   List<String> AppBar = [
     "Selles ",
     "Store ",
     "Suppliers ",
     "Employees ",
+    "Settings ",
   ];
   List<FlashyTabBarItem> barItem = [
     FlashyTabBarItem(
@@ -117,7 +121,31 @@ class MobilCuibt extends Cubit<MobilState> {
         ),
         inactiveColor: Colors.white,
         activeColor: Colors.blueGrey),
+    FlashyTabBarItem(
+        title: const Text("Settings"),
+        icon: const Icon(
+          Icons.settings,
+        ),
+        inactiveColor: Colors.white,
+        activeColor: Colors.grey),
   ];
+
+//Settings
+  var BranchName;
+  List<String> Branch = [];
+String dataTime=DateFormat.yMMMd().format(DateTime.now());
+  void setBranchName(name) {
+    BranchName = name;
+   getUserDate();
+   getMoneyDate();
+   getOrdersItem();
+   getProductData();
+   getSuppliers();
+   getEmployeeData();
+   scrollController.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.easeOutCubic);
+value=0;
+    emit(ChangeBranch());
+  }
 
   //Methods
   void changeSignInObsr() {
@@ -151,8 +179,8 @@ class MobilCuibt extends Cubit<MobilState> {
   void signIn(context) {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(
-        email: emailAddressController.text,
-        password: passwordController.text)
+            email: emailAddressController.text,
+            password: passwordController.text)
         .then((value) {
       sherdprefrence.setdate(key: 'Token', value: value.user!.uid);
       getUserDate();
@@ -187,17 +215,17 @@ class MobilCuibt extends Cubit<MobilState> {
         .collection("Users")
         .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Money")
-        .doc("${DateFormat.yMMMd().format(DateTime.now())}")
+        .doc(dataTime)
         .get()
         .then((value) {
       print(value.data());
       if (value.data() != null) {
         money = MoneyMoudel.fromJson(value.data()!);
-      }
-      else {
-        money = MoneyMoudel(moneyInBox: 0.0,
+      } else {
+        money = MoneyMoudel(
+            moneyInBox: 0.0,
             moneyPaid: 0.0,
             allMoneyGeted: 0.0,
             dateTime: DateFormat.yMMMd().format(DateTime.now()));
@@ -217,7 +245,7 @@ class MobilCuibt extends Cubit<MobilState> {
         .collection("Users")
         .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Orders")
         .orderBy("quantity", descending: true)
         .get()
@@ -242,7 +270,7 @@ class MobilCuibt extends Cubit<MobilState> {
         .collection("Users")
         .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("products")
         .orderBy("quantityInShop", descending: false)
         .get()
@@ -267,7 +295,6 @@ class MobilCuibt extends Cubit<MobilState> {
     required code,
     required startDate,
     required quantityInStore,
-
   }) {
     ProductsModule product = ProductsModule(
       name: name,
@@ -280,9 +307,9 @@ class MobilCuibt extends Cubit<MobilState> {
     );
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("products")
         .doc(product.code)
         .update(product.toJson())
@@ -310,7 +337,7 @@ class MobilCuibt extends Cubit<MobilState> {
         .collection("Users")
         .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Suppliers")
         .get()
         .then((value) {
@@ -330,9 +357,9 @@ class MobilCuibt extends Cubit<MobilState> {
     fess.clear();
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Suppliers")
         .doc(name)
         .collection("Fees")
@@ -356,7 +383,7 @@ class MobilCuibt extends Cubit<MobilState> {
         .collection("Users")
         .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Employee")
         .get()
         .then((value) {
@@ -370,14 +397,15 @@ class MobilCuibt extends Cubit<MobilState> {
       print(onError);
     });
   }
+
   //Get Employee Data
-  void getAttendance({id}){
+  void getAttendance({id}) {
     employeeDate.clear();
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Employee")
         .doc("$id")
         .collection("Attendance,Leaving Date")
@@ -393,35 +421,35 @@ class MobilCuibt extends Cubit<MobilState> {
       print(onError);
     });
   }
-  void getRate({id}){
+
+  void getRate({id}) {
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Employee")
         .doc("$id")
         .collection("Rate")
-    .doc(DateFormat.yMMMd().format(DateTime.now()))
+        .doc(DateFormat.yMMMd().format(DateTime.now()))
         .get()
         .then((value) {
-     rate=Rate.fromJson(value.data()!);
+      rate = Rate.fromJson(value.data()!);
       print("rate is ${rate}");
       emit(GetRateDateTr());
     }).catchError((onError) {
       emit(GetRateDateFa());
-      rate=Rate.fromJson({
-        "Rate":"0"
-      });
+      rate = Rate.fromJson({"Rate": "0"});
       print(onError);
     });
   }
-  void getMoneyData({id}){
+
+  void getMoneyData({id}) {
     FirebaseFirestore.instance
         .collection("Users")
-        .doc("buD9c6qOdBalk4AXJeA3W2wtXes2")
+        .doc(sherdprefrence.getdate(key: 'Token'))
         .collection("Shops")
-        .doc("lord")
+        .doc(BranchName)
         .collection("Employee")
         .doc("$id")
         .collection("Money")
@@ -434,4 +462,30 @@ class MobilCuibt extends Cubit<MobilState> {
       emit(GetMoneyDateTr());
     });
   }
+
+  //get name of branches
+  void getBranchName() async {
+    Branch.clear();
+    print("dsvfgfv");
+    var collection = FirebaseFirestore.instance.collection('Users').doc(sherdprefrence.getdate(key: 'Token')).collection('Shops');
+    var querySnapshots = await collection.get();
+    print(querySnapshots.docs.length);
+    for (var snapshot in querySnapshots.docs) {
+      Branch.add(snapshot.id) ;// <-- Document ID
+      print(snapshot.id);
+    }
+    BranchName=Branch[0];
+}
+void logout(context){
+  sherdprefrence.removedate(key: 'Token');
+  employeeMoney = [];
+itemsQuantity = [];
+  itemsQuantityLess = [];
+ productData = [];
+ suppliers = [];
+ fess = [];
+ employee = [];
+ employeeDate = [];
+  nevigator(bool: false,page: SignIn(),context: context);
+}
 }

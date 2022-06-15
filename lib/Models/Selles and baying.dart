@@ -12,7 +12,6 @@ class SellesABuying extends StatelessWidget {
     return BlocConsumer<MobilCuibt, MobilState>(
       listener: (context, state) {},
       builder: (context, state) {
-        print(state);
         var Size = MediaQuery.of(context).size;
         var cuibt = MobilCuibt.get(context);
         return SafeArea(

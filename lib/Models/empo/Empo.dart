@@ -1,4 +1,5 @@
 import 'package:casheir_mobill/Models/empo/showDetiles.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:casheir_mobill/Componads/Comoonads.dart';
@@ -16,35 +17,36 @@ class Employees extends StatelessWidget {
         var empo=cuibt.employee;
         var Size = MediaQuery.of(context).size;
         return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: Size.height,
-                width: Size.width,
-                child: GridView.count(
-                  physics: const BouncingScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  crossAxisCount: 2,
-                  childAspectRatio: .98,
-                  children: List.generate(
-                      empo.length,
-                          (i) => _showEmployee(
-                          Size: Size,
-                          name: empo[i].name!,
-                          startWork: empo[i].AttendanceDate!,
-                          endWork: empo[i].LeavingDate!,
-                              salary: empo[i].Salary!,
-                          jobTitle: "Cashier",
-                          context: context,
-                            cuibt: cuibt,
-                            id: empo[i].id!,
-                            index: i
-                      )),
-                ),
-              )
-            ],
-          ),
+          child:
+           Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: Size.height,
+                  width: Size.width,
+                  child: GridView.count(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    crossAxisCount: 2,
+                    childAspectRatio: .98,
+                    children: List.generate(
+                        empo.length,
+                            (i) => _showEmployee(
+                            Size: Size,
+                            name: empo[i].name!,
+                            startWork: empo[i].AttendanceDate!,
+                            endWork: empo[i].LeavingDate!,
+                                salary: empo[i].Salary!,
+                            jobTitle: "Cashier",
+                            context: context,
+                              cuibt: cuibt,
+                              id: empo[i].id!,
+                              index: i
+                        )),
+                  ),
+                )
+              ],
+            ),
         );
       },
     );
