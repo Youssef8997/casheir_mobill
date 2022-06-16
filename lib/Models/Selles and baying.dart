@@ -149,7 +149,7 @@ class SellesABuying extends StatelessWidget {
             ),
             const SizedBox(width: 3),
             Text(
-              "${cuibt.money!.moneyInBox} LE",
+              "${cuibt.money!.moneyInBox} ${LocaleKeys.le.tr()}",
               style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
@@ -168,7 +168,7 @@ class SellesABuying extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextButton(
-          child: Text("${NU} branch",
+          child: Text("${NU} ${LocaleKeys.branch.tr()}",
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -177,7 +177,7 @@ class SellesABuying extends StatelessWidget {
         ),
         Row(
           children: [
-            Text("$Money LE",
+            Text("$Money ${LocaleKeys.le.tr()}",
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -219,14 +219,14 @@ class SellesABuying extends StatelessWidget {
             ),
             const SizedBox(width: 3),
             Text(
-              "${cuibt.money!.allMoneyGeted!} LE",
+              "${cuibt.money!.allMoneyGeted!} ${LocaleKeys.le.tr()}",
               style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
         ),
         UserNMoney(
             Money: cuibt.money!.allMoneyGeted!,
-            NU: "LORD",
+            NU:cuibt.BranchName,
             precent: (30.0).ceil()),
       ],
     );
@@ -248,7 +248,7 @@ class SellesABuying extends StatelessWidget {
             ),
             const SizedBox(width: 3),
             Text(
-              "${cuibt.money!.moneyPaid} LE",
+              "${cuibt.money!.moneyPaid} ${LocaleKeys.le.tr()}",
               style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w800),
             ),
           ],
@@ -258,7 +258,7 @@ class SellesABuying extends StatelessWidget {
         ),
         //Row of analytics
         UserNMoney(
-            Money: cuibt.money!.moneyPaid!, NU: "LORD", precent: (30.0).ceil()),
+            Money: cuibt.money!.moneyPaid!, NU: cuibt.BranchName, precent: (30.0).ceil()),
       ],
     );
   }
@@ -328,7 +328,7 @@ class SellesABuying extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                "${HM} LE",
+                "${HM} ${LocaleKeys.le.tr()}",
                 style: TextStyle(
                     fontSize: 18,
                     color: Colors.grey[800]!,
@@ -342,7 +342,7 @@ class SellesABuying extends StatelessWidget {
           SizedBox(
             width: Size.width * .2,
             child: Text(
-              "${HMany.ceil()} Pack",
+              "${HMany.ceil()} ${LocaleKeys.package.tr()}",
               style: const TextStyle(
                   fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
               overflow: TextOverflow.ellipsis,

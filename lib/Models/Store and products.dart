@@ -3,9 +3,12 @@ import 'package:casheir_mobill/Componads/TextForm.dart';
 import 'package:casheir_mobill/Componads/mybutton.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import '../translations/locale_keys.g.dart';
 
 class StoreAProducts extends StatelessWidget {
   @override
@@ -101,7 +104,7 @@ class StoreAProducts extends StatelessWidget {
               Expanded(
                 child: Text(
                   maxLines: 1,
-                  "$HMany Pack",
+                  "$HMany ${LocaleKeys.package.tr()}",
                   style: const TextStyle(
                       fontSize: 20,
                       color: Colors.black,
@@ -116,7 +119,7 @@ class StoreAProducts extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  "$HM LE",
+                  "$HM ${LocaleKeys.le.tr()}",
                   style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[800]!,
@@ -207,7 +210,7 @@ cuibt.fullController(name: NOF, price: HM ,quantity: quantityInShop,expireDate:e
                   const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(35)),
-              title: const Text("Edit Item"),
+              title:  Text(LocaleKeys.dialog.tr()),
               titleTextStyle: const TextStyle(
                   fontSize: 22,
                   color: Colors.white,
@@ -218,13 +221,13 @@ cuibt.fullController(name: NOF, price: HM ,quantity: quantityInShop,expireDate:e
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   MyTextField(
-                    label: "Name of Product",
+                    label: LocaleKeys.lable1.tr(),
                     Controlr: cuibt.nameItemController,
                     hint: "cola",
                   ),
                   const SizedBox(height: 15),
                   MyTextField(
-                      label: "Price",
+                      label: LocaleKeys.lable2.tr(),
                       keybordtype: TextInputType.number,
                       Controlr: cuibt.priceItemController,
                       hint: "30 LE"),
@@ -233,7 +236,7 @@ cuibt.fullController(name: NOF, price: HM ,quantity: quantityInShop,expireDate:e
                       Controlr: cuibt.quantityItemController,
                       hint: "60",
                       keybordtype: TextInputType.number,
-                      label: " quantity of packages"),
+                      label: LocaleKeys.lable3.tr()),
                   const SizedBox(height: 15),
                   MyTextField(
                       keybordtype: TextInputType.none,
@@ -250,7 +253,7 @@ cuibt.fullController(name: NOF, price: HM ,quantity: quantityInShop,expireDate:e
                             cuibt.expireDateItemController.text =DateFormat.yMMMd().format(value!);
                           }),
 
-                      label: "Expire Date",
+                      label: LocaleKeys.lable5.tr(),
                       Controlr: cuibt.expireDateItemController,
                       hint: "2023/8/5"),
                 ],
@@ -263,7 +266,7 @@ cuibt.fullController(name: NOF, price: HM ,quantity: quantityInShop,expireDate:e
                   children: [
                     Expanded(
                       child: MyButton(
-                          widget: const Text("Save",
+                          widget:  Text(LocaleKeys.SAVE.tr(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 22)),
                           onPressed: () {
@@ -284,7 +287,7 @@ cuibt.fullController(name: NOF, price: HM ,quantity: quantityInShop,expireDate:e
                     const SizedBox(width: 10),
                     Expanded(
                       child: MyButton(
-                          widget: const Text("cancel",
+                          widget:  Text(LocaleKeys.cancel.tr(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 22)),
                           onPressed: () {

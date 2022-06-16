@@ -1,8 +1,11 @@
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+
+import '../translations/locale_keys.g.dart';
 
 class Setting extends StatelessWidget {
   @override
@@ -27,7 +30,7 @@ class Setting extends StatelessWidget {
                 ExpansionTile(
                   leading: Icon(Icons.storefront),
                   title: Text(
-                    'Branches',
+                   LocaleKeys.branches.tr(),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -35,7 +38,7 @@ class Setting extends StatelessWidget {
                   ),
                   controlAffinity: ListTileControlAffinity.trailing,
                   subtitle: Text(
-                    'Move between your branches',
+                      LocaleKeys.setting1.tr() ,
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -55,7 +58,7 @@ class Setting extends StatelessWidget {
                 ExpansionTile(
                   leading: Icon(Icons.language),
                   title: Text(
-                    'Language',
+                    LocaleKeys.Language.tr(),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -63,28 +66,43 @@ class Setting extends StatelessWidget {
                   ),
                   controlAffinity: ListTileControlAffinity.trailing,
                   subtitle: Text(
-                    'Change app language',
+                    LocaleKeys.Change_app_language.tr(),
                     style: TextStyle(
                       fontSize: 18,
                     ),
                   ),
-                  children: [ListTile(
-                    onTap: () { },
+                  children: [
+                    ListTile(
+                    onTap: () {context.setLocale(Locale('ar'));},
                     leading: Icon(Icons.date_range_sharp, color: Colors.white),
                     title: Text(
-                      "Change Date",
+                      "العربيه",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w900,
                           fontStyle: FontStyle.italic),
                     ),
-                  )  ],
+                  ) ,
+                    ListTile(
+                    onTap: () {context.setLocale(Locale('en'));},
+                    leading: Icon(Icons.flag, color: Colors.white),
+                    title: Text(
+                      "English",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  ) ,
+
+                  ],
                 ),
                 ExpansionTile(
                   leading: Icon(Icons.date_range),
                   title: Text(
-                    'Date',
+                    LocaleKeys.Date.tr(),
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -92,7 +110,7 @@ class Setting extends StatelessWidget {
                   ),
                   controlAffinity: ListTileControlAffinity.trailing,
                   subtitle: Text(
-                    'Change your date of your information',
+                    LocaleKeys.Change_your_date_of_your_information.tr(),
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -114,7 +132,7 @@ class Setting extends StatelessWidget {
                       });},
                       leading: Icon(Icons.date_range_sharp, color: Colors.white),
                       title: Text(
-                        "Change Date",
+                        LocaleKeys.change_date.tr(),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -128,7 +146,7 @@ class Setting extends StatelessWidget {
                   onTap: () => cuibt.logout(context),
                   leading: Icon(Icons.logout, color: Colors.white),
                   title: Text(
-                    "Log out",
+                    LocaleKeys.log_out.tr(),
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
