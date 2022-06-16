@@ -100,32 +100,36 @@ class MobilCuibt extends Cubit<MobilState> {
   ];
   List<FlashyTabBarItem> barItem = [
     FlashyTabBarItem(
-        title: const Text("Sells"),
+        title:  Text( LocaleKeys.bar1.tr(),),
         icon: const Icon(Icons.shopping_cart),
         inactiveColor: Colors.grey,
         activeColor: Colors.blue),
     FlashyTabBarItem(
-      title: const Text("Store"),
+      title:  Text(    LocaleKeys.bar2.tr(),
+      ),
       icon: const Icon(Icons.store),
       inactiveColor: Colors.white,
       activeColor: Colors.lightBlue[700]!,
     ),
     FlashyTabBarItem(
-        title: const Text("Suppliers"),
+        title:  Text(    LocaleKeys.bar3.tr(),
+        ),
         icon: const Icon(
           Icons.attribution_outlined,
         ),
         inactiveColor: Colors.white,
         activeColor: Colors.lightBlue[500]!),
     FlashyTabBarItem(
-        title: const Text("Employees"),
+        title:  Text(    LocaleKeys.bar4.tr(),
+        ),
         icon: const Icon(
           Icons.group_outlined,
         ),
         inactiveColor: Colors.white,
         activeColor: Colors.blueGrey),
     FlashyTabBarItem(
-        title: const Text("Settings"),
+        title:  Text(    LocaleKeys.bar5.tr(),
+        ),
         icon: const Icon(
           Icons.settings,
         ),
