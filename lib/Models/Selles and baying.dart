@@ -2,9 +2,12 @@ import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+
+import '../translations/locale_keys.g.dart';
 
 class SellesABuying extends StatelessWidget {
   @override
@@ -24,15 +27,15 @@ class SellesABuying extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hi ${cuibt.user!.name}!",
+                  "${LocaleKeys.hi.tr()} ${cuibt.user!.name}!",
                   style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       fontStyle: FontStyle.italic),
                 ),
-                const Text(
-                  "Thanks for your trust in us to make your work more professional ",
+                 Text(
+                  LocaleKeys.descriptionsells.tr(),
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -42,39 +45,39 @@ class SellesABuying extends StatelessWidget {
                 MyExpansionTile(
                   Size: Size,
                   Children: [_balanceContents(cuibt)],
-                  Title: "Account Balance",
+                  Title:LocaleKeys.account.tr(),
                   SubTitle:
-                      "All physical transactions are recorded in the account balance",
+                  LocaleKeys.description1.tr(),
                   cuibt: cuibt,
                 ),
                 MyExpansionTile(
                   Size: Size,
                   Children: [_sellsContents(cuibt)],
-                  Title: "Sells",
+                  Title:LocaleKeys.bar1.tr(),
                   SubTitle:
-                      "The monetary gain you earned from selling your products",
+                  LocaleKeys.description2.tr(),
                   cuibt: cuibt,
                 ),
                 MyExpansionTile(
                   Size: Size,
                   Children: [_paymentContents(cuibt)],
-                  Title: "Payments",
+                  Title: LocaleKeys.title3.tr(),
                   SubTitle:
-                      "The money you paid to buy your products or raw materials",
+                  LocaleKeys.description3.tr(),
                   cuibt: cuibt,
                 ),
                 MyExpansionTile(
                   Size: Size,
                   Children: [_mostContents(context, cuibt)],
-                  Title: "Most in demand",
-                  SubTitle: "The most sold products",
+                  Title:  LocaleKeys.title4.tr(),
+                  SubTitle: LocaleKeys.description4.tr(),
                   cuibt: cuibt,
                 ),
                 MyExpansionTile(
                   Size: Size,
                   Children: [_leastContents(Size,cuibt)],
-                  Title: "least in demand",
-                  SubTitle: "The least sold products",
+                  Title: LocaleKeys.title5.tr(),
+                  SubTitle: LocaleKeys.description5.tr(),
                   cuibt: cuibt,
                 ),
               ],

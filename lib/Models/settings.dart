@@ -68,7 +68,18 @@ class Setting extends StatelessWidget {
                       fontSize: 18,
                     ),
                   ),
-                  children: [MyListTile(Name: "lORD", cuibt: cuibt)],
+                  children: [ListTile(
+                    onTap: () { },
+                    leading: Icon(Icons.date_range_sharp, color: Colors.white),
+                    title: Text(
+                      "Change Date",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w900,
+                          fontStyle: FontStyle.italic),
+                    ),
+                  )  ],
                 ),
                 ExpansionTile(
                   leading: Icon(Icons.date_range),

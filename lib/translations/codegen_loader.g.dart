@@ -67,7 +67,8 @@ class CodegenLoader extends AssetLoader{
   "title4": "الاكثر طلبا",
   "title6": "كل الدفعات",
   "title5": "الاقل مبيعا ",
-  "total_money": "مجموع المال"
+  "total_money": "مجموع المال",
+    "fees6": "دفعه"
 };
 static const Map<String,dynamic> en = {
   "hi ": "HI",
@@ -122,7 +123,8 @@ static const Map<String,dynamic> en = {
   "title4": "Most in demand",
   "title6": "all fees",
   "title5": "least in demand",
-  "total_money": "total money"
+  "total_money": "total money",
+  "fees6": "fees"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": ar, "en": en};
 }

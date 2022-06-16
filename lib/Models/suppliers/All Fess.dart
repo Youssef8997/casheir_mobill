@@ -2,9 +2,12 @@ import 'package:casheir_mobill/Componads/AppBar.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+
+import '../../translations/locale_keys.g.dart';
 
 class AllFess extends StatelessWidget {
   var index;
@@ -19,7 +22,7 @@ class AllFess extends StatelessWidget {
         var Size = MediaQuery.of(context).size;
         return Scaffold(
             extendBodyBehindAppBar: true,
-            appBar: myAppBar(text: "All Fess", Action: []),
+            appBar: myAppBar(text:LocaleKeys.title6.tr(), Action: []),
             body: Container(
               padding: const EdgeInsets.only(left: 10, right: 10),
               height: Size.height,
@@ -97,7 +100,7 @@ class AllFess extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 20)),
             Text(
-              "Total Money : ${cuibt.suppliers[index].TotalSuppliers!} LE",
+              "${LocaleKeys.total_money.tr()} : ${cuibt.suppliers[index].TotalSuppliers!} ${LocaleKeys.le.tr()}",
               style: const TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -105,7 +108,7 @@ class AllFess extends StatelessWidget {
               ),
             ),
             Text(
-              "Last fess : ${cuibt.suppliers[index].LastPaid!} LE",
+              "${LocaleKeys.fees.tr()} : ${cuibt.suppliers[index].LastPaid!} ${LocaleKeys.le.tr()}",
               style: TextStyle(
                 color: Colors.grey[600]!,
                 fontWeight: FontWeight.bold,
@@ -183,7 +186,7 @@ class AllFess extends StatelessWidget {
                     ),
                     Expanded(
                         child: Text(
-                      "Fees: $fess LE",
+                      "${LocaleKeys.fees6.tr()}: $fess ${LocaleKeys.le.tr()}",
                       style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,
@@ -199,7 +202,7 @@ class AllFess extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Text(
-                      "$moneyBefore LE",
+                      "$moneyBefore ${LocaleKeys.le.tr()}",
                       style: const TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
@@ -215,7 +218,7 @@ class AllFess extends StatelessWidget {
                     ),
                     Expanded(
                         child: Text(
-                      "$moneyAfter LE",
+                      "$moneyAfter ${LocaleKeys.le.tr()}",
                       style: const TextStyle(
                           fontSize: 21,
                           fontWeight: FontWeight.bold,

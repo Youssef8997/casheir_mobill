@@ -2,8 +2,11 @@ import 'package:casheir_mobill/Componads/Comoonads.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:casheir_mobill/Models/suppliers/All%20Fess.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../translations/locale_keys.g.dart';
 
 class Suppliers extends StatelessWidget {
   @override
@@ -104,7 +107,7 @@ class Suppliers extends StatelessWidget {
               const SizedBox(width: 3,),
               Expanded(
                 child: Text(
-                  "$fees LE",
+                  "$fees ${LocaleKeys.le.tr()}",
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,

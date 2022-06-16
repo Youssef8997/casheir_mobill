@@ -54,5 +54,6 @@ abstract class  LocaleKeys {
   static const title6 = 'title6';
   static const title5 = 'title5';
   static const total_money = 'total_money';
+  static const fees6 = 'fees6';
 
 }
