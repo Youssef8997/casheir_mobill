@@ -1,6 +1,7 @@
 
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:casheir_mobill/SpalshScreen/Spalsh.dart';
+import 'package:casheir_mobill/translations/codegen_loader.g.dart';
 import 'package:connection_notifier/connection_notifier.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,9 +16,10 @@ void main()async{
   await Firebase.initializeApp();
   await sherdprefrence.init();
   runApp(EasyLocalization(
-      path: 'lib/assest/Translaton',
+      path: 'lib/assest/Trans',
       supportedLocales: [Locale('en'), Locale('ar')],
       fallbackLocale: Locale('ar'),
+      assetLoader: CodegenLoader(),
       child: const MyApp()));
 }
 

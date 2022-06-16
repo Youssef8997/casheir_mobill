@@ -3,6 +3,7 @@ import 'package:casheir_mobill/Models/Selles%20and%20baying.dart';
 import 'package:casheir_mobill/Models/Store%20and%20products.dart';
 import 'package:casheir_mobill/moudle/Suppliers%20Moudle.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,7 @@ import '../moudle/UserMoudule.dart';
 import '../moudle/money.dart';
 import '../moudle/orders Moudle.dart';
 import '../sign/signin.dart';
+import '../translations/locale_keys.g.dart';
 
 class MobilCuibt extends Cubit<MobilState> {
   MobilCuibt() : super(initState());
@@ -89,11 +91,12 @@ class MobilCuibt extends Cubit<MobilState> {
     Setting()
   ];
   List<String> AppBar = [
-    "Selles ",
-    "Store ",
-    "Suppliers ",
-    "Employees ",
-    "Settings ",
+    LocaleKeys.bar1.tr(),
+    LocaleKeys.bar2.tr(),
+    LocaleKeys.bar3.tr(),
+    LocaleKeys.bar4.tr(),
+    LocaleKeys.bar5.tr(),
+
   ];
   List<FlashyTabBarItem> barItem = [
     FlashyTabBarItem(

@@ -153,7 +153,7 @@ class SellesABuying extends StatelessWidget {
         ),
         UserNMoney(
             Money: cuibt.money!.moneyInBox!,
-            NU: "LORD",
+            NU: cuibt.BranchName,
             precent: (30.0).ceil()),
       ],
     );

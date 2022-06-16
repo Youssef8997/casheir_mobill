@@ -2,12 +2,14 @@ import 'package:casheir_mobill/Componads/AppBar.dart';
 import 'package:casheir_mobill/Cuibt/State.dart';
 import 'package:casheir_mobill/Cuibt/cuibt.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
 import '../../moudle/Date Empoloyee.dart';
+import '../../translations/locale_keys.g.dart';
 
 class Empo extends StatefulWidget {
   int? index;
@@ -30,7 +32,7 @@ class _EmpoState extends State<Empo> {
         return Scaffold(
           key: cuibt.employeeScaffold,
           extendBodyBehindAppBar: true,
-          appBar: myAppBar(text: "Details", Action: []),
+          appBar: myAppBar(text: LocaleKeys.details.tr(), Action: []),
           body: Container(
             height: size.height,
             width: size.width,
@@ -75,12 +77,12 @@ class _EmpoState extends State<Empo> {
             onTap: () => cuibt.changeSelectedTile(1),
             selected: cuibt.selectedTile == 1,
             leading: const Icon(Icons.access_time_outlined),
-            title: const Text(
-              'Time',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            title:  Text(
+              LocaleKeys .time.tr(),
+    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text(
-              'Attendance, Leave, Overtime',
+            subtitle:  Text(
+              LocaleKeys.empo_description1.tr(),
               style: TextStyle(
                 fontSize: 17,
               ),
@@ -96,12 +98,12 @@ class _EmpoState extends State<Empo> {
               Icons.monetization_on,
               color: Colors.greenAccent,
             ),
-            title: const Text(
-              'money',
+            title:  Text(
+              LocaleKeys.empo2.tr(),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text(
-              'cash withdrawals',
+            subtitle:  Text(
+              LocaleKeys.empo_desc.tr(),
               style: TextStyle(
                 fontSize: 17,
               ),
@@ -117,12 +119,12 @@ class _EmpoState extends State<Empo> {
               Icons.star,
               color: Colors.yellow,
             ),
-            title: const Text(
-              'Rating',
+            title:  Text(
+              LocaleKeys.Rating.tr(),
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            subtitle: const Text(
-              'Rate employee ',
+            subtitle:  Text(
+              LocaleKeys.Rate_employee.tr(),
               style: TextStyle(
                 fontSize: 17,
               ),
@@ -186,8 +188,8 @@ class _EmpoState extends State<Empo> {
       padding: const EdgeInsets.all(15),
       child: Column(
         children: [
-          const Text(
-            "Give rating to employee",
+           Text(
+           LocaleKeys.Rate_employee.tr(),
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
@@ -235,8 +237,8 @@ class _EmpoState extends State<Empo> {
           const SizedBox(
             height: 50,
           ),
-          const Text(
-            "Manger`s rating of employee",
+           Text(
+             LocaleKeys.rate3.tr(),
             style: TextStyle(
                 fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
           ),
