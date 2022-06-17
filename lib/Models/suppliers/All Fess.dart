@@ -151,7 +151,7 @@ class AllFess extends StatelessWidget {
             height: 85,
             width: MediaQuery.of(context).size.width * .8,
             margin: const EdgeInsets.all(8),
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: Colors.blueGrey[700]!,
               borderRadius: BorderRadius.circular(40),
@@ -197,6 +197,9 @@ class AllFess extends StatelessWidget {
                     )),
                   ],
                 ),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -209,6 +212,7 @@ class AllFess extends StatelessWidget {
                         color: Colors.white,
                         fontStyle: FontStyle.italic,
                         decoration: TextDecoration.lineThrough,
+                        height: .7
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -221,6 +225,7 @@ class AllFess extends StatelessWidget {
                       "$moneyAfter ${LocaleKeys.le.tr()}",
                       style: const TextStyle(
                           fontSize: 21,
+                          height: .7,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                           fontStyle: FontStyle.italic),

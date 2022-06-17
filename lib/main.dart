@@ -7,9 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'SheredPrefrence/shered.dart';
-import 'moudle/locales/loc.dart';
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -18,7 +16,7 @@ void main()async{
   runApp(EasyLocalization(
       path: 'lib/assest/Trans',
       supportedLocales: [Locale('en'), Locale('ar')],
-      fallbackLocale: Locale('ar'),
+      fallbackLocale: Locale('en'),
       assetLoader: CodegenLoader(),
       child: const MyApp()));
 }

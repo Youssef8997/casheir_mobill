@@ -495,4 +495,7 @@ itemsQuantity = [];
  employeeDate = [];
   nevigator(bool: false,page: SignIn(),context: context);
 }
+void setstate(){
+  emit(SetState());
+}
 }

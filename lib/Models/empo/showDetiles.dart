@@ -6,7 +6,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:intl/intl.dart';
 
 import '../../moudle/Date Empoloyee.dart';
 import '../../translations/locale_keys.g.dart';
@@ -78,7 +77,7 @@ class _EmpoState extends State<Empo> {
             selected: cuibt.selectedTile == 1,
             leading: const Icon(Icons.access_time_outlined),
             title:  Text(
-              LocaleKeys .time.tr(),
+              LocaleKeys.time.tr(),
     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             subtitle:  Text(

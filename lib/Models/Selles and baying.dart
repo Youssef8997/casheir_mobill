@@ -291,7 +291,7 @@ class SellesABuying extends StatelessWidget {
           separatorBuilder: (context, _) => const SizedBox(
                 height: 10,
               ),
-          itemCount:5),
+          itemCount:cuibt.itemsQuantity.length.clamp(0, 5)),
     );
   }
 
@@ -299,8 +299,8 @@ class SellesABuying extends StatelessWidget {
       {required String NOF, required double HM, required double HMany}) {
     return Container(
       margin: const EdgeInsetsDirectional.all(8.0),
-      padding: const EdgeInsets.only(right:10, left:15),
-      height: 80,
+      padding: const EdgeInsets.only(right:15, left:15),
+      height: 85,
       width: Size.width,
       decoration: BoxDecoration(
           color: color,
@@ -325,7 +325,7 @@ class SellesABuying extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               Text(
                 "${HM} ${LocaleKeys.le.tr()}",

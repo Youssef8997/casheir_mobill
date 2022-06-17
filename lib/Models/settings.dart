@@ -73,25 +73,29 @@ class Setting extends StatelessWidget {
                   ),
                   children: [
                     ListTile(
-                    onTap: () {context.setLocale(Locale('ar'));},
-                    leading: Icon(Icons.date_range_sharp, color: Colors.white),
+                    onTap: () {context.setLocale(Locale('ar'));cuibt.setstate();},
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage("lib/assest/arabic.jpg"),
+                    ),
                     title: Text(
                       "العربيه",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.w900,
                           fontStyle: FontStyle.italic),
                     ),
                   ) ,
                     ListTile(
-                    onTap: () {context.setLocale(Locale('en'));},
-                    leading: Icon(Icons.flag, color: Colors.white),
+                    onTap: () {context.setLocale(Locale('en'));cuibt.setstate();},
+                    leading: CircleAvatar(
+                      backgroundImage: AssetImage("lib/assest/English.png"),
+                    ),
                     title: Text(
                       "English",
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 20,
+                          fontSize: 22,
                           fontWeight: FontWeight.w900,
                           fontStyle: FontStyle.italic),
                     ),
@@ -125,10 +129,12 @@ class Setting extends StatelessWidget {
                         lastDate: DateTime.parse('2027-11-07'),
                       ).then((value) {
                         value ??= DateTime.now();
-                        cuibt.dataTime = DateFormat.yMMMd().format(value);
-                       cuibt.scrollController.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.easeOutCubic);
+                        cuibt.dataTime ="${DateFormat.MMM().format(value)} ${value.day}, ${value.year}";
+                     print(cuibt.dataTime);
+                      cuibt.scrollController.animateToPage(0, duration: const Duration(seconds: 1), curve: Curves.easeOutCubic);
                         cuibt.value=0;
                         cuibt.getMoneyDate();
+
                       });},
                       leading: Icon(Icons.date_range_sharp, color: Colors.white),
                       title: Text(
